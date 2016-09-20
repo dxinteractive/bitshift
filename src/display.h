@@ -17,8 +17,8 @@
 class BitshiftDisplay
 {
   public:
-    BitshiftDisplay();
-    virtual ~BitshiftDisplay();
+    BitshiftDisplay() {}
+    virtual ~BitshiftDisplay() {}
 
     virtual void render() = 0;
     

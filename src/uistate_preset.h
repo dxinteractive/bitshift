@@ -15,9 +15,9 @@
 #ifndef BITSHIFT_UISTATE_PRESET_H
 #define BITSHIFT_UISTATE_PRESET_H
 
-#include "../uistate.h"
+#include "uistate.h"
 
-class BitshiftUIStatePreset : public BitshiftUIState
+class BitshiftUIStatePreset: public BitshiftUIState
 {
     public:
         BitshiftUIStatePreset():

@@ -17,8 +17,8 @@
 class BitshiftUIState
 {
   public:
-    BitshiftUIState();
-    virtual ~BitshiftUIState();
+    BitshiftUIState() {}
+    virtual ~BitshiftUIState() {}
 
     virtual void update() = 0;
     

@@ -1,6 +1,6 @@
 /*
- * uistate
- * Base class for UI states, reads user input and can update audio and display differently depending on active state behaviour
+ * input
+ * Base class for input providers
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
@@ -11,12 +11,18 @@
  * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
  */
 
-#include "uistate.h"
+#ifndef BITSHIFT_INPUT_H
+#define BITSHIFT_INPUT_H
 
-BitshiftUIState::BitshiftUIState()
+class BitshiftInput
 {
-}
+  public:
+    BitshiftInput() {}
+    virtual ~BitshiftInput() {}
 
-BitshiftUIState::~BitshiftUIState()
-{
-}
+    virtual void update() = 0;
+    
+  private:
+};
+
+#endif

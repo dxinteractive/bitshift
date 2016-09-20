@@ -38,13 +38,43 @@
 //#include <bitshift-effects.h>
 
 // set pins and consts for your specific setup
+// input
+const int ANALOG_TOTAL = 5;
+const int ANALOG_PINS[ANALOG_TOTAL] = {A2, A3, A6, A7, A11};
+const int BUTTONS_PIN = A10;
+const int BUTTONS_TOTAL = 7;
+const int BUTTONS_VALUES[BUTTONS_TOTAL] = {0, 182, 353, 508, 605, 764, 855};
+// ^ analog readings when each button is pressed, in ascending order
+
+const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {5, 0, 1, 4, 6, 2, 3};
+// ^ index of BUTTON_VALUES corresponding to each button in the following order:
+// up, down, back, select, tap, tap 2, tap 3
+// e.g. "up" is to be triggered when BUTTON_VALUES index 5 (~764) is read
+// e.g. "back" is to be triggered when BUTTON_VALUES index 1 (~182) is read
+
+// display
 const int PIN_SCREEN_SID = 4;
 const int PIN_SCREEN_SCLK = 3;
 const int PIN_SCREEN_DC = 2;
 const int PIN_SCREEN_RST = 1;
 const int PIN_SCREEN_CS = 0;
 
-BitshiftDisplaySSD1306 display(PIN_SCREEN_SID, PIN_SCREEN_SCLK, PIN_SCREEN_DC, PIN_SCREEN_RST, PIN_SCREEN_CS);
+BitshiftInputDefault input(
+  ANALOG_TOTAL,
+  ANALOG_PINS,
+  BUTTONS_PIN,
+  BUTTONS_TOTAL,
+  BUTTONS_VALUES,
+  BUTTONS_ASSIGN
+);
+
+BitshiftDisplaySSD1306 display(
+  PIN_SCREEN_SID,
+  PIN_SCREEN_SCLK,
+  PIN_SCREEN_DC,
+  PIN_SCREEN_RST,
+  PIN_SCREEN_CS
+);
 Bitshift bitshift;
 
 void setup() {
