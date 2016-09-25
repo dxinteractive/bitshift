@@ -21,26 +21,26 @@
 
 class BitshiftInputDefault: public BitshiftInput
 {
-    public:
-    	static const int MAX_ANALOG = 10;
+  public:
+    static const int MAX_ANALOG = 10;
 
-        BitshiftInputDefault(
-        	int analogTotal,
-        	const int analogPins[],
-        	int buttonsPin,
-        	int buttonsTotal,
-        	const int buttonsValues[],
-        	const int buttonsAssign[]
-        );
-		~BitshiftInputDefault() {}
+    BitshiftInputDefault(
+      int analogTotal,
+      const int analogPins[],
+      int buttonsPin,
+      int buttonsTotal,
+      const int buttonsValues[],
+      const int buttonsAssign[]
+    );
+    ~BitshiftInputDefault() {}
 
-		virtual void update();
-		
-	private:
-		int analogTotal;
-		AnalogMultiButton buttons;
-		int buttonsAssign[AnalogMultiButton::MAX_BUTTONS];
-		ResponsiveAnalogRead* analogInputs[BitshiftInputDefault::MAX_ANALOG];
+    virtual void update();
+    
+  private:
+    int analogTotal;
+    AnalogMultiButton buttons;
+    int buttonsAssign[AnalogMultiButton::MAX_BUTTONS];
+    ResponsiveAnalogRead* analogInputs[BitshiftInputDefault::MAX_ANALOG];
 };
 
 #endif

@@ -11,26 +11,28 @@
  * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
  */
 
-
-#ifndef BITSHIFT_UISTATE_PRESET_H
-#define BITSHIFT_UISTATE_PRESET_H
-
+#include "uistate_preset.h"
 #include "uistate.h"
 
-class BitshiftUIStatePreset: public BitshiftUIState
+void BitshiftUIStatePreset::onEvent(int id)
 {
-  public:
-    BitshiftUIStatePreset():
-      BitshiftUIState() {}
-    ~BitshiftUIStatePreset() {}
+  switch(id)
+  {
+    case 0:
+  
+      return;
 
-    // set total number of analog inputs
-    // get total number of params from audio
+    case 1:
 
-    virtual void onEvent(int id);
+      return;
 
-  protected:
-  	int paramOffset;
-};
+    case 2:
+      paramOffset += 4;
+      // render
+      return;
 
-#endif
+    case 3:
+    
+      return;
+  }
+}

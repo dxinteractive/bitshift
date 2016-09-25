@@ -14,15 +14,20 @@
 #ifndef BITSHIFT_UISTATE_H
 #define BITSHIFT_UISTATE_H
 
+// forward declare ui
+class BitshiftUI;
+
 class BitshiftUIState
 {
   public:
     BitshiftUIState() {}
     virtual ~BitshiftUIState() {}
 
-    virtual void update() = 0;
+    inline void setUI(BitshiftUI* const ui) { this->ui = ui; }
+    virtual void onEvent(int id) = 0;
     
-  private:
+  protected:
+    BitshiftUI* ui;
 };
 
 #endif

@@ -1,6 +1,6 @@
 /*
  * ui
- * Controller class for managing a stack of UI states, handling input, and updating audio objects and display in response to input
+ * Base class for managing a stack of UI states, handling input, and updating audio objects and display in response to input
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
@@ -16,17 +16,33 @@
 
 #include <stack>
 #include "uistate.h"
+#include "audio.h"
+#include "input.h"
 #include "display.h"
 
 class BitshiftUI
 {
   public:
-    BitshiftUI();
+    BitshiftUI(
+    	BitshiftAudio& audio,
+    	BitshiftInput& input,
+    	BitshiftDisplay& display,
+      int initialState
+    );
     ~BitshiftUI();
 
-    void pushState(BitshiftUIState* newState);
+    virtual BitshiftUIState* createState(int id) { return NULL; }
+    void pushState(int id);
     void popState();
     void update();
+
+    void event(int id);
+    void setValue(int id, int value);
+
+  protected:
+  	BitshiftAudio* audio;
+    BitshiftInput* input;
+    BitshiftDisplay* display;
     
   private:
     std::stack <BitshiftUIState*> stateStack;

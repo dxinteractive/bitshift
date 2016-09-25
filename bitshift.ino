@@ -37,6 +37,8 @@
 #include <bitshift.h>
 //#include <bitshift-effects.h>
 
+
+
 // set pins and consts for your specific setup
 // input
 const int ANALOG_TOTAL = 5;
@@ -50,14 +52,6 @@ const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {5, 0, 1, 4, 6, 2, 3};
 // ^ index of BUTTON_VALUES corresponding to each button in the following order:
 // up, down, back, select, tap, tap 2, tap 3
 // e.g. "up" is to be triggered when BUTTON_VALUES index 5 (~764) is read
-// e.g. "back" is to be triggered when BUTTON_VALUES index 1 (~182) is read
-
-// display
-const int PIN_SCREEN_SID = 4;
-const int PIN_SCREEN_SCLK = 3;
-const int PIN_SCREEN_DC = 2;
-const int PIN_SCREEN_RST = 1;
-const int PIN_SCREEN_CS = 0;
 
 BitshiftInputDefault input(
   ANALOG_TOTAL,
@@ -68,6 +62,13 @@ BitshiftInputDefault input(
   BUTTONS_ASSIGN
 );
 
+// display
+const int PIN_SCREEN_SID = 4;
+const int PIN_SCREEN_SCLK = 3;
+const int PIN_SCREEN_DC = 2;
+const int PIN_SCREEN_RST = 1;
+const int PIN_SCREEN_CS = 0;
+
 BitshiftDisplaySSD1306 display(
   PIN_SCREEN_SID,
   PIN_SCREEN_SCLK,
@@ -75,7 +76,15 @@ BitshiftDisplaySSD1306 display(
   PIN_SCREEN_RST,
   PIN_SCREEN_CS
 );
-Bitshift bitshift;
+
+// audio
+BitshiftAudio audio;
+
+// ui
+BitshiftUIDefault ui(audio, input, display);
+
+// bitshift
+Bitshift bitshift(audio, ui);
 
 void setup() {
   Serial.begin(9600);

@@ -12,25 +12,13 @@
  */
 
 #include "bitshift.h"
-#include "audio.h"
-#include "input.h"
-#include "ui.h"
-
-Bitshift::Bitshift()
-{
-}
-
-Bitshift::~Bitshift()
-{
-}
 
 void Bitshift::setup()
 {
-	audio.setup();
+  audio->setup();
 }
 
 void Bitshift::update()
 {
-	//input.update();
-	ui.update();
+  ui->update();
 }

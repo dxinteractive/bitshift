@@ -19,7 +19,7 @@
 #include <SerialFlash.h>
 
 BitshiftAudio::BitshiftAudio():
-	inToOut(audioIn, 0, audioOut, 0)
+  inToOut(audioIn, 0, audioOut, 0)
 {
 }
 

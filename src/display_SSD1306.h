@@ -21,23 +21,23 @@
 
 class BitshiftDisplaySSD1306: public BitshiftDisplay
 {
-    public:
-        BitshiftDisplaySSD1306(
-        	int pin_sid,
-        	int pin_sclk,
-        	int pin_dc,
-        	int pin_rst,
-        	int pin_cs
-        ):
-			BitshiftDisplay(),
-			screen(pin_sid, pin_sclk, pin_dc, pin_rst, pin_cs) {}
+  public:
+    BitshiftDisplaySSD1306(
+     int pin_sid,
+     int pin_sclk,
+     int pin_dc,
+     int pin_rst,
+     int pin_cs
+    ):
+      BitshiftDisplay(),
+      screen(pin_sid, pin_sclk, pin_dc, pin_rst, pin_cs) {}
 
-		~BitshiftDisplaySSD1306() {}
+    ~BitshiftDisplaySSD1306() {}
 
-		virtual void render() {}
+    virtual void render() {}
 
-	private:
-		Adafruit_SSD1306 screen;
+  private:
+    Adafruit_SSD1306 screen;
 };
 
 #endif

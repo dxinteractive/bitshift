@@ -15,26 +15,26 @@
 #define BITSHIFT_H
 
 #include "audio.h"
-#include "input.h"
 #include "ui.h"
 
 // include specific concrete classes so they are linked and can be used from outside this library
-#include "display_SSD1306.h"
+#include "ui_default.h"
 #include "input_default.h"
+#include "display_SSD1306.h"
 
 class Bitshift
 {
   public:
-  	Bitshift();
-  	~Bitshift();
+  	Bitshift(BitshiftAudio& audio, BitshiftUI& ui):
+  		audio(&audio),
+  		ui(&ui) {}
 
     void setup();
     void update();
     
   private:
-  	BitshiftAudio audio;
-  	//BitshiftInput input;
-  	BitshiftUI ui;
+  	BitshiftAudio* audio;
+  	BitshiftUI* ui;
 };
 
 #endif

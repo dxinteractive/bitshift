@@ -14,15 +14,20 @@
 #ifndef BITSHIFT_INPUT_H
 #define BITSHIFT_INPUT_H
 
+// forward declare ui
+class BitshiftUI;
+
 class BitshiftInput
 {
   public:
     BitshiftInput() {}
     virtual ~BitshiftInput() {}
 
+    inline void setUI(BitshiftUI* const ui) { this->ui = ui; }
     virtual void update() = 0;
     
-  private:
+  protected:
+    BitshiftUI *ui;
 };
 
 #endif
