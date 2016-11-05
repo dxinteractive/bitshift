@@ -4,11 +4,11 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 #include "input_default.h"
@@ -33,31 +33,44 @@ BitshiftInputDefault::BitshiftInputDefault(
     analogInputs[i] = new ResponsiveAnalogRead(analogPins[i], true);
 
   for(int i = 0; i < buttonsTotal; i++)
-    this->buttonsAssign[buttonsAssign[i]] = i;
+    this->buttonsAssign[i] = buttonsAssign[i];
 }
 
 void BitshiftInputDefault::update()
 {
   buttons.update();
 
-  /*
-  for(int i = 0; i < analogTotal; i++)
+  //for(int i = 0; i < analogTotal; i++)
+ // {
+ //     analogInputs[i]->update();
+  //}
+
+  if(buttons.onPress(buttonsAssign[0]))
   {
-      analogInputs[i]->update();
-  }
-  */
-
-  if(buttons.onPress(0)) // up
+    // up
+    //Serial.println("Pressed ^");
     ui->event(0);
+  }
 
-  if(buttons.onPress(1)) // down
+  if(buttons.onPress(buttonsAssign[1]))
+  {
+    // down
+    //Serial.println("Pressed v");
     ui->event(1);
+  }
 
-  if(buttons.onPress(2)) // back
+  if(buttons.onPress(buttonsAssign[2]))
+  {
+    // back
+    //Serial.println("Pressed <");
     ui->event(2);
+  }
 
-  if(buttons.onPress(3)) // select
+  if(buttons.onPress(buttonsAssign[3]))
+  {
+    // select
+    //Serial.println("Pressed >");
     ui->event(3);
+  }
 
-  
 }

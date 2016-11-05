@@ -17,6 +17,7 @@
 
 #include "ui.h"
 #include "uistate.h"
+#include "uistate_preset.h"
 
 class BitshiftUIDefault: public BitshiftUI
 {
@@ -25,15 +26,8 @@ class BitshiftUIDefault: public BitshiftUI
       BitshiftAudio& audio,
       BitshiftInput& input,
       BitshiftDisplay& display
-    ):
-      BitshiftUI(audio, input, display, 0) {}
+    );
     ~BitshiftUIDefault() {}
-
-    static const int UISTATE_PRESET = 0;
-    static const int UISTATE_PARAM = 1;
-    static const int UISTATE_MENU_MAIN = 1;
-
-    virtual BitshiftUIState* createState(int id);
 };
 
 #endif

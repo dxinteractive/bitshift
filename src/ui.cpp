@@ -4,70 +4,55 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 #include "ui.h"
 
 #include <Arduino.h>
-#include <stack>
+#include "StackArray.h"
 #include "uistate_preset.h"
-
-namespace std {
-  void __throw_bad_alloc()
-  {
-    Serial.println("Unable to allocate memory");
-  }
-
-  void __throw_length_error( char const*e )
-  {
-    Serial.print("Length Error :");
-    Serial.println(e);
-  }
-}
 
 BitshiftUI::BitshiftUI(
   BitshiftAudio& audio,
   BitshiftInput& input,
-  BitshiftDisplay& display,
-  int initialState
+  BitshiftDisplay& display
 ):
   audio(&audio),
   input(&input),
   display(&display)
 {
   this->input->setUI(this);
-  pushState(initialState);
+  //pushState(initialState);
 }
 
 BitshiftUI::~BitshiftUI()
 {
   BitshiftUIState* topState;
-  while(!stateStack.empty())
+  while(!stateStack.isEmpty())
   {
-    topState = stateStack.top();
+    topState = stateStack.peek();
     stateStack.pop();
     delete topState;
   }
 }
 
-void BitshiftUI::pushState(int id)
+void BitshiftUI::pushState(BitshiftUIState* newState)
 {
-  BitshiftUIState* newState = createState(id);
   newState->setUI(this);
 
-  if(stateStack.empty())
+  if(stateStack.isEmpty())
   {
     //newState->setup(this, pControl);
     stateStack.push(newState);
     return;
   }
-  
-  BitshiftUIState* topState = stateStack.top();
+
+  BitshiftUIState* topState = stateStack.peek();
   if(newState != topState)
   {
     //newState->setup(this, pControl, topState);
@@ -77,9 +62,9 @@ void BitshiftUI::pushState(int id)
 
 void BitshiftUI::popState()
 {
-  if(stateStack.size() == 1) return;
-  
-  BitshiftUIState* topState = stateStack.top();
+  if(stateStack.count() == 1) return;
+
+  BitshiftUIState* topState = stateStack.peek();
   stateStack.pop();
   delete topState;
 }
@@ -88,7 +73,7 @@ void BitshiftUI::update()
 {
   input->update();
 
-  /*BitshiftUIState* topState = stateStack.top();
+  /*BitshiftUIState* topState = stateStack.peek();
   if(topState != NULL)
   {
     topState->update();
@@ -97,7 +82,7 @@ void BitshiftUI::update()
 
 void BitshiftUI::event(int id)
 {
-  BitshiftUIState* topState = stateStack.top();
+  BitshiftUIState* topState = stateStack.peek();
   if(topState != NULL)
   {
     topState->onEvent(id);
@@ -106,7 +91,7 @@ void BitshiftUI::event(int id)
 
 void BitshiftUI::setValue(int id, int value)
 {
-  /*BitshiftUIState* topState = stateStack.top();
+  /*BitshiftUIState* topState = stateStack.peek();
   if(topState != NULL)
   {
     topState->trigger(id);

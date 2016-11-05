@@ -25,17 +25,13 @@
 #include <SD.h>
 #include <SerialFlash.h>
 
-// stl
-// https://forum.pjrc.com/threads/23467-Using-std-vector?p=69787&viewfull=1#post69787
-#include <stack>
-
 // SSD1306 oled display
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
 // include bitshift libraries
 #include <bitshift.h>
-//#include <bitshift-effects.h>
+//#include <bitshift-presets.h>
 
 
 
@@ -96,5 +92,6 @@ void setup() {
 
 void loop() {
   bitshift.update();
+  delay(10);
 }
 

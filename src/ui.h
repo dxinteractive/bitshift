@@ -4,17 +4,17 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 #ifndef BITSHIFT_UI_H
 #define BITSHIFT_UI_H
 
-#include <stack>
+#include "StackArray.h"
 #include "uistate.h"
 #include "audio.h"
 #include "input.h"
@@ -26,13 +26,11 @@ class BitshiftUI
     BitshiftUI(
     	BitshiftAudio& audio,
     	BitshiftInput& input,
-    	BitshiftDisplay& display,
-      int initialState
+    	BitshiftDisplay& display
     );
     ~BitshiftUI();
 
-    virtual BitshiftUIState* createState(int id) { return NULL; }
-    void pushState(int id);
+    void pushState(BitshiftUIState* newState);
     void popState();
     void update();
 
@@ -43,9 +41,9 @@ class BitshiftUI
   	BitshiftAudio* audio;
     BitshiftInput* input;
     BitshiftDisplay* display;
-    
+
   private:
-    std::stack <BitshiftUIState*> stateStack;
+    StackArray <BitshiftUIState*> stateStack;
 };
 
 #endif

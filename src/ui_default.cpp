@@ -4,23 +4,23 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
+#include "ui.h"
 #include "ui_default.h"
-#include "uistate.h"
 #include "uistate_preset.h"
 
-BitshiftUIState* BitshiftUIDefault::createState(int id)
+BitshiftUIDefault::BitshiftUIDefault(
+  BitshiftAudio& audio,
+  BitshiftInput& input,
+  BitshiftDisplay& display
+):
+  BitshiftUI(audio, input, display)
 {
-  switch(id)
-  {
-    case 0:
-      return new BitshiftUIStatePreset();
-  }
-  return NULL;
+  this->pushState(new BitshiftUIStatePreset());
 }
