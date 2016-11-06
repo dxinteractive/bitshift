@@ -4,18 +4,20 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 #ifndef BITSHIFT_UISTATE_H
 #define BITSHIFT_UISTATE_H
 
-// forward declare ui
+// forward declarations
 class BitshiftUI;
+class BitshiftAudio;
+class BitshiftDisplay;
 
 class BitshiftUIState
 {
@@ -23,10 +25,17 @@ class BitshiftUIState
     BitshiftUIState() {}
     virtual ~BitshiftUIState() {}
 
-    inline void setUI(BitshiftUI* const ui) { this->ui = ui; }
+    void setUI(BitshiftUI* const ui);
+    void pushState(BitshiftUIState* newState);
+    void popState();
+    virtual void render() = 0;
     virtual void onEvent(int id) = 0;
-    
+
   protected:
+    BitshiftAudio* audio;
+    BitshiftDisplay* display;
+
+  private:
     BitshiftUI* ui;
 };
 

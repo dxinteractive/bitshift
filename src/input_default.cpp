@@ -48,28 +48,28 @@ void BitshiftInputDefault::update()
   if(buttons.onPress(buttonsAssign[0]))
   {
     // up
-    //Serial.println("Pressed ^");
+    Serial.println("Pressed ^");
     ui->event(0);
   }
 
   if(buttons.onPress(buttonsAssign[1]))
   {
     // down
-    //Serial.println("Pressed v");
+    Serial.println("Pressed v");
     ui->event(1);
   }
 
   if(buttons.onPress(buttonsAssign[2]))
   {
     // back
-    //Serial.println("Pressed <");
+    Serial.println("Pressed <");
     ui->event(2);
   }
 
   if(buttons.onPress(buttonsAssign[3]))
   {
     // select
-    //Serial.println("Pressed >");
+    Serial.println("Pressed >");
     ui->event(3);
   }
 

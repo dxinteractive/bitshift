@@ -4,11 +4,11 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 
@@ -20,16 +20,19 @@
 class BitshiftUIStatePreset: public BitshiftUIState
 {
   public:
-    BitshiftUIStatePreset():
-      BitshiftUIState() {}
+    BitshiftUIStatePreset(int a):
+      BitshiftUIState(),
+      a(a) {}
     ~BitshiftUIStatePreset() {}
 
     // set total number of analog inputs
     // get total number of params from audio
 
+    virtual void render();
     virtual void onEvent(int id);
 
   protected:
+    int a;
   	int paramOffset;
 };
 

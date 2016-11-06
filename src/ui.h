@@ -22,6 +22,7 @@
 
 class BitshiftUI
 {
+  friend class BitshiftUIState;
   public:
     BitshiftUI(
     	BitshiftAudio& audio,
@@ -35,7 +36,7 @@ class BitshiftUI
     void update();
 
     void event(int id);
-    void setValue(int id, int value);
+    //void setValue(int id, int value); is this for analog?
 
   protected:
   	BitshiftAudio* audio;

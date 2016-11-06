@@ -15,7 +15,6 @@
 
 #include <Arduino.h>
 #include "StackArray.h"
-#include "uistate_preset.h"
 
 BitshiftUI::BitshiftUI(
   BitshiftAudio& audio,
@@ -27,7 +26,6 @@ BitshiftUI::BitshiftUI(
   display(&display)
 {
   this->input->setUI(this);
-  //pushState(initialState);
 }
 
 BitshiftUI::~BitshiftUI()
@@ -43,20 +41,20 @@ BitshiftUI::~BitshiftUI()
 
 void BitshiftUI::pushState(BitshiftUIState* newState)
 {
-  newState->setUI(this);
-
   if(stateStack.isEmpty())
   {
-    //newState->setup(this, pControl);
     stateStack.push(newState);
+    newState->setUI(this);
+    newState->render();
     return;
   }
 
   BitshiftUIState* topState = stateStack.peek();
   if(newState != topState)
   {
-    //newState->setup(this, pControl, topState);
     stateStack.push(newState);
+    newState->setUI(this);
+    newState->render();
   }
 }
 
@@ -67,6 +65,8 @@ void BitshiftUI::popState()
   BitshiftUIState* topState = stateStack.peek();
   stateStack.pop();
   delete topState;
+
+  stateStack.peek()->render();
 }
 
 void BitshiftUI::update()
@@ -89,11 +89,11 @@ void BitshiftUI::event(int id)
   }
 }
 
-void BitshiftUI::setValue(int id, int value)
+/*void BitshiftUI::setValue(int id, int value)
 {
-  /*BitshiftUIState* topState = stateStack.peek();
+  BitshiftUIState* topState = stateStack.peek();
   if(topState != NULL)
   {
     topState->trigger(id);
-  }*/
-}
+  }
+}*/

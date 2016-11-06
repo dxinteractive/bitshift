@@ -4,26 +4,28 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 #include "uistate_preset.h"
 #include "uistate.h"
+#include "display.h"
+#include <Arduino.h>
 
 void BitshiftUIStatePreset::onEvent(int id)
 {
   switch(id)
   {
     case 0:
-  
+      pushState(new BitshiftUIStatePreset(a + 1));
       return;
 
     case 1:
-
+      popState();
       return;
 
     case 2:
@@ -32,7 +34,12 @@ void BitshiftUIStatePreset::onEvent(int id)
       return;
 
     case 3:
-    
+
       return;
   }
+}
+
+void BitshiftUIStatePreset::render()
+{
+  display->renderPreset(a);
 }

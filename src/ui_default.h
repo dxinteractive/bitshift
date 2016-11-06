@@ -4,11 +4,11 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 
@@ -21,6 +21,7 @@
 
 class BitshiftUIDefault: public BitshiftUI
 {
+  friend class BitshiftUIState;
   public:
     BitshiftUIDefault(
       BitshiftAudio& audio,

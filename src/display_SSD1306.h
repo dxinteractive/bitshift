@@ -4,11 +4,11 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 
@@ -16,6 +16,7 @@
 #define BITSHIFT_DISPLAY_SSD1306_H
 
 #include "display.h"
+#include <Arduino.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
@@ -28,13 +29,10 @@ class BitshiftDisplaySSD1306: public BitshiftDisplay
      int pin_dc,
      int pin_rst,
      int pin_cs
-    ):
-      BitshiftDisplay(),
-      screen(pin_sid, pin_sclk, pin_dc, pin_rst, pin_cs) {}
-
+    );
     ~BitshiftDisplaySSD1306() {}
 
-    virtual void render() {}
+    virtual void renderPreset(int size);
 
   private:
     Adafruit_SSD1306 screen;
