@@ -84,14 +84,23 @@ Bitshift bitshift(audio, ui);
 
 void setup() {
   Serial.begin(9600);
-  //while(!Serial) delay(1000);
-  
   bitshift.setup();
 }
 
 
 void loop() {
   bitshift.update();
+  
+  Serial.print("CPU: ");
+  Serial.print(AudioProcessorUsage());
+  Serial.print(",");
+  Serial.print(AudioProcessorUsageMax());
+  Serial.print("    ");
+  Serial.print("Memory: ");
+  Serial.print(AudioMemoryUsage());
+  Serial.print(",");
+  Serial.print(AudioMemoryUsageMax());
+  Serial.println("");
   delay(10);
 }
 
