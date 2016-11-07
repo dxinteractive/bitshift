@@ -29,7 +29,8 @@ class BitshiftUIStatePreset: public BitshiftUIState
     // get total number of params from audio
 
     virtual void render();
-    virtual void onEvent(int id);
+    virtual void onEvent(int id, int value);
+    virtual void onEvent(int id, float value);
 
   protected:
     int a;

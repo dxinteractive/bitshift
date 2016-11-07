@@ -35,8 +35,8 @@ class BitshiftUI
     void popState();
     void update();
 
-    void event(int id);
-    //void setValue(int id, int value); is this for analog?
+    void event(int id, int value);
+    void event(int id, float value);
 
   protected:
   	BitshiftAudio* audio;

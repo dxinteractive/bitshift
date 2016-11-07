@@ -4,11 +4,11 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 #ifndef BITSHIFT_INPUT_H
@@ -24,8 +24,10 @@ class BitshiftInput
     virtual ~BitshiftInput() {}
 
     inline void setUI(BitshiftUI* const ui) { this->ui = ui; }
+    void event(int id, int value);
+    void event(int id, float value);
     virtual void update() = 0;
-    
+
   protected:
     BitshiftUI *ui;
 };

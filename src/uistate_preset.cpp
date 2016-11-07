@@ -15,8 +15,9 @@
 #include "uistate.h"
 #include "display.h"
 #include <Arduino.h>
+#include "input_consts.h"
 
-void BitshiftUIStatePreset::onEvent(int id)
+void BitshiftUIStatePreset::onEvent(int id, int value)
 {
   switch(id)
   {
@@ -37,6 +38,10 @@ void BitshiftUIStatePreset::onEvent(int id)
 
       return;
   }
+}
+
+void BitshiftUIStatePreset::onEvent(int id, float value)
+{
 }
 
 void BitshiftUIStatePreset::render()

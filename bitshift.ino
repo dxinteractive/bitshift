@@ -49,6 +49,8 @@ const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {5, 0, 1, 4, 6, 2, 3};
 // up, down, back, select, tap, tap 2, tap 3
 // e.g. "up" is to be triggered when BUTTON_VALUES index 5 (~764) is read
 
+// replace with the inverse: DOWN, BACK, TAP 2, TAP 3, SELECT, UP, TAP 1
+
 BitshiftInputDefault input(
   ANALOG_TOTAL,
   ANALOG_PINS,
@@ -91,7 +93,7 @@ void setup() {
 void loop() {
   bitshift.update();
   
-  Serial.print("CPU: ");
+  /*Serial.print("CPU: ");
   Serial.print(AudioProcessorUsage());
   Serial.print(",");
   Serial.print(AudioProcessorUsageMax());
@@ -100,7 +102,6 @@ void loop() {
   Serial.print(AudioMemoryUsage());
   Serial.print(",");
   Serial.print(AudioMemoryUsageMax());
-  Serial.println("");
-  delay(10);
+  Serial.println("");*/
 }
 

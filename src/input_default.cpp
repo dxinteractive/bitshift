@@ -15,7 +15,7 @@
 #include "input.h"
 #include "AnalogMultiButton.h"
 #include "ResponsiveAnalogRead.h"
-#include "ui.h"
+#include "input_consts.h"
 
 BitshiftInputDefault::BitshiftInputDefault(
   int analogTotal,
@@ -30,7 +30,11 @@ BitshiftInputDefault::BitshiftInputDefault(
   buttons(buttonsPin, buttonsTotal, buttonsValues)
 {
   for(int i = 0; i < analogTotal; i++)
-    analogInputs[i] = new ResponsiveAnalogRead(analogPins[i], true);
+  {
+    ResponsiveAnalogRead* read = new ResponsiveAnalogRead(analogPins[i], true);
+    read->setActivityThreshold(10.0);
+    analogInputs[i] = read;
+  }
 
   for(int i = 0; i < buttonsTotal; i++)
     this->buttonsAssign[i] = buttonsAssign[i];
@@ -38,39 +42,47 @@ BitshiftInputDefault::BitshiftInputDefault(
 
 void BitshiftInputDefault::update()
 {
-  buttons.update();
+  // each update, perform one read, cycling through each analog input each time
+  analogInputToRead++;
+  if(analogInputToRead > analogTotal)
+    analogInputToRead = 0;
 
-  //for(int i = 0; i < analogTotal; i++)
- // {
- //     analogInputs[i]->update();
-  //}
-
-  if(buttons.onPress(buttonsAssign[0]))
+  // read buttons
+  if(analogInputToRead == analogTotal)
   {
-    // up
-    Serial.println("Pressed ^");
-    ui->event(0);
+    buttons.update();
+    if(buttons.onPress(buttonsAssign[BUTTON_UP]))
+      event(BUTTON_UP, BUTTON_PRESS);
+
+    if(buttons.onPress(buttonsAssign[BUTTON_DOWN]))
+      event(BUTTON_DOWN, BUTTON_PRESS);
+
+    if(buttons.onPress(buttonsAssign[BUTTON_BACK]))
+      event(BUTTON_BACK, BUTTON_PRESS);
+
+    if(buttons.onPress(buttonsAssign[BUTTON_SELECT]))
+      event(BUTTON_SELECT, BUTTON_PRESS);
+
+    if(buttons.onRelease(buttonsAssign[BUTTON_UP]))
+      event(BUTTON_UP, BUTTON_RELEASE);
+
+    if(buttons.onRelease(buttonsAssign[BUTTON_DOWN]))
+      event(BUTTON_DOWN, BUTTON_RELEASE);
+
+    if(buttons.onRelease(buttonsAssign[BUTTON_BACK]))
+      event(BUTTON_BACK, BUTTON_RELEASE);
+
+    if(buttons.onRelease(buttonsAssign[BUTTON_SELECT]))
+      event(BUTTON_SELECT, BUTTON_RELEASE);
+
+    return;
   }
 
-  if(buttons.onPress(buttonsAssign[1]))
+  // read analog input
+  analogInputs[analogInputToRead]->update();
+  if(analogInputs[analogInputToRead]->hasChanged())
   {
-    // down
-    Serial.println("Pressed v");
-    ui->event(1);
+    float value = (float)analogInputs[analogInputToRead]->getValue() / (float)BitshiftInputDefault::ANALOG_RESOLUTION;
+    event(BitshiftInputDefault::ANALOG_ID_OFFSET + i, value);
   }
-
-  if(buttons.onPress(buttonsAssign[2]))
-  {
-    // back
-    Serial.println("Pressed <");
-    ui->event(2);
-  }
-
-  if(buttons.onPress(buttonsAssign[3]))
-  {
-    // select
-    Serial.println("Pressed >");
-    ui->event(3);
-  }
-
 }
