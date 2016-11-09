@@ -13,7 +13,6 @@
 
 #include "display.h"
 #include "display_SSD1306.h"
-#include <Arduino.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
@@ -31,16 +30,15 @@ BitshiftDisplaySSD1306::BitshiftDisplaySSD1306(
   screen.clearDisplay();
   screen.setTextSize(1);
   screen.setTextColor(WHITE);
-  screen.println("Hello.");
   screen.display();
 }
 
-void BitshiftDisplaySSD1306::renderPreset(int size)
+void BitshiftDisplaySSD1306::renderPreset(char const* presetName)
 {
   screen.clearDisplay();
-  screen.setTextSize(size);
-  screen.setTextColor(WHITE);
+  screen.setTextSize(1);
   screen.setCursor(0,0);
-  screen.println("Yay.");
+  screen.println("Yay. ");
+  screen.println(presetName);
   screen.display();
 }

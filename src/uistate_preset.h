@@ -30,7 +30,7 @@ class BitshiftUIStatePreset: public BitshiftUIState
 
     virtual void render();
     virtual void onEvent(int id, int value);
-    virtual void onEvent(int id, float value);
+    virtual void onEventAnalog(int id, float value);
 
   protected:
     int a;

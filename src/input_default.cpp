@@ -83,6 +83,6 @@ void BitshiftInputDefault::update()
   if(analogInputs[analogInputToRead]->hasChanged())
   {
     float value = (float)analogInputs[analogInputToRead]->getValue() / (float)BitshiftInputDefault::ANALOG_RESOLUTION;
-    event(BitshiftInputDefault::ANALOG_ID_OFFSET + i, value);
+    eventAnalog(analogInputToRead, value);
   }
 }

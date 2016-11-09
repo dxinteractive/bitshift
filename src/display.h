@@ -14,15 +14,13 @@
 #ifndef BITSHIFT_DISPLAY_H
 #define BITSHIFT_DISPLAY_H
 
-#include <Arduino.h>
-
 class BitshiftDisplay
 {
   public:
     BitshiftDisplay() {}
     virtual ~BitshiftDisplay() {}
 
-    virtual void renderPreset(int size) = 0;
+    virtual void renderPreset(char const* presetName) = 0;
 
   private:
 };

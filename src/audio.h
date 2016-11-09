@@ -4,11 +4,11 @@
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-. 
+ * .-.    _  .-.      .-.    _  .--. .-.
  * : :   :_;.' `.     : :   :_;: .-'.' `.
  * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
+ * ' .; :: : : :`._-.': .. :: :: :   : :
+ * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
 #ifndef BITSHIFT_AUDIO_H
@@ -20,17 +20,27 @@
 #include <SD.h>
 #include <SerialFlash.h>
 
+#include "preset.h"
+
 class BitshiftAudio
 {
   public:
-    BitshiftAudio();
+    BitshiftAudio(BitshiftPreset* presets, int presetsTotal);
     ~BitshiftAudio();
-    
+
     void setup();
-    void loop();
-    
+    void update();
+
+    char const* presetName();
+    void presetParam(int id, int value);
+    void presetParamAnalog(int id, float value);
+
   private:
-    AudioInputI2S audioIn;
+    BitshiftPreset* presets;
+    int presetsTotal;
+    int activePreset;
+
+    AudioInputI2S audioIn; // move these out to .ino?
     AudioOutputI2S audioOut;
     AudioConnection inToOut;
     AudioControlSGTL5000 audioAdaptor;

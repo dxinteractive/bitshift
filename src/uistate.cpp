@@ -25,10 +25,12 @@ void BitshiftUIState::setUI(BitshiftUI* const ui)
 
 void BitshiftUIState::pushState(BitshiftUIState* newState)
 {
-  ui->pushState(newState);
+  if(ui)
+    ui->pushState(newState);
 }
 
 void BitshiftUIState::popState()
 {
-  ui->popState();
+  if(ui)
+    ui->popState();
 }

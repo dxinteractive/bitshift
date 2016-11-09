@@ -30,7 +30,7 @@ class BitshiftUIState
     void popState();
     virtual void render() = 0;
     virtual void onEvent(int id, int value) = 0;
-    virtual void onEvent(int id, float value) = 0;
+    virtual void onEventAnalog(int id, float value) = 0;
 
   protected:
     BitshiftAudio* audio;

@@ -14,37 +14,43 @@
 #include "uistate_preset.h"
 #include "uistate.h"
 #include "display.h"
-#include <Arduino.h>
+#include "audio.h"
 #include "input_consts.h"
 
 void BitshiftUIStatePreset::onEvent(int id, int value)
 {
-  switch(id)
+  if(!audio) return;
+
+  if(value == BUTTON_PRESS)
   {
-    case 0:
-      pushState(new BitshiftUIStatePreset(a + 1));
-      return;
+    switch(id)
+    {
+      case BUTTON_UP:
+        pushState(new BitshiftUIStatePreset(a + 1));
+        return;
 
-    case 1:
-      popState();
-      return;
+      case BUTTON_DOWN:
+        popState();
+        return;
 
-    case 2:
-      paramOffset += 4;
-      // render
-      return;
+      case BUTTON_BACK:
+        //paramOffset += 4;
+        return;
 
-    case 3:
-
-      return;
+      case BUTTON_SELECT:
+        return;
+    }
   }
 }
 
-void BitshiftUIStatePreset::onEvent(int id, float value)
+void BitshiftUIStatePreset::onEventAnalog(int id, float value)
 {
+  if(!audio) return;
+  audio->presetParamAnalog(id + paramOffset, value);
 }
 
 void BitshiftUIStatePreset::render()
 {
-  display->renderPreset(a);
+  if(!display || !audio) return;
+  display->renderPreset(audio->presetName());
 }

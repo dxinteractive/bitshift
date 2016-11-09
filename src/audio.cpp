@@ -18,7 +18,11 @@
 #include <SD.h>
 #include <SerialFlash.h>
 
-BitshiftAudio::BitshiftAudio():
+#include "preset.h"
+
+BitshiftAudio::BitshiftAudio(BitshiftPreset* presets, int presetsTotal):
+  presets(presets),
+  presetsTotal(presetsTotal),
   inToOut(audioIn, 0, audioOut, 0)
 {
 }
@@ -43,6 +47,21 @@ void BitshiftAudio::setup()
   audioAdaptor.dacVolume(0.9);
 }
 
-void BitshiftAudio::loop()
+void BitshiftAudio::update()
 {
+}
+
+char const* BitshiftAudio::presetName()
+{
+  return presets[activePreset].name();
+}
+
+void BitshiftAudio::presetParam(int id, int value)
+{
+  presets[activePreset].param(id, value);
+}
+
+void BitshiftAudio::presetParamAnalog(int id, float value)
+{
+  presets[activePreset].paramAnalog(id, value);
 }

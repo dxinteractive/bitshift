@@ -24,7 +24,6 @@ class BitshiftInputDefault: public BitshiftInput
   public:
     static const int MAX_ANALOG = 10;
     static const int ANALOG_RESOLUTION = 1023;
-    static const int ANALOG_ID_OFFSET = 256;
 
     BitshiftInputDefault(
       int analogTotal,
@@ -38,12 +37,11 @@ class BitshiftInputDefault: public BitshiftInput
 
     virtual void update();
 
-    AnalogMultiButton buttons;
-    ResponsiveAnalogRead* analogInputs[BitshiftInputDefault::MAX_ANALOG];
-
   private:
     int analogInputToRead;
     int analogTotal;
+    AnalogMultiButton buttons;
+    ResponsiveAnalogRead* analogInputs[BitshiftInputDefault::MAX_ANALOG];
     int buttonsAssign[AnalogMultiButton::MAX_BUTTONS];
 };
 

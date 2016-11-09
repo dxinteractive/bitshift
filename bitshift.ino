@@ -50,6 +50,7 @@ const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {5, 0, 1, 4, 6, 2, 3};
 // e.g. "up" is to be triggered when BUTTON_VALUES index 5 (~764) is read
 
 // replace with the inverse: DOWN, BACK, TAP 2, TAP 3, SELECT, UP, TAP 1
+// const int poo = BUTTON_DOWN;
 
 BitshiftInputDefault input(
   ANALOG_TOTAL,
@@ -75,8 +76,14 @@ BitshiftDisplaySSD1306 display(
   PIN_SCREEN_CS
 );
 
+// presets
+const int PRESETS_TOTAL = 1;
+BitshiftPreset presets[PRESETS_TOTAL] = {
+  BitshiftPresetTremolo()
+};
+
 // audio
-BitshiftAudio audio;
+BitshiftAudio audio(presets, PRESETS_TOTAL);
 
 // ui
 BitshiftUIDefault ui(audio, input, display);
@@ -86,6 +93,8 @@ Bitshift bitshift(audio, ui);
 
 void setup() {
   Serial.begin(9600);
+  // while(!Serial) { delay(1000); }
+
   bitshift.setup();
 }
 

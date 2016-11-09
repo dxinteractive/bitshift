@@ -35,8 +35,8 @@ class BitshiftUI
     void popState();
     void update();
 
-    void event(int id, int value);
-    void event(int id, float value);
+    void onEvent(int id, int value);
+    void onEventAnalog(int id, float value);
 
   protected:
   	BitshiftAudio* audio;

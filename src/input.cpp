@@ -14,9 +14,11 @@
 #include "ui.h"
 
 void BitshiftInput::event(int id, int value) {
-  ui->event(id, value);
+  if(ui)
+    ui->onEvent(id, value);
 }
 
-void BitshiftInput::event(int id, float value) {
-  ui->event(id, value);
+void BitshiftInput::eventAnalog(int id, float value) {
+  if(ui)
+    ui->onEventAnalog(id, value);
 }

@@ -80,7 +80,7 @@ void BitshiftUI::update()
   }*/
 }
 
-void BitshiftUI::event(int id, int value)
+void BitshiftUI::onEvent(int id, int value)
 {
   BitshiftUIState* topState = stateStack.peek();
   if(topState != NULL)
@@ -89,11 +89,11 @@ void BitshiftUI::event(int id, int value)
   }
 }
 
-void BitshiftUI::event(int id, float value)
+void BitshiftUI::onEventAnalog(int id, float value)
 {
   BitshiftUIState* topState = stateStack.peek();
   if(topState != NULL)
   {
-    topState->onEvent(id, value);
+    topState->onEventAnalog(id, value);
   }
 }
