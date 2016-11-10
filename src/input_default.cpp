@@ -75,6 +75,18 @@ void BitshiftInputDefault::update()
     if(buttons.onRelease(buttonsAssign[BUTTON_SELECT]))
       event(BUTTON_SELECT, BUTTON_RELEASE);
 
+    if(buttons.onPressAfter(buttonsAssign[BUTTON_UP], 500, 500))
+      event(BUTTON_UP, BUTTON_REPEAT);
+
+    if(buttons.onPressAfter(buttonsAssign[BUTTON_DOWN], 500, 500))
+      event(BUTTON_DOWN, BUTTON_REPEAT);
+
+    if(buttons.onPressAfter(buttonsAssign[BUTTON_BACK], 500, 500))
+      event(BUTTON_BACK, BUTTON_REPEAT);
+
+    if(buttons.onPressAfter(buttonsAssign[BUTTON_SELECT], 500, 500))
+      event(BUTTON_SELECT, BUTTON_REPEAT);
+
     return;
   }
 

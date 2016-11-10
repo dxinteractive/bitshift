@@ -31,7 +31,7 @@ class BitshiftDisplaySSD1306: public BitshiftDisplay
     );
     ~BitshiftDisplaySSD1306() {}
 
-    virtual void renderPreset(char const* presetName);
+    virtual void renderPreset(char const* presetName, float poo);
 
   private:
     Adafruit_SSD1306 screen;

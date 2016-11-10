@@ -21,9 +21,14 @@ class BitshiftPreset
     BitshiftPreset() {}
     virtual ~BitshiftPreset() {}
 
+    virtual const int totalParams() { return 0; }
     virtual char const* name() { return 0; }
-    virtual void param(int id, int value) {}
-    virtual void paramAnalog(int id, int value) {}
+    virtual char const** paramNames() { return 0; }
+
+    virtual int getParam(int id) { return 0; }
+    virtual float getParamAnalog(int id) { return 0.0; }
+    virtual void setParam(int id, int value) {}
+    virtual void setParamAnalog(int id, float value) {}
 };
 
 #endif

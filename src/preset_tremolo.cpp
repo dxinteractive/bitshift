@@ -13,21 +13,50 @@
 
 #include "preset_tremolo.h"
 
+const int BitshiftPresetTremolo::_totalParams = 5;
 char const* BitshiftPresetTremolo::_name = "Tremolo";
+char const* BitshiftPresetTremolo::_paramNames[] = {
+  "Speed",
+  "Depth",
+  "Shape",
+  "Division",
+  "Volume"
+};
+
+const int BitshiftPresetTremolo::totalParams()
+{
+  return BitshiftPresetTremolo::_totalParams;
+}
 
 char const* BitshiftPresetTremolo::name()
 {
-  return BitshiftPresetTremolo::_name;
+  return ":D";
 }
 
-void BitshiftPresetTremolo::param(int id, int value)
+char const** BitshiftPresetTremolo::paramNames()
+{
+  return BitshiftPresetTremolo::_paramNames;
+}
+
+int BitshiftPresetTremolo::getParam(int id)
+{
+  return 3;
+}
+
+float BitshiftPresetTremolo::getParamAnalog(int id)
+{
+  return 0.3;
+}
+
+
+void BitshiftPresetTremolo::setParam(int id, int value)
 {
 
 }
 
-void BitshiftPresetTremolo::paramAnalog(int id, float value)
+void BitshiftPresetTremolo::setParamAnalog(int id, float value)
 {
-
+  temp = value;
 }
 
  /*

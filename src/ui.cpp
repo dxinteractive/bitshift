@@ -39,6 +39,31 @@ BitshiftUI::~BitshiftUI()
   }
 }
 
+void BitshiftUI::update()
+{
+  input->update();
+
+  /*BitshiftUIState* topState = stateStack.peek();
+  if(topState != NULL)
+  {
+    topState->update();
+  }*/
+}
+
+void BitshiftUI::render()
+{
+  if(stateStack.isEmpty()) return;
+
+  BitshiftUIState* topState = stateStack.peek();
+  topState->render();
+}
+
+void BitshiftUI::initialState(BitshiftUIState* initialState)
+{
+  stateStack.push(initialState);
+  initialState->setUI(this);
+}
+
 void BitshiftUI::pushState(BitshiftUIState* newState)
 {
   if(stateStack.isEmpty())
@@ -67,17 +92,6 @@ void BitshiftUI::popState()
   delete topState;
 
   stateStack.peek()->render();
-}
-
-void BitshiftUI::update()
-{
-  input->update();
-
-  /*BitshiftUIState* topState = stateStack.peek();
-  if(topState != NULL)
-  {
-    topState->update();
-  }*/
 }
 
 void BitshiftUI::onEvent(int id, int value)

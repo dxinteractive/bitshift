@@ -20,7 +20,7 @@ class BitshiftDisplay
     BitshiftDisplay() {}
     virtual ~BitshiftDisplay() {}
 
-    virtual void renderPreset(char const* presetName) = 0;
+    virtual void renderPreset(char const* presetName, float poo) = 0;
 
   private:
 };

@@ -2,7 +2,7 @@
  * bitshift.ino
  * Arduino / Teensy dev project file for Deeep Bitshift digital guitar pedal
  * Copyright (c) 2016 Damien Clarke
- * damienclarke.me | github.com/dxinteractive/bitshift-ui
+ * damienclarke.me | github.com/dxinteractive/bitshift
  * 
  * .-.    _  .-.      .-.    _  .--. .-. 
  * : :   :_;.' `.     : :   :_;: .-'.' `.
@@ -49,8 +49,17 @@ const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {5, 0, 1, 4, 6, 2, 3};
 // up, down, back, select, tap, tap 2, tap 3
 // e.g. "up" is to be triggered when BUTTON_VALUES index 5 (~764) is read
 
-// replace with the inverse: DOWN, BACK, TAP 2, TAP 3, SELECT, UP, TAP 1
-// const int poo = BUTTON_DOWN;
+/* 
+const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {
+  BUTTON_DOWN, // 0
+  BUTTON_BACK, // 182
+  BUTTON_TAP2, // 353
+  BUTTON_TAP3, // 508
+  BUTTON_SELECT, // 605
+  BUTTON_UP, // 764
+  BUTTON_TAP1 // 855
+};
+*/
 
 BitshiftInputDefault input(
   ANALOG_TOTAL,
@@ -78,8 +87,9 @@ BitshiftDisplaySSD1306 display(
 
 // presets
 const int PRESETS_TOTAL = 1;
-BitshiftPreset presets[PRESETS_TOTAL] = {
-  BitshiftPresetTremolo()
+BitshiftPresetTremolo tremolo;
+BitshiftPreset* presets[PRESETS_TOTAL] = {
+  &tremolo
 };
 
 // audio

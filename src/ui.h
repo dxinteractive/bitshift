@@ -31,9 +31,12 @@ class BitshiftUI
     );
     ~BitshiftUI();
 
+    void update();
+    void render();
+
+    void initialState(BitshiftUIState* initialState);
     void pushState(BitshiftUIState* newState);
     void popState();
-    void update();
 
     void onEvent(int id, int value);
     void onEventAnalog(int id, float value);

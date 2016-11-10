@@ -21,3 +21,4 @@ const int BUTTON_TAP3 = 6;
 
 const int BUTTON_PRESS = 0;
 const int BUTTON_RELEASE = 1;
+const int BUTTON_REPEAT = 2;

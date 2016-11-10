@@ -17,6 +17,9 @@ void Bitshift::setup()
 {
   if(audio)
     audio->setup();
+
+  if(ui)
+    ui->render();
 }
 
 void Bitshift::update()

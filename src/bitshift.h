@@ -16,6 +16,7 @@
 
 #include "audio.h"
 #include "ui.h"
+#include "preset.h"
 #include "input_consts.h"
 
 // include specific concrete classes so they are linked and can be used from outside this library

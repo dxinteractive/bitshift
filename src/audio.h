@@ -25,18 +25,22 @@
 class BitshiftAudio
 {
   public:
-    BitshiftAudio(BitshiftPreset* presets, int presetsTotal);
+    BitshiftAudio(BitshiftPreset** presets, int presetsTotal);
     ~BitshiftAudio();
 
     void setup();
     void update();
 
     char const* presetName();
-    void presetParam(int id, int value);
-    void presetParamAnalog(int id, float value);
+    char const** presetParamNames();
+
+    int getPresetParam(int id);
+    float getPresetParamAnalog(int id);
+    void setPresetParam(int id, int value);
+    void setPresetParamAnalog(int id, float value);
 
   private:
-    BitshiftPreset* presets;
+    BitshiftPreset** presets;
     int presetsTotal;
     int activePreset;
 

@@ -23,12 +23,20 @@ class BitshiftPresetTremolo: public BitshiftPreset
       BitshiftPreset() {}
     ~BitshiftPresetTremolo() {}
 
+    virtual const int totalParams();
     virtual char const* name();
-    virtual void param(int id, int value);
-    virtual void paramAnalog(int id, float value);
+    virtual char const** paramNames();
+
+    virtual int getParam(int id);
+    virtual float getParamAnalog(int id);
+    virtual void setParam(int id, int value);
+    virtual void setParamAnalog(int id, float value);
 
   private:
+    static const int _totalParams;
     static char const* _name;
+    static char const* _paramNames[];
+    float temp;
 };
 
 #endif

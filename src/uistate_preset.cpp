@@ -21,16 +21,16 @@ void BitshiftUIStatePreset::onEvent(int id, int value)
 {
   if(!audio) return;
 
-  if(value == BUTTON_PRESS)
+  if(value == BUTTON_PRESS || value == BUTTON_REPEAT)
   {
     switch(id)
     {
       case BUTTON_UP:
-        pushState(new BitshiftUIStatePreset(a + 1));
+        //pushState(new BitshiftUIStatePreset(a + 1));
         return;
 
       case BUTTON_DOWN:
-        popState();
+        //popState();
         return;
 
       case BUTTON_BACK:
@@ -46,11 +46,13 @@ void BitshiftUIStatePreset::onEvent(int id, int value)
 void BitshiftUIStatePreset::onEventAnalog(int id, float value)
 {
   if(!audio) return;
-  audio->presetParamAnalog(id + paramOffset, value);
+  audio->setPresetParamAnalog(id + paramOffset, value);
+
+  render();
 }
 
 void BitshiftUIStatePreset::render()
 {
   if(!display || !audio) return;
-  display->renderPreset(audio->presetName());
+  display->renderPreset(audio->presetName(), audio->getPresetParamAnalog(0));
 }

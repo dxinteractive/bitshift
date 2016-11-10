@@ -28,17 +28,19 @@ BitshiftDisplaySSD1306::BitshiftDisplaySSD1306(
 {
   screen.begin(SSD1306_SWITCHCAPVCC);
   screen.clearDisplay();
-  screen.setTextSize(1);
+  screen.setTextSize(6);
+  screen.println(":)");
   screen.setTextColor(WHITE);
   screen.display();
 }
 
-void BitshiftDisplaySSD1306::renderPreset(char const* presetName)
+void BitshiftDisplaySSD1306::renderPreset(char const* presetName, float poo)
 {
   screen.clearDisplay();
   screen.setTextSize(1);
   screen.setCursor(0,0);
-  screen.println("Yay. ");
+  screen.println("Yay! ");
   screen.println(presetName);
+  screen.println(poo);
   screen.display();
 }
