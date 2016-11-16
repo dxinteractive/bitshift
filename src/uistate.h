@@ -28,16 +28,21 @@ class BitshiftUIState
     void setUI(BitshiftUI* const ui);
     void pushState(BitshiftUIState* newState);
     void popState();
+
+    virtual void update(unsigned long ms);
     virtual void render() = 0;
-    virtual void onEvent(int id, int value) = 0;
-    virtual void onEventAnalog(int id, float value) = 0;
+    virtual void event(int id, int value) = 0;
+    virtual void eventAnalog(int id, float value) = 0;
+
+    void setTimeout();
 
   protected:
     BitshiftAudio* audio;
     BitshiftDisplay* display;
+    BitshiftUI* ui;
 
   private:
-    BitshiftUI* ui;
+    unsigned long timeout = 0;
 };
 
 #endif

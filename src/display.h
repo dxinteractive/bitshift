@@ -14,13 +14,16 @@
 #ifndef BITSHIFT_DISPLAY_H
 #define BITSHIFT_DISPLAY_H
 
+#include "props.h"
+
 class BitshiftDisplay
 {
   public:
     BitshiftDisplay() {}
     virtual ~BitshiftDisplay() {}
 
-    virtual void renderPreset(char const* presetName, float poo) = 0;
+    virtual void render(BitshiftPropsPreset &props) = 0;
+    virtual void render(BitshiftPropsParam &props) = 0;
 
   private:
 };

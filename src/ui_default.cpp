@@ -22,5 +22,5 @@ BitshiftUIDefault::BitshiftUIDefault(
 ):
   BitshiftUI(audio, input, display)
 {
-  this->initialState(new BitshiftUIStatePreset(1));
+  this->initialState(new BitshiftUIStatePreset());
 }

@@ -1,6 +1,6 @@
 /*
  * preset_tremolo
- * Tremolo effect (modulations in volume)
+ * Controller for tremolo effect (modulations in volume)
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
@@ -15,28 +15,25 @@
 #define BITSHIFT_PRESET_TREMOLO_H
 
 #include "preset.h"
+#include "param.h"
+#include "effect_tremolo.h"
 
 class BitshiftPresetTremolo: public BitshiftPreset
 {
   public:
-    BitshiftPresetTremolo():
-      BitshiftPreset() {}
+    BitshiftPresetTremolo();
     ~BitshiftPresetTremolo() {}
 
-    virtual const int totalParams();
-    virtual char const* name();
-    virtual char const** paramNames();
-
-    virtual int getParam(int id);
-    virtual float getParamAnalog(int id);
-    virtual void setParam(int id, int value);
-    virtual void setParamAnalog(int id, float value);
+    virtual void setParam(int paramId, int value);
+    virtual void setParam(int paramId, float value);
+    virtual void setAnalogParam(int analogId, float value);
+    virtual void setMenuItemParam(int itemId, int value);
 
   private:
-    static const int _totalParams;
-    static char const* _name;
-    static char const* _paramNames[];
-    float temp;
+    static BitshiftEffectTremolo tremolo;
+    static const int PARAMS_TOTAL = 6;
+    static char const* NAME;
+    static char const* PARAM_NAMES[PARAMS_TOTAL];
 };
 
 #endif

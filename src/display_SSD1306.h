@@ -16,6 +16,7 @@
 #define BITSHIFT_DISPLAY_SSD1306_H
 
 #include "display.h"
+#include "props.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
@@ -31,9 +32,10 @@ class BitshiftDisplaySSD1306: public BitshiftDisplay
     );
     ~BitshiftDisplaySSD1306() {}
 
-    virtual void renderPreset(char const* presetName, float poo);
+    virtual void render(BitshiftPropsPreset &props);
+    virtual void render(BitshiftPropsParam &props);
 
-  private:
+  protected:
     Adafruit_SSD1306 screen;
 };
 

@@ -51,40 +51,88 @@ void BitshiftAudio::update()
 {
 }
 
-char const* BitshiftAudio::presetName()
+void BitshiftAudio::nextPreset()
+{
+  activePreset++;
+  if(activePreset >= presetsTotal)
+    activePreset = 0;
+}
+
+void BitshiftAudio::prevPreset()
+{
+  activePreset--;
+  if(activePreset < 0)
+    activePreset = presetsTotal - 1;
+}
+
+char const* BitshiftAudio::presetName() const
 {
   BitshiftPreset* preset = presets[activePreset];
   return preset ? preset->name() : "";
 }
 
-char const** BitshiftAudio::presetParamNames()
+char const* BitshiftAudio::paramName(int paramId) const
 {
   BitshiftPreset* preset = presets[activePreset];
-  return preset ? preset->paramNames() : 0;
+  return preset ? preset->paramName(paramId) : "";
 }
 
-int BitshiftAudio::getPresetParam(int id)
+char const* BitshiftAudio::analogParamName(int analogId) const
 {
   BitshiftPreset* preset = presets[activePreset];
-  return preset ? preset->getParam(id) : 0;
+  return preset ? preset->analogParamName(analogId) : "";
 }
 
-float BitshiftAudio::getPresetParamAnalog(int id)
+char const* BitshiftAudio::menuItemParamName(int itemId) const
 {
   BitshiftPreset* preset = presets[activePreset];
-  return preset ? preset->getParamAnalog(id) : 0.0;
+  return preset ? preset->menuItemParamName(itemId) : "";
 }
 
-void BitshiftAudio::setPresetParam(int id, int value)
+int BitshiftAudio::paramsTotal() const
+{
+  BitshiftPreset* preset = presets[activePreset];
+  return preset ? preset->paramsTotal() : 0;
+}
+
+int BitshiftAudio::analogParamsTotal() const
+{
+  BitshiftPreset* preset = presets[activePreset];
+  return preset ? preset->analogParamsTotal() : 0;
+}
+
+
+int BitshiftAudio::menuItemParamsTotal() const
+{
+  BitshiftPreset* preset = presets[activePreset];
+  return preset ? preset->menuItemParamsTotal() : 0;
+}
+
+
+void BitshiftAudio::setParam(int id, int value)
 {
   BitshiftPreset* preset = presets[activePreset];
   if(preset)
     preset->setParam(id, value);
 }
 
-void BitshiftAudio::setPresetParamAnalog(int id, float value)
+void BitshiftAudio::setParam(int id, float value)
 {
   BitshiftPreset* preset = presets[activePreset];
   if(preset)
-    preset->setParamAnalog(id, value);
+    preset->setParam(id, value);
+}
+
+void BitshiftAudio::setAnalogParam(int analogId, float value)
+{
+  BitshiftPreset* preset = presets[activePreset];
+  if(preset)
+    preset->setAnalogParam(analogId, value);
+}
+
+void BitshiftAudio::setMenuItemParam(int itemId, int value)
+{
+  BitshiftPreset* preset = presets[activePreset];
+  if(preset)
+    preset->setMenuItemParam(itemId, value);
 }

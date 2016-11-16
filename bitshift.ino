@@ -62,8 +62,8 @@ const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {
 */
 
 BitshiftInputDefault input(
-  ANALOG_TOTAL,
   ANALOG_PINS,
+  ANALOG_TOTAL,
   BUTTONS_PIN,
   BUTTONS_TOTAL,
   BUTTONS_VALUES,
@@ -110,7 +110,7 @@ void setup() {
 
 
 void loop() {
-  bitshift.update();
+  bitshift.update(millis());
   
   /*Serial.print("CPU: ");
   Serial.print(AudioProcessorUsage());

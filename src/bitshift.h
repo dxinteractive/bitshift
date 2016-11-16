@@ -33,7 +33,7 @@ class Bitshift
   		ui(&ui) {}
 
     void setup();
-    void update();
+    void update(unsigned long ms);
 
   private:
   	BitshiftAudio* audio;

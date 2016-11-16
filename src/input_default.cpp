@@ -18,8 +18,8 @@
 #include "input_consts.h"
 
 BitshiftInputDefault::BitshiftInputDefault(
-  int analogTotal,
   const int analogPins[],
+  int analogTotal,
   int buttonsPin,
   int buttonsTotal,
   const int buttonsValues[],

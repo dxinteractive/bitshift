@@ -23,14 +23,28 @@ void BitshiftUIState::setUI(BitshiftUI* const ui)
   this->display = ui->display;
 }
 
+void BitshiftUIState::update(unsigned long ms)
+{
+  if(timeout != 0 && timeout + 2000 < ms)
+  {
+    Serial.println("POP");
+    Serial.println(timeout);
+    Serial.println(ms);
+    popState();
+  }
+}
+
 void BitshiftUIState::pushState(BitshiftUIState* newState)
 {
-  if(ui)
-    ui->pushState(newState);
+  ui->pushState(newState);
 }
 
 void BitshiftUIState::popState()
 {
-  if(ui)
-    ui->popState();
+  ui->popState();
+}
+
+void BitshiftUIState::setTimeout()
+{
+  timeout = lastUpdateMS + 1; // how can we set this when this state doesn't know the time yet?
 }

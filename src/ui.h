@@ -20,7 +20,7 @@
 #include "input.h"
 #include "display.h"
 
-class BitshiftUI
+class BitshiftUI // move this to the 'default' version
 {
   friend class BitshiftUIState;
   public:
@@ -31,15 +31,16 @@ class BitshiftUI
     );
     ~BitshiftUI();
 
-    void update();
+    void update(unsigned long ms);
     void render();
 
     void initialState(BitshiftUIState* initialState);
     void pushState(BitshiftUIState* newState);
     void popState();
 
-    void onEvent(int id, int value);
-    void onEventAnalog(int id, float value);
+    void event(int id, int value);
+    void eventAnalog(int id, float value);
+    int visibleAnalog = 4;
 
   protected:
   	BitshiftAudio* audio;

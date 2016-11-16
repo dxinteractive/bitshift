@@ -1,6 +1,6 @@
 /*
- * input
- * Base class for input providers
+ * effect
+ * Base class for effects, which are configured sets of Teensy Audio components
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
@@ -11,14 +11,14 @@
  * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
-#include "ui.h"
+#ifndef BITSHIFT_EFFECT_H
+#define BITSHIFT_EFFECT_H
 
-void BitshiftInput::event(int id, int value) {
-  if(ui)
-    ui->event(id, value);
-}
+class BitshiftEffect
+{
+  public:
+    BitshiftEffect() {}
+    virtual ~BitshiftEffect();
+};
 
-void BitshiftInput::eventAnalog(int id, float value) {
-  if(ui)
-    ui->eventAnalog(id, value);
-}
+#endif

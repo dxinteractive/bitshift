@@ -22,7 +22,7 @@
 
 #include "preset.h"
 
-class BitshiftAudio
+class BitshiftAudio // make extend from base class
 {
   public:
     BitshiftAudio(BitshiftPreset** presets, int presetsTotal);
@@ -31,13 +31,22 @@ class BitshiftAudio
     void setup();
     void update();
 
-    char const* presetName();
-    char const** presetParamNames();
+    void nextPreset();
+    void prevPreset();
 
-    int getPresetParam(int id);
-    float getPresetParamAnalog(int id);
-    void setPresetParam(int id, int value);
-    void setPresetParamAnalog(int id, float value);
+    char const* presetName() const;
+    char const* paramName(int paramId) const;
+    char const* analogParamName(int analogId) const;
+    char const* menuItemParamName(int itemId) const;
+
+    int paramsTotal() const;
+    int analogParamsTotal() const;
+    int menuItemParamsTotal() const;
+
+    void setParam(int paramId, int value);
+    void setParam(int paramId, float value);
+    void setAnalogParam(int analogId, float value);
+    void setMenuItemParam(int itemId, int value);
 
   private:
     BitshiftPreset** presets;

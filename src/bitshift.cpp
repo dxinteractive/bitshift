@@ -22,8 +22,8 @@ void Bitshift::setup()
     ui->render();
 }
 
-void Bitshift::update()
+void Bitshift::update(unsigned long ms)
 {
   if(ui)
-    ui->update();
+    ui->update(ms);
 }

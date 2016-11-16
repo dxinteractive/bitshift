@@ -15,20 +15,48 @@
 #ifndef BITSHIFT_PRESET_H
 #define BITSHIFT_PRESET_H
 
+#include "param.h"
+
 class BitshiftPreset
 {
   public:
     BitshiftPreset() {}
-    virtual ~BitshiftPreset() {}
+    virtual ~BitshiftPreset();
 
-    virtual const int totalParams() { return 0; }
-    virtual char const* name() { return 0; }
-    virtual char const** paramNames() { return 0; }
+    inline char const* name() const { return thisName; }
+    char const* paramName(int paramId) const;
+    char const* analogParamName(int analogId) const;
+    char const* menuItemParamName(int itemId) const;
 
-    virtual int getParam(int id) { return 0; }
-    virtual float getParamAnalog(int id) { return 0.0; }
-    virtual void setParam(int id, int value) {}
-    virtual void setParamAnalog(int id, float value) {}
+    inline const int paramsTotal() const { return thisParamsTotal; }
+    inline const int analogParamsTotal() const { return analogMapSize; }
+    inline const int menuItemParamsTotal() const { return menuItemMapSize; }
+
+    virtual void setParam(int paramId, int value) {}
+    virtual void setParam(int paramId, float value) {}
+    virtual void setAnalogParam(int analogId, float value) {}
+    virtual void setMenuItemParam(int itemId, int value) {}
+
+    int paramIdByAnalogId(int analogId) const;
+    int paramIdByMenuItemId(int itemId) const;
+
+    void setAnalogMap(int inputMap[], int size);
+    void setMenuItemMap(int inputMap[], int size);
+
+    void clearAnalogMap();
+    void clearMenuItemMap();
+
+    void deletePresets(int totalPresets);
+
+  protected:
+    BitshiftParam** state;
+    char const* thisName;
+    char const** thisParamNames;
+    int thisParamsTotal;
+    int analogMapSize;
+    int* analogMap;
+    int menuItemMapSize;
+    int* menuItemMap;
 };
 
 #endif

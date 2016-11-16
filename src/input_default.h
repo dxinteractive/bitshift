@@ -26,8 +26,8 @@ class BitshiftInputDefault: public BitshiftInput
     static const int ANALOG_RESOLUTION = 1023;
 
     BitshiftInputDefault(
-      int analogTotal,
       const int analogPins[],
+      int analogTotal,
       int buttonsPin,
       int buttonsTotal,
       const int buttonsValues[],

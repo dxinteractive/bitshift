@@ -13,6 +13,7 @@
 
 #include "display.h"
 #include "display_SSD1306.h"
+#include "props.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
@@ -34,13 +35,47 @@ BitshiftDisplaySSD1306::BitshiftDisplaySSD1306(
   screen.display();
 }
 
-void BitshiftDisplaySSD1306::renderPreset(char const* presetName, float poo)
+void BitshiftDisplaySSD1306::render(BitshiftPropsPreset &props)
 {
   screen.clearDisplay();
+
   screen.setTextSize(1);
+  if(props.analogParamNames[0][0])
+  {
+    screen.setCursor(0,0);
+    screen.print("A:");
+    screen.print(props.analogParamNames[0]);
+  }
+  if(props.analogParamNames[2][0])
+  {
+    screen.setCursor(60,0);
+    screen.print("C:");
+    screen.print(props.analogParamNames[2]);
+  }
+  if(props.analogParamNames[1][0])
+  {
+    screen.setCursor(0,9);
+    screen.print("B:");
+    screen.print(props.analogParamNames[1]);
+  }
+  if(props.analogParamNames[3][0])
+  {
+    screen.setCursor(60,9);
+    screen.print("D:");
+    screen.print(props.analogParamNames[3]);
+  }
+
+  screen.setCursor(64 - strlen(props.presetName) * 6, 26);
+  screen.setTextSize(2);
+  screen.println(props.presetName);
+  screen.display();
+}
+
+void BitshiftDisplaySSD1306::render(BitshiftPropsParam &props)
+{
+  screen.clearDisplay();
+  screen.setTextSize(2);
   screen.setCursor(0,0);
-  screen.println("Yay! ");
-  screen.println(presetName);
-  screen.println(poo);
+  screen.println(props.paramName);
   screen.display();
 }
