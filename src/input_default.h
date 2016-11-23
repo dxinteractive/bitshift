@@ -38,10 +38,11 @@ class BitshiftInputDefault: public BitshiftInput
     virtual void update();
 
   private:
-    int analogInputToRead;
     int analogTotal;
+    int buttonsTotal;
     AnalogMultiButton buttons;
     ResponsiveAnalogRead* analogInputs[BitshiftInputDefault::MAX_ANALOG];
+    int analogInputToRead;
     int buttonsAssign[AnalogMultiButton::MAX_BUTTONS];
 };
 

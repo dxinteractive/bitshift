@@ -26,7 +26,10 @@ class BitshiftUIDefault: public BitshiftUI
     BitshiftUIDefault(
       BitshiftAudio& audio,
       BitshiftInput& input,
-      BitshiftDisplay& display
+      BitshiftDisplay& display,
+      BitshiftUIState* initialState,
+      int analogVisible,
+      int buttonsVisible
     );
     ~BitshiftUIDefault() {}
 };

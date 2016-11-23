@@ -32,6 +32,7 @@ class BitshiftDisplaySSD1306: public BitshiftDisplay
     );
     ~BitshiftDisplaySSD1306() {}
 
+    virtual void render(BitshiftPropsMessage &props);
     virtual void render(BitshiftPropsPreset &props);
     virtual void render(BitshiftPropsParam &props);
 

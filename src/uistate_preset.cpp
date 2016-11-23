@@ -13,6 +13,7 @@
 
 #include "uistate_preset.h"
 #include "uistate_param.h"
+#include "uistate_message.h"
 #include "uistate.h"
 #include "ui.h"
 #include "display.h"
@@ -20,12 +21,12 @@
 #include "audio.h"
 #include "input_consts.h"
 
-void BitshiftUIStatePreset::event(int id, int value)
+void BitshiftUIStatePreset::eventButton(int id, int value)
 {
   switch(id)
   {
     case BUTTON_UP:
-      if(value == BUTTON_PRESS || value == BUTTON_REPEAT)
+      if(value == BUTTONEVENT_PRESS || value == BUTTONEVENT_REPEAT)
       {
         audio->prevPreset();
         render();
@@ -33,7 +34,7 @@ void BitshiftUIStatePreset::event(int id, int value)
       return;
 
     case BUTTON_DOWN:
-      if(value == BUTTON_PRESS || value == BUTTON_REPEAT)
+      if(value == BUTTONEVENT_PRESS || value == BUTTONEVENT_REPEAT)
       {
         audio->nextPreset();
         render();
@@ -41,10 +42,9 @@ void BitshiftUIStatePreset::event(int id, int value)
       return;
 
     case BUTTON_BACK:
-      if(value == BUTTON_PRESS)
+      if(value == BUTTONEVENT_PRESS)
       {
         analogOffset();
-        render();
       }
       return;
 
@@ -56,6 +56,12 @@ void BitshiftUIStatePreset::event(int id, int value)
 
 void BitshiftUIStatePreset::eventAnalog(int id, float value)
 {
+  if(id + analogParamOffset >= audio->analogParamsTotal())
+  {
+    render();
+    return;
+  }
+
   BitshiftUIStateParam* newState = new BitshiftUIStateParam(id + analogParamOffset, value);
   newState->setTimeout();
   pushState(newState);
@@ -65,7 +71,7 @@ void BitshiftUIStatePreset::render()
 {
   BitshiftPropsPreset props;
   props.presetName = audio->presetName();
-  for(int i = 0; i < ui->visibleAnalog; i++)
+  for(int i = 0; i < visibleAnalogsTotal(); i++)
     props.analogParamNames[i] = audio->analogParamName(i + analogParamOffset);
 
   //props.poo = audio->getPresetParamAnalog(0);
@@ -75,14 +81,17 @@ void BitshiftUIStatePreset::render()
 void BitshiftUIStatePreset::analogOffset()
 {
   int analogParamsTotal = audio->analogParamsTotal();
-  if(analogParamsTotal <= ui->visibleAnalog)
+  if(analogParamsTotal <= visibleAnalogsTotal())
   {
-    // not enough analog inputs to apply an offset
-    // should render a message to say this
+    BitshiftUIStateMessage* newState = new BitshiftUIStateMessage("No more params available on this preset");
+    newState->setTimeout(2500);
+    pushState(newState);
     return;
   }
 
-  analogParamOffset += ui->visibleAnalog;
+  analogParamOffset += visibleAnalogsTotal();
   if(analogParamOffset > analogParamsTotal)
     analogParamOffset = 0;
+
+  render();
 }

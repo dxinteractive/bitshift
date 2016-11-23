@@ -12,7 +12,8 @@
  */
 
 #include "preset_tremolo.h"
-#include "param.h"
+#include <Arduino.h>
+#include "paramset.h"
 
 static const int SPEED = 0;
 static const int DEPTH = 1;
@@ -34,13 +35,12 @@ char const* BitshiftPresetTremolo::PARAM_NAMES[] = {
 BitshiftPresetTremolo::BitshiftPresetTremolo():
   BitshiftPreset()
 {
-  state = new BitshiftParam*[PARAMS_TOTAL];
-  state[SPEED] = new BitshiftParam(1.0);
-  state[DEPTH] = new BitshiftParam(0.5);
-  state[SHAPE] = new BitshiftParam(3);
-  state[DIVISION] = new BitshiftParam(0);
-  state[BIAS] = new BitshiftParam(0.2);
-  state[VOLUME] = new BitshiftParam(0.8);
+  params.speed = 1.0;
+  params.depth = 0.5;
+  params.shape = 3;
+  params.division = 0;
+  params.bias = 0.2;
+  params.volume = 0.8;
 
   thisName = NAME;
   thisParamsTotal = PARAMS_TOTAL;
@@ -53,6 +53,12 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
   const int MENU_ITEM_MAP_SIZE = 1;
   int menuItemMap[MENU_ITEM_MAP_SIZE] = {3};
   setMenuItemMap(menuItemMap, MENU_ITEM_MAP_SIZE);
+}
+
+void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
+{
+  int fingers = 5;
+  sprintf(str, "Poo %d", fingers);
 }
 
 void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
@@ -100,17 +106,17 @@ void BitshiftPresetTremolo::setParam(int paramId, float value)
   {
     case SPEED:
       BitshiftPresetTremolo::tremolo.speed(value);
-      break;
+      params.speed = value;
+      return;
     case DEPTH:
       BitshiftPresetTremolo::tremolo.depth(value);
-      break;
+      params.depth = value;
+      return;
     case VOLUME:
       BitshiftPresetTremolo::tremolo.volume(value);
-      break;
-    default:
+      params.volume = value;
       return;
   }
-  state[paramId]->set(value);
 }
 
 void BitshiftPresetTremolo::setParam(int paramId, int value)
@@ -121,12 +127,11 @@ void BitshiftPresetTremolo::setParam(int paramId, int value)
   {
     case SHAPE:
       BitshiftPresetTremolo::tremolo.shape(value);
-      break;
+      params.shape = value;
+      return;
     case DIVISION:
       BitshiftPresetTremolo::tremolo.division(value);
-      break;
-    default:
+      params.division = value;
       return;
   }
-  state[paramId]->set(value);
 }

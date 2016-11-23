@@ -1,5 +1,5 @@
 /*
- * param
+ * paramset
  * Simple object container for effect parameters (ints, floats etc)
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
@@ -11,25 +11,18 @@
  * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
-#ifndef BITSHIFT_PARAM_H
-#define BITSHIFT_PARAM_H
+#ifndef BITSHIFT_PARAMSET_H
+#define BITSHIFT_PARAMSET_H
 
-class BitshiftParam
+class BitshiftParamset
 {
   public:
-    BitshiftParam(int intValue);
-    BitshiftParam(float floatValue);
-
-    void set(int intValue);
-    void set(float floatValue);
-
-  private:
-    enum { IS_INT, IS_FLOAT, IS_CHAR } type;
-    union {
-      int intValue;
-      float floatValue;
-      char charValue;
-    } value;
+    // virtual bool isInt(int paramId) = 0;
+    // virtual bool isFloat(int paramId) = 0;
+    // virtual int getInt(int paramId) = 0;
+    // virtual float getFloat(int paramId) = 0;
+    // virtual void setInt(int paramId, int intValue) = 0;
+    // virtual void setFloat(int paramId, float floatValue) = 0;
 };
 
 #endif

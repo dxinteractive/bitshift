@@ -20,11 +20,13 @@
 class BitshiftUIStateParam: public BitshiftUIState
 {
   public:
-    BitshiftUIStateParam(int analogId, float value);
+    BitshiftUIStateParam(int analogId, float value):
+      BitshiftUIState(),
+      analogId(analogId) {}
     ~BitshiftUIStateParam() {}
 
     virtual void render();
-    virtual void event(int id, int value);
+    virtual void eventButton(int id, int value);
     virtual void eventAnalog(int id, float value);
 
   private:

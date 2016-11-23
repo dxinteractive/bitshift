@@ -15,10 +15,7 @@ const int BUTTON_UP = 0;
 const int BUTTON_DOWN = 1;
 const int BUTTON_BACK = 2;
 const int BUTTON_SELECT = 3;
-const int BUTTON_TAP1 = 4;
-const int BUTTON_TAP2 = 5;
-const int BUTTON_TAP3 = 6;
 
-const int BUTTON_PRESS = 0;
-const int BUTTON_RELEASE = 1;
-const int BUTTON_REPEAT = 2;
+const int BUTTONEVENT_PRESS = 0;
+const int BUTTONEVENT_RELEASE = 1;
+const int BUTTONEVENT_REPEAT = 2;

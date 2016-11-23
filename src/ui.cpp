@@ -19,13 +19,17 @@
 BitshiftUI::BitshiftUI(
   BitshiftAudio& audio,
   BitshiftInput& input,
-  BitshiftDisplay& display
+  BitshiftDisplay& display,
+  int visibleButtonsTotal,
+  int visibleAnalogsTotal
 ):
   audio(&audio),
   input(&input),
-  display(&display)
+  display(&display),
+  visibleButtonsTotal(visibleButtonsTotal),
+  visibleAnalogsTotal(visibleAnalogsTotal)
 {
-  this->input->setUI(this);
+  this->input->init(this);
 }
 
 BitshiftUI::~BitshiftUI()
@@ -60,44 +64,38 @@ void BitshiftUI::render()
 void BitshiftUI::initialState(BitshiftUIState* initialState)
 {
   stateStack.push(initialState);
-  initialState->setUI(this);
+  initialState->init(this);
 }
 
 void BitshiftUI::pushState(BitshiftUIState* newState)
 {
-  if(stateStack.isEmpty())
-  {
-    stateStack.push(newState);
-    newState->setUI(this);
-    newState->render();
-    return;
-  }
-
   BitshiftUIState* topState = stateStack.peek();
   if(newState != topState)
   {
     stateStack.push(newState);
-    newState->setUI(this);
+    newState->init(this, topState);
     newState->render();
   }
 }
 
-void BitshiftUI::popState()
+void BitshiftUI::popState(bool render)
 {
-  if(stateStack.count() == 1) return;
+  if(stateStack.count() == 1)
+    return;
 
   BitshiftUIState* topState = stateStack.peek();
   stateStack.pop();
   delete topState;
 
-  stateStack.peek()->render();
+  if(render)
+    stateStack.peek()->render();
 }
 
-void BitshiftUI::event(int id, int value)
+void BitshiftUI::eventButton(int id, int value)
 {
   BitshiftUIState* topState = stateStack.peek();
   if(topState)
-    topState->event(id, value);
+    topState->eventButton(id, value);
 }
 
 void BitshiftUI::eventAnalog(int id, float value)

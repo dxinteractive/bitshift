@@ -39,6 +39,10 @@ class BitshiftAudio // make extend from base class
     char const* analogParamName(int analogId) const;
     char const* menuItemParamName(int itemId) const;
 
+    void paramValueString(char* str, int paramId) const;
+    void analogParamValueString(char* str, int analogId) const;
+    void menuItemParamValueString(char* str, int itemId) const;
+
     int paramsTotal() const;
     int analogParamsTotal() const;
     int menuItemParamsTotal() const;

@@ -21,17 +21,24 @@ class BitshiftProps
     virtual ~BitshiftProps() {}
 };
 
+class BitshiftPropsMessage: public BitshiftProps
+{
+  public:
+    char const* message;
+};
+
 class BitshiftPropsParam: public BitshiftProps
 {
   public:
     char const* paramName;
+    char const* paramValueString;
 };
 
 class BitshiftPropsPreset: public BitshiftProps
 {
   public:
     char const* presetName;
-    char const* analogParamNames[4];
+    char const* analogParamNames[4]; // todo dont hardcode this
 };
 
 #endif

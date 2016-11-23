@@ -11,27 +11,30 @@
  * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
+#include <Arduino.h>
 #include "uistate.h"
 #include "ui.h"
 #include "audio.h"
 #include "display.h"
 
-void BitshiftUIState::setUI(BitshiftUI* const ui)
+void BitshiftUIState::init(BitshiftUI* const ui)
 {
   this->ui = ui;
   this->audio = ui->audio;
   this->display = ui->display;
 }
 
+
+void BitshiftUIState::init(BitshiftUI* const ui, BitshiftUIState* const lowerState)
+{
+  init(ui);
+  this->lowerState = lowerState;
+}
+
 void BitshiftUIState::update(unsigned long ms)
 {
-  if(timeout != 0 && timeout + 2000 < ms)
-  {
-    Serial.println("POP");
-    Serial.println(timeout);
-    Serial.println(ms);
+  if(timeout > 0 && timeout < ms)
     popState();
-  }
 }
 
 void BitshiftUIState::pushState(BitshiftUIState* newState)
@@ -39,12 +42,54 @@ void BitshiftUIState::pushState(BitshiftUIState* newState)
   ui->pushState(newState);
 }
 
-void BitshiftUIState::popState()
+void BitshiftUIState::popState(bool render)
 {
-  ui->popState();
+  ui->popState(render);
 }
 
-void BitshiftUIState::setTimeout()
+int BitshiftUIState::visibleButtonsTotal()
 {
-  timeout = lastUpdateMS + 1; // how can we set this when this state doesn't know the time yet?
+  return ui->visibleButtonsTotal;
+}
+
+int BitshiftUIState::visibleAnalogsTotal()
+{
+  return ui->visibleAnalogsTotal;
+}
+
+void BitshiftUIState::passDownEventButton(int id, int value)
+{
+  if(lowerState)
+    lowerState->eventButton(id, value);
+}
+
+void BitshiftUIState::passDownEventAnalog(int id, float value)
+{
+  if(lowerState)
+    lowerState->eventAnalog(id, value);
+}
+
+bool BitshiftUIState::passDownEventInvisibleButton(int id, int value)
+{
+  if(lowerState && id >= ui->visibleButtonsTotal)
+  {
+    lowerState->eventButton(id, value);
+    return true;
+  }
+  return false;
+}
+
+bool BitshiftUIState::passDownEventInvisibleAnalog(int id, float value)
+{
+  if(lowerState && id >= ui->visibleAnalogsTotal)
+  {
+    lowerState->eventAnalog(id, value);
+    return true;
+  }
+  return false;
+}
+
+void BitshiftUIState::setTimeout(int duration)
+{
+  timeout = millis() + duration;
 }

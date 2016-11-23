@@ -29,16 +29,23 @@ BitshiftDisplaySSD1306::BitshiftDisplaySSD1306(
 {
   screen.begin(SSD1306_SWITCHCAPVCC);
   screen.clearDisplay();
-  screen.setTextSize(6);
-  screen.println(":)");
   screen.setTextColor(WHITE);
+  screen.println("...");
+  screen.display();
+}
+
+void BitshiftDisplaySSD1306::render(BitshiftPropsMessage &props)
+{
+  screen.clearDisplay();
+  screen.setCursor(0,0);
+  screen.setTextSize(1);
+  screen.println(props.message);
   screen.display();
 }
 
 void BitshiftDisplaySSD1306::render(BitshiftPropsPreset &props)
 {
   screen.clearDisplay();
-
   screen.setTextSize(1);
   if(props.analogParamNames[0][0])
   {
@@ -74,8 +81,9 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsPreset &props)
 void BitshiftDisplaySSD1306::render(BitshiftPropsParam &props)
 {
   screen.clearDisplay();
-  screen.setTextSize(2);
   screen.setCursor(0,0);
+  screen.setTextSize(2);
   screen.println(props.paramName);
+  screen.println(props.paramValueString);
   screen.display();
 }

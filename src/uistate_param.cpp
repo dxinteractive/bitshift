@@ -19,28 +19,32 @@
 #include "audio.h"
 #include "input_consts.h"
 
-BitshiftUIStateParam::BitshiftUIStateParam(int analogId, float value):
-  BitshiftUIState(),
-  analogId(analogId)
+void BitshiftUIStateParam::eventButton(int id, int value)
 {
-
-}
-
-void BitshiftUIStateParam::event(int id, int value)
-{
-
+  passDownEventInvisibleButton(id, value);
 }
 
 void BitshiftUIStateParam::eventAnalog(int id, float value)
 {
+  if(id != analogId)
+  {
+    popState(false);
+    passDownEventAnalog(id, value);
+    return;
+  }
+
   //audio->setAnalogParam(id + analogParamOffset, value);
   //render();
-  //setTimeout();
+  setTimeout();
 }
 
 void BitshiftUIStateParam::render()
 {
+  char paramValueString[30];
   BitshiftPropsParam props;
   props.paramName = audio->analogParamName(analogId);
+  audio->analogParamValueString(paramValueString, analogId);
+  Serial.println(paramValueString);
+  props.paramValueString = paramValueString;
   display->render(props);
 }

@@ -25,21 +25,31 @@ class BitshiftUIState
     BitshiftUIState() {}
     virtual ~BitshiftUIState() {}
 
-    void setUI(BitshiftUI* const ui);
+    void init(BitshiftUI* const ui);
+    void init(BitshiftUI* const ui, BitshiftUIState* const lowerState);
     void pushState(BitshiftUIState* newState);
-    void popState();
+    void popState(bool render = true);
 
     virtual void update(unsigned long ms);
     virtual void render() = 0;
-    virtual void event(int id, int value) = 0;
+
+    virtual void eventButton(int id, int value) = 0;
     virtual void eventAnalog(int id, float value) = 0;
 
-    void setTimeout();
+    int visibleButtonsTotal();
+    int visibleAnalogsTotal();
+    void passDownEventButton(int id, int value);
+    void passDownEventAnalog(int id, float value);
+    bool passDownEventInvisibleButton(int id, int value);
+    bool passDownEventInvisibleAnalog(int id, float value);
+
+    void setTimeout(int duration = 1000);
 
   protected:
     BitshiftAudio* audio;
     BitshiftDisplay* display;
     BitshiftUI* ui;
+    BitshiftUIState* lowerState;
 
   private:
     unsigned long timeout = 0;

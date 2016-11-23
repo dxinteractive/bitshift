@@ -27,7 +27,9 @@ class BitshiftUI // move this to the 'default' version
     BitshiftUI(
     	BitshiftAudio& audio,
     	BitshiftInput& input,
-    	BitshiftDisplay& display
+    	BitshiftDisplay& display,
+      int visibleButtonsTotal,
+      int visibleAnalogsTotal
     );
     ~BitshiftUI();
 
@@ -36,16 +38,17 @@ class BitshiftUI // move this to the 'default' version
 
     void initialState(BitshiftUIState* initialState);
     void pushState(BitshiftUIState* newState);
-    void popState();
+    void popState(bool render = true);
 
-    void event(int id, int value);
+    void eventButton(int id, int value);
     void eventAnalog(int id, float value);
-    int visibleAnalog = 4;
 
   protected:
   	BitshiftAudio* audio;
     BitshiftInput* input;
     BitshiftDisplay* display;
+    const int visibleButtonsTotal;
+    const int visibleAnalogsTotal;
 
   private:
     StackArray <BitshiftUIState*> stateStack;

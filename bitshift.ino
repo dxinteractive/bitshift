@@ -36,30 +36,41 @@
 
 
 // set pins and consts for your specific setup
-// input
+// input - analog
 const int ANALOG_TOTAL = 5;
 const int ANALOG_PINS[ANALOG_TOTAL] = {A2, A3, A6, A7, A11};
+const int ANALOG_VISIBLE = 4;
+// ^ this signifies that the first 4 analog inputs should display their parameter changes on the UI (use with knobs)
+// Any analog pins after that will not cause any UI changes (use with expression pedals and control voltages)
+
+// input - buttons
 const int BUTTONS_PIN = A10;
 const int BUTTONS_TOTAL = 7;
-const int BUTTONS_VALUES[BUTTONS_TOTAL] = {0, 182, 353, 508, 605, 764, 855};
+const int BUTTONS_VISIBLE = 4;
+// ^ this signifies that the first 4 buttons should display their parameter changes on the UI (up, down, back and select)
+// Any button assign values higher that that will not cause any UI changes and should usually not be affected by 
+
+const int BUTTONS_VALUES[BUTTONS_TOTAL] = {
+  0,
+  182,
+  353,
+  508,
+  605,
+  764,
+  855
+};
 // ^ analog readings when each button is pressed, in ascending order
 
-const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {5, 0, 1, 4, 6, 2, 3};
-// ^ index of BUTTON_VALUES corresponding to each button in the following order:
-// up, down, back, select, tap, tap 2, tap 3
-// e.g. "up" is to be triggered when BUTTON_VALUES index 5 (~764) is read
-
-/* 
 const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {
   BUTTON_DOWN, // 0
   BUTTON_BACK, // 182
-  BUTTON_TAP2, // 353
-  BUTTON_TAP3, // 508
+  BUTTONS_VISIBLE + 1, // 353 (tap 2)
+  BUTTONS_VISIBLE + 2, // 508 (tap 3)
   BUTTON_SELECT, // 605
   BUTTON_UP, // 764
-  BUTTON_TAP1 // 855
+  BUTTONS_VISIBLE // 855 (tap 1)
 };
-*/
+// ^ buttons corresponding to each of the BUTTON_VALUES
 
 BitshiftInputDefault input(
   ANALOG_PINS,
@@ -96,7 +107,14 @@ BitshiftPreset* presets[PRESETS_TOTAL] = {
 BitshiftAudio audio(presets, PRESETS_TOTAL);
 
 // ui
-BitshiftUIDefault ui(audio, input, display);
+BitshiftUIDefault ui(
+  audio,
+  input,
+  display,
+  new BitshiftUIStatePreset(),
+  BUTTONS_VISIBLE,
+  ANALOG_VISIBLE
+);
 
 // bitshift
 Bitshift bitshift(audio, ui);

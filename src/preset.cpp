@@ -18,16 +18,16 @@ BitshiftPreset::~BitshiftPreset()
 {
   clearAnalogMap();
   clearMenuItemMap();
-  deletePresets(paramsTotal());
+  //deletePresets(paramsTotal());
 }
 
-void BitshiftPreset::deletePresets(int totalPresets)
-{
-  for(int i = 0; i < totalPresets; i++)
-    delete[] state[i];
+// void BitshiftPreset::deletePresets(int totalPresets)
+// {
+//   for(int i = 0; i < totalPresets; i++)
+//     delete[] state[i];
 
-  delete[] state;
-}
+//   delete[] state;
+// }
 
 char const* BitshiftPreset::paramName(int paramId) const
 {
@@ -47,6 +47,15 @@ char const* BitshiftPreset::menuItemParamName(int itemId) const
   return paramName(paramIdByMenuItemId(itemId));
 }
 
+void BitshiftPreset::analogParamValueString(char* str, int analogId) const
+{
+  paramValueString(str, paramIdByAnalogId(analogId));
+}
+
+void BitshiftPreset::menuItemParamValueString(char* str, int itemId) const
+{
+  paramValueString(str, paramIdByMenuItemId(itemId));
+}
 
 int BitshiftPreset::paramIdByAnalogId(int analogId) const
 {

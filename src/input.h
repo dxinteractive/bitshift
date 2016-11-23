@@ -23,8 +23,8 @@ class BitshiftInput
     BitshiftInput() {}
     virtual ~BitshiftInput() {}
 
-    inline void setUI(BitshiftUI* const ui) { this->ui = ui; }
-    void event(int id, int value);
+    inline void init(BitshiftUI* const ui) { this->ui = ui; }
+    void eventButton(int id, int value);
     void eventAnalog(int id, float value);
     virtual void update() = 0;
 

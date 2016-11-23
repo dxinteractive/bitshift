@@ -15,8 +15,6 @@
 #ifndef BITSHIFT_PRESET_H
 #define BITSHIFT_PRESET_H
 
-#include "param.h"
-
 class BitshiftPreset
 {
   public:
@@ -27,6 +25,10 @@ class BitshiftPreset
     char const* paramName(int paramId) const;
     char const* analogParamName(int analogId) const;
     char const* menuItemParamName(int itemId) const;
+
+    virtual void paramValueString(char* str, int paramId) const {}
+    void analogParamValueString(char* str, int analogId) const;
+    void menuItemParamValueString(char* str, int itemId) const;
 
     inline const int paramsTotal() const { return thisParamsTotal; }
     inline const int analogParamsTotal() const { return analogMapSize; }
@@ -46,10 +48,7 @@ class BitshiftPreset
     void clearAnalogMap();
     void clearMenuItemMap();
 
-    void deletePresets(int totalPresets);
-
   protected:
-    BitshiftParam** state;
     char const* thisName;
     char const** thisParamNames;
     int thisParamsTotal;

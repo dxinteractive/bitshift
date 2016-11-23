@@ -22,6 +22,7 @@ class BitshiftDisplay
     BitshiftDisplay() {}
     virtual ~BitshiftDisplay() {}
 
+    virtual void render(BitshiftPropsMessage &props) = 0;
     virtual void render(BitshiftPropsPreset &props) = 0;
     virtual void render(BitshiftPropsParam &props) = 0;
 

@@ -51,42 +51,17 @@ void BitshiftInputDefault::update()
   if(analogInputToRead == analogTotal)
   {
     buttons.update();
-    if(buttons.onPress(buttonsAssign[BUTTON_UP]))
-      event(BUTTON_UP, BUTTON_PRESS);
+    for(int i = 0; i < buttonsTotal; i++)
+    {
+      if(buttons.onPress(i))
+        eventButton(buttonsAssign[i], BUTTONEVENT_PRESS);
 
-    if(buttons.onPress(buttonsAssign[BUTTON_DOWN]))
-      event(BUTTON_DOWN, BUTTON_PRESS);
+      if(buttons.onRelease(i))
+        eventButton(buttonsAssign[i], BUTTONEVENT_RELEASE);
 
-    if(buttons.onPress(buttonsAssign[BUTTON_BACK]))
-      event(BUTTON_BACK, BUTTON_PRESS);
-
-    if(buttons.onPress(buttonsAssign[BUTTON_SELECT]))
-      event(BUTTON_SELECT, BUTTON_PRESS);
-
-    if(buttons.onRelease(buttonsAssign[BUTTON_UP]))
-      event(BUTTON_UP, BUTTON_RELEASE);
-
-    if(buttons.onRelease(buttonsAssign[BUTTON_DOWN]))
-      event(BUTTON_DOWN, BUTTON_RELEASE);
-
-    if(buttons.onRelease(buttonsAssign[BUTTON_BACK]))
-      event(BUTTON_BACK, BUTTON_RELEASE);
-
-    if(buttons.onRelease(buttonsAssign[BUTTON_SELECT]))
-      event(BUTTON_SELECT, BUTTON_RELEASE);
-
-    if(buttons.onPressAfter(buttonsAssign[BUTTON_UP], 500, 500))
-      event(BUTTON_UP, BUTTON_REPEAT);
-
-    if(buttons.onPressAfter(buttonsAssign[BUTTON_DOWN], 500, 500))
-      event(BUTTON_DOWN, BUTTON_REPEAT);
-
-    if(buttons.onPressAfter(buttonsAssign[BUTTON_BACK], 500, 500))
-      event(BUTTON_BACK, BUTTON_REPEAT);
-
-    if(buttons.onPressAfter(buttonsAssign[BUTTON_SELECT], 500, 500))
-      event(BUTTON_SELECT, BUTTON_REPEAT);
-
+      if(buttons.onPressAfter(i, 500, 500))
+        eventButton(buttonsAssign[i], BUTTONEVENT_REPEAT);
+    }
     return;
   }
 

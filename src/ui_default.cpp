@@ -18,9 +18,18 @@
 BitshiftUIDefault::BitshiftUIDefault(
   BitshiftAudio& audio,
   BitshiftInput& input,
-  BitshiftDisplay& display
+  BitshiftDisplay& display,
+  BitshiftUIState* initialState,
+  int analogVisible,
+  int buttonsVisible
 ):
-  BitshiftUI(audio, input, display)
+  BitshiftUI(
+    audio,
+    input,
+    display,
+    analogVisible,
+    buttonsVisible
+  )
 {
-  this->initialState(new BitshiftUIStatePreset());
+  this->initialState(initialState);
 }
