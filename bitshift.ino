@@ -104,7 +104,7 @@ BitshiftPreset* presets[PRESETS_TOTAL] = {
 };
 
 // audio
-BitshiftAudio audio(presets, PRESETS_TOTAL);
+BitshiftAudioDefault audio(presets, PRESETS_TOTAL);
 
 // ui
 BitshiftUIDefault ui(

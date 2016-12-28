@@ -31,7 +31,7 @@ class BitshiftUI // move this to the 'default' version
       int visibleButtonsTotal,
       int visibleAnalogsTotal
     );
-    ~BitshiftUI();
+    virtual ~BitshiftUI();
 
     void update(unsigned long ms);
     void render();

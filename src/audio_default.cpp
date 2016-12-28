@@ -1,5 +1,5 @@
 /*
- * audio
+ * audio_default
  * Class responsible for all audio management
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
@@ -12,6 +12,7 @@
  */
 
 #include "audio.h"
+#include "audio_default.h"
 #include <Audio.h>
 #include <Wire.h>
 #include <SPI.h>
@@ -20,19 +21,17 @@
 
 #include "preset.h"
 
-BitshiftAudio::BitshiftAudio(BitshiftPreset** presets, int presetsTotal):
+BitshiftAudioDefault::BitshiftAudioDefault(BitshiftPreset** presets, int presetsTotal):
+  BitshiftAudio(),
   presets(presets),
   presetsTotal(presetsTotal),
   inToOut(audioIn, 0, audioOut, 0)
 {
 }
 
-BitshiftAudio::~BitshiftAudio()
+void BitshiftAudioDefault::setup()
 {
-}
-
-void BitshiftAudio::setup()
-{
+  // "12" is arbitrary right now (todo, adjust for reasons)
   AudioMemory(12);
   audioAdaptor.enable();
   audioAdaptor.inputSelect(AUDIO_INPUT_LINEIN);
@@ -47,92 +46,90 @@ void BitshiftAudio::setup()
   audioAdaptor.dacVolume(0.9);
 }
 
-void BitshiftAudio::update()
+void BitshiftAudioDefault::update()
 {
 }
 
-void BitshiftAudio::nextPreset()
+void BitshiftAudioDefault::nextPreset()
 {
   activePreset++;
   if(activePreset >= presetsTotal)
     activePreset = 0;
 }
 
-void BitshiftAudio::prevPreset()
+void BitshiftAudioDefault::prevPreset()
 {
   activePreset--;
   if(activePreset < 0)
     activePreset = presetsTotal - 1;
 }
 
-char const* BitshiftAudio::presetName() const
+char const* BitshiftAudioDefault::presetName() const
 {
   return presets[activePreset]->name();
 }
 
-char const* BitshiftAudio::paramName(int paramId) const
+char const* BitshiftAudioDefault::paramName(int paramId) const
 {
   return presets[activePreset]->paramName(paramId);
 }
 
-char const* BitshiftAudio::analogParamName(int analogId) const
+char const* BitshiftAudioDefault::analogParamName(int analogId) const
 {
   return presets[activePreset]->analogParamName(analogId);
 }
 
-char const* BitshiftAudio::menuItemParamName(int itemId) const
+char const* BitshiftAudioDefault::menuItemParamName(int itemId) const
 {
   return presets[activePreset]->menuItemParamName(itemId);
 }
 
-void BitshiftAudio::paramValueString(char* str, int paramId) const
+void BitshiftAudioDefault::paramValueString(char* str, int paramId) const
 {
   presets[activePreset]->paramValueString(str, paramId);
 }
 
-void BitshiftAudio::analogParamValueString(char* str, int paramId) const
+void BitshiftAudioDefault::analogParamValueString(char* str, int paramId) const
 {
   presets[activePreset]->analogParamValueString(str, paramId);
 }
 
-void BitshiftAudio::menuItemParamValueString(char* str, int itemId) const
+void BitshiftAudioDefault::menuItemParamValueString(char* str, int itemId) const
 {
   presets[activePreset]->menuItemParamValueString(str, itemId);
 }
 
-int BitshiftAudio::paramsTotal() const
+int BitshiftAudioDefault::paramsTotal() const
 {
   return presets[activePreset]->paramsTotal();
 }
 
-int BitshiftAudio::analogParamsTotal() const
+int BitshiftAudioDefault::analogParamsTotal() const
 {
   return presets[activePreset]->analogParamsTotal();
 }
 
-
-int BitshiftAudio::menuItemParamsTotal() const
+int BitshiftAudioDefault::menuItemParamsTotal() const
 {
   return presets[activePreset]->menuItemParamsTotal();
 }
 
-
-void BitshiftAudio::setParam(int id, int value)
+void BitshiftAudioDefault::setParam(int id, int value)
 {
-    presets[activePreset]->setParam(id, value);
+  presets[activePreset]->setParam(id, value);
 }
 
-void BitshiftAudio::setParam(int id, float value)
+void BitshiftAudioDefault::setParam(int id, float value)
 {
-    presets[activePreset]->setParam(id, value);
+  presets[activePreset]->setParam(id, value);
 }
 
-void BitshiftAudio::setAnalogParam(int analogId, float value)
+void BitshiftAudioDefault::setAnalogParam(int analogId, float value)
 {
-    presets[activePreset]->setAnalogParam(analogId, value);
+  presets[activePreset]->setAnalogParam(analogId, value);
 }
 
-void BitshiftAudio::setMenuItemParam(int itemId, int value)
+void BitshiftAudioDefault::setMenuItemParam(int itemId, int value)
 {
-    presets[activePreset]->setMenuItemParam(itemId, value);
+  presets[activePreset]->setMenuItemParam(itemId, value);
 }

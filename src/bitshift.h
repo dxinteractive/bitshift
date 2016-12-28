@@ -20,6 +20,7 @@
 #include "input_consts.h"
 
 // include specific concrete classes so they are linked and can be used from outside this library
+#include "audio_default.h"
 #include "ui_default.h"
 #include "input_default.h"
 #include "display_SSD1306.h"
