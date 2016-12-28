@@ -1,6 +1,6 @@
 /*
  * effect
- * Base class for effects, which are configured sets of Teensy Audio components
+ * Abstract base class for effects, which are configured sets of Teensy Audio components
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
@@ -18,7 +18,7 @@ class BitshiftEffect
 {
   public:
     BitshiftEffect() {}
-    virtual ~BitshiftEffect();
+    virtual ~BitshiftEffect() = 0;
 };
 
 #endif

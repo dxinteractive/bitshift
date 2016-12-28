@@ -24,7 +24,10 @@
 #include "ui_default.h"
 #include "input_default.h"
 #include "display_SSD1306.h"
+
+ // presets for testing - move these out to their own repo once ready
 #include "preset_tremolo.h"
+#include "preset_bitcrusher.h"
 
 class Bitshift
 {

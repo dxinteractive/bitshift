@@ -1,6 +1,6 @@
 /*
  * paramset
- * Simple object container for effect parameters (ints, floats etc)
+ * Simple base type for effect parameters
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
@@ -17,12 +17,8 @@
 class BitshiftParamset
 {
   public:
-    // virtual bool isInt(int paramId) = 0;
-    // virtual bool isFloat(int paramId) = 0;
-    // virtual int getInt(int paramId) = 0;
-    // virtual float getFloat(int paramId) = 0;
-    // virtual void setInt(int paramId, int intValue) = 0;
-    // virtual void setFloat(int paramId, float floatValue) = 0;
+    BitshiftParamset() {}
+    ~BitshiftParamset() {}
 };
 
 #endif

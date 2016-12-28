@@ -116,8 +116,6 @@ void BitshiftPresetTremolo::setMenuItemParam(int itemId, int value)
 
 void BitshiftPresetTremolo::setParam(int paramId, float value)
 {
-  if(paramId >= paramsTotal() || paramId < 0) return;
-
   switch(paramId)
   {
     case SPEED:
@@ -134,8 +132,6 @@ void BitshiftPresetTremolo::setParam(int paramId, float value)
 
 void BitshiftPresetTremolo::setParam(int paramId, int value)
 {
-  if(paramId >= paramsTotal() || paramId < 0) return;
-
   switch(paramId)
   {
     case SHAPE:

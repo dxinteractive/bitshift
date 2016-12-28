@@ -97,10 +97,12 @@ BitshiftDisplaySSD1306 display(
 );
 
 // presets
-const int PRESETS_TOTAL = 1;
+const int PRESETS_TOTAL = 2;
 BitshiftPresetTremolo tremolo;
+BitshiftPresetBitcrusher bitcrusher;
 BitshiftPreset* presets[PRESETS_TOTAL] = {
-  &tremolo
+  &tremolo,
+  &bitcrusher
 };
 
 // audio
