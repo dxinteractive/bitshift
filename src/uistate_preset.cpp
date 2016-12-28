@@ -62,7 +62,7 @@ void BitshiftUIStatePreset::eventAnalog(int id, float value)
     return;
   }
 
-  BitshiftUIStateParam* newState = new BitshiftUIStateParam(id + analogParamOffset, value);
+  BitshiftUIStateParam* newState = new BitshiftUIStateParam(id, analogParamOffset, value);
   newState->setTimeout();
   pushState(newState);
 }

@@ -20,9 +20,10 @@
 class BitshiftUIStateParam: public BitshiftUIState
 {
   public:
-    BitshiftUIStateParam(int analogId, float value):
+    BitshiftUIStateParam(int analogId, int analogParamOffset, float value):
       BitshiftUIState(),
-      analogId(analogId) {}
+      analogId(analogId),
+      analogParamOffset(analogParamOffset) {}
     ~BitshiftUIStateParam() {}
 
     virtual void render();
@@ -31,6 +32,7 @@ class BitshiftUIStateParam: public BitshiftUIState
 
   private:
     int analogId;
+    int analogParamOffset;
 };
 
 #endif

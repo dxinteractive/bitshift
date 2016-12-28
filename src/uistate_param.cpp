@@ -33,18 +33,22 @@ void BitshiftUIStateParam::eventAnalog(int id, float value)
     return;
   }
 
-  //audio->setAnalogParam(id + analogParamOffset, value);
-  //render();
+  audio->setAnalogParam(analogId + analogParamOffset, value);
+  render();
   setTimeout();
 }
 
 void BitshiftUIStateParam::render()
 {
-  char paramValueString[30];
   BitshiftPropsParam props;
-  props.paramName = audio->analogParamName(analogId);
-  audio->analogParamValueString(paramValueString, analogId);
-  Serial.println(paramValueString);
+  // get param name from audio and pass it to props
+  props.paramName = audio->analogParamName(analogId + analogParamOffset);
+
+  // get param value (as a string) from audio and pass it to props
+  char paramValueString[30];
+  audio->analogParamValueString(paramValueString, analogId + analogParamOffset);
   props.paramValueString = paramValueString;
+
+  // render
   display->render(props);
 }

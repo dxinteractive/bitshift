@@ -57,8 +57,29 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
 
 void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
 {
-  int fingers = 5;
-  sprintf(str, "Poo %d", fingers);
+  switch(paramId)
+  {
+    case SPEED:
+      sprintf(str, "%0.1fHz", params.speed);
+      break;
+    case DEPTH:
+      sprintf(str, "%0.0f%%", params.depth * 100.0);
+      break;
+    case SHAPE:
+      sprintf(str, "...");
+      break;
+    case DIVISION:
+      sprintf(str, "...");
+      break;
+    case BIAS:
+      sprintf(str, "...");
+      break;
+    case VOLUME:
+      sprintf(str, "%0.0f%%", params.volume * 100.0);
+      break;
+    default:
+      return;
+  }
 }
 
 void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
@@ -67,16 +88,11 @@ void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
   switch(paramId)
   {
     case SPEED:
-      //value = setParam(paramId, value);
+      // exponential range from 0.125 (2^-3) - 64.0 (2^6)
+      value = pow(2, value * 9.0 - 3.0);
       break;
     case DEPTH:
-      //value = setParam(paramId, value);
-      break;
-    case BIAS:
-      //value = setParam(paramId, value);
-      break;
     case VOLUME:
-      //value = setParam(paramId, value);
       break;
     default:
       return;
@@ -105,16 +121,13 @@ void BitshiftPresetTremolo::setParam(int paramId, float value)
   switch(paramId)
   {
     case SPEED:
-      BitshiftPresetTremolo::tremolo.speed(value);
-      params.speed = value;
+      params.speed = BitshiftPresetTremolo::tremolo.speed(value);
       return;
     case DEPTH:
-      BitshiftPresetTremolo::tremolo.depth(value);
-      params.depth = value;
+      params.depth = BitshiftPresetTremolo::tremolo.depth(value);
       return;
     case VOLUME:
-      BitshiftPresetTremolo::tremolo.volume(value);
-      params.volume = value;
+      params.volume = BitshiftPresetTremolo::tremolo.volume(value);
       return;
   }
 }
@@ -126,12 +139,10 @@ void BitshiftPresetTremolo::setParam(int paramId, int value)
   switch(paramId)
   {
     case SHAPE:
-      BitshiftPresetTremolo::tremolo.shape(value);
-      params.shape = value;
+      params.shape = BitshiftPresetTremolo::tremolo.shape(value);
       return;
     case DIVISION:
-      BitshiftPresetTremolo::tremolo.division(value);
-      params.division = value;
+      params.division = BitshiftPresetTremolo::tremolo.division(value);
       return;
   }
 }

@@ -3,24 +3,24 @@
  * A library to capture multiple button presses through a single analog pin
  *
  * Copyright (c) 2016 Damien Clarke
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.  
+ * SOFTWARE.
  */
 
 #include <Arduino.h>
@@ -30,7 +30,7 @@ AnalogMultiButton::AnalogMultiButton(int pin, int total, const int values[], uns
 {
   pinMode(pin, INPUT ); // ensure button pin is an input
   digitalWrite(pin, LOW ); // ensure pullup is off on button pin
-  
+
   this->pin = pin;
   this->total = total;
   this->debounceDuration = debounceDuration;
@@ -58,19 +58,18 @@ void AnalogMultiButton::update()
   buttonOnRelease = -1;
   lastUpdateTime = thisUpdateTime;
   thisUpdateTime = millis();
-  
+
   int a = analogRead(pin);
   int button = getButtonForAnalogValue(a);
-  if(debounceButton(button) && button != buttonPressed) 
+  if(debounceButton(button) && button != buttonPressed)
   {
     releasedButtonPressTime = buttonPressTime;
-    
+
     if(button != -1)
       buttonPressTime = thisUpdateTime;
-    
+
     buttonOnPress = button;
-	buttonOnRelease = buttonPressed;
-      
+    buttonOnRelease = buttonPressed;
     buttonPressed = button;
   }
 }
@@ -125,7 +124,7 @@ int AnalogMultiButton::getPressDuration()
 {
   if(buttonPressed == -1)
     return 0;
-    
+
   return thisUpdateTime - buttonPressTime;
 }
 
@@ -142,7 +141,7 @@ boolean AnalogMultiButton::debounceButton(int button)
 {
   if(button != lastDebounceButton)
     lastDebounceButtonTime = thisUpdateTime;
-  
+
   lastDebounceButton = button;
   return (thisUpdateTime - lastDebounceButtonTime > debounceDuration);
 }

@@ -27,12 +27,13 @@ BitshiftInputDefault::BitshiftInputDefault(
 ):
   BitshiftInput(),
   analogTotal(analogTotal),
+  buttonsTotal(buttonsTotal),
   buttons(buttonsPin, buttonsTotal, buttonsValues)
 {
   for(int i = 0; i < analogTotal; i++)
   {
     ResponsiveAnalogRead* read = new ResponsiveAnalogRead(analogPins[i], true);
-    read->setActivityThreshold(10.0);
+    read->setActivityThreshold(20.0);
     analogInputs[i] = read;
   }
 
