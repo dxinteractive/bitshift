@@ -27,5 +27,23 @@ BitshiftRouter::BitshiftRouter(
   presetsTotal(presetsTotal),
   inToOut(audioIn, audioInChannel, audioOut, audioOutChannel)
 {
+  patchInputToPresets = new AudioConnection*[presetsTotal];
+  for(int i = 0; i < presetsTotal; i++)
+  {
+    patchInputToPresets[i] = new AudioConnection(
+      audioIn,
+      audioInChannel,
+      *(presets[i]->audioIn()),
+      presets[i]->audioInChannel()
+    );
+  }
+}
 
+BitshiftRouter::~BitshiftRouter()
+{
+  for(int i = 0; i < presetsTotal; i++)
+  {
+    delete patchInputToPresets[i];
+  }
+  delete[] patchInputToPresets;
 }

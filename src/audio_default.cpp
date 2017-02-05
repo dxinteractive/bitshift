@@ -47,6 +47,7 @@ void BitshiftAudioDefault::setup()
 {
   // "12" is arbitrary right now (todo, adjust for reasons)
   AudioMemory(12);
+  // todo: move this out and apply via a default config
   audioAdaptor.enable();
   audioAdaptor.inputSelect(AUDIO_INPUT_LINEIN);
   audioAdaptor.micGain(0);

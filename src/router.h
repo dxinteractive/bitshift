@@ -28,7 +28,7 @@ class BitshiftRouter
       AudioStream& audioOut,
       int audioOutChannel
     );
-    ~BitshiftRouter() {}
+    ~BitshiftRouter();
 
     void setActivePreset(int presetId) { activePresetId = presetId; }
 
@@ -36,6 +36,8 @@ class BitshiftRouter
     BitshiftPreset** presets;
     int presetsTotal;
     int activePresetId;
+
+    AudioConnection** patchInputToPresets;
 
     // for testing
     AudioConnection inToOut;
