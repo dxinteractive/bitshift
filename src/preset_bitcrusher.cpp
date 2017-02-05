@@ -29,6 +29,8 @@ char const* BitshiftPresetBitcrusher::PARAM_NAMES[] = {
 BitshiftPresetBitcrusher::BitshiftPresetBitcrusher():
   BitshiftPreset()
 {
+  setEffect(&bitcrusher);
+
   params.rate = 44100.0;
   params.depth = 16;
   params.volume = 0.8;
@@ -97,10 +99,11 @@ void BitshiftPresetBitcrusher::setParam(int paramId, float value)
   switch(paramId)
   {
     case RATE:
-      params.rate = BitshiftPresetBitcrusher::bitcrusher.rate(value);
+      params.rate = bitcrusher.rate(value);
       return;
+
     case VOLUME:
-      params.volume = BitshiftPresetBitcrusher::bitcrusher.volume(value);
+      params.volume = bitcrusher.volume(value);
       return;
   }
 }
@@ -110,7 +113,7 @@ void BitshiftPresetBitcrusher::setParam(int paramId, int value)
   switch(paramId)
   {
     case DEPTH:
-      params.depth = BitshiftPresetBitcrusher::bitcrusher.depth(value);
+      params.depth = bitcrusher.depth(value);
       return;
   }
 }

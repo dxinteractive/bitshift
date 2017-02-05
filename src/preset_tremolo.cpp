@@ -35,6 +35,8 @@ char const* BitshiftPresetTremolo::PARAM_NAMES[] = {
 BitshiftPresetTremolo::BitshiftPresetTremolo():
   BitshiftPreset()
 {
+  setEffect(&tremolo);
+
   params.speed = 1.0;
   params.depth = 0.5;
   params.shape = 3;
@@ -120,14 +122,17 @@ void BitshiftPresetTremolo::setParam(int paramId, float value)
   switch(paramId)
   {
     case SPEED:
-      params.speed = BitshiftPresetTremolo::tremolo.speed(value);
+      params.speed = tremolo.speed(value);
       return;
+
     case DEPTH:
-      params.depth = BitshiftPresetTremolo::tremolo.depth(value);
+      params.depth = tremolo.depth(value);
       return;
+
     case VOLUME:
-      params.volume = BitshiftPresetTremolo::tremolo.volume(value);
+      params.volume = tremolo.volume(value);
       return;
+
   }
 }
 
@@ -136,10 +141,11 @@ void BitshiftPresetTremolo::setParam(int paramId, int value)
   switch(paramId)
   {
     case SHAPE:
-      params.shape = BitshiftPresetTremolo::tremolo.shape(value);
+      params.shape = tremolo.shape(value);
       return;
+
     case DIVISION:
-      params.division = BitshiftPresetTremolo::tremolo.division(value);
+      params.division = tremolo.division(value);
       return;
   }
 }

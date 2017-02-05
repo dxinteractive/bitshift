@@ -43,11 +43,11 @@ class BitshiftPresetTremolo: public BitshiftPreset
     virtual void setMenuItemParam(int itemId, int value);
 
   private:
-    static BitshiftEffectTremolo tremolo;
     static const int PARAMS_TOTAL = 6;
     static char const* NAME;
     static char const* PARAM_NAMES[PARAMS_TOTAL];
 
+    BitshiftEffectTremolo tremolo;
     BitshiftParamsetTremolo params;
 };
 

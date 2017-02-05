@@ -39,11 +39,11 @@ class BitshiftPresetBitcrusher: public BitshiftPreset
     virtual void setAnalogParam(int analogId, float value);
 
   private:
-    static BitshiftEffectBitcrusher bitcrusher;
     static const int PARAMS_TOTAL = 3;
     static char const* NAME;
     static char const* PARAM_NAMES[PARAMS_TOTAL];
 
+    BitshiftEffectBitcrusher bitcrusher;
     BitshiftParamsetBitcrusher params;
 };
 

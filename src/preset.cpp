@@ -13,6 +13,7 @@
  */
 
 #include "preset.h"
+#include <Audio.h>
 
 BitshiftPreset::~BitshiftPreset()
 {
@@ -28,6 +29,26 @@ BitshiftPreset::~BitshiftPreset()
 
 //   delete[] state;
 // }
+
+void BitshiftPreset::setEffect(BitshiftEffect* effect) {
+  this->effect = effect;
+}
+
+AudioStream const* BitshiftPreset::audioIn() const {
+  return effect ? effect->audioIn() : NULL;
+}
+
+AudioStream const* BitshiftPreset::audioOut() const {
+  return effect ? effect->audioOut() : NULL;
+}
+
+int BitshiftPreset::audioInChannel() const {
+  return effect ? effect->audioInChannel() : 0;
+}
+
+int BitshiftPreset::audioOutChannel() const {
+  return effect ? effect->audioOutChannel() : 0;
+}
 
 char const* BitshiftPreset::paramName(int paramId) const
 {

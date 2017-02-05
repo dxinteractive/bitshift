@@ -15,11 +15,20 @@
 #ifndef BITSHIFT_PRESET_H
 #define BITSHIFT_PRESET_H
 
+#include <Audio.h>
+#include "effect.h"
+
 class BitshiftPreset
 {
   public:
     BitshiftPreset() {}
     virtual ~BitshiftPreset();
+
+    void setEffect(BitshiftEffect* effect);
+    AudioStream const* audioIn() const;
+    AudioStream const* audioOut() const;
+    int audioInChannel() const;
+    int audioOutChannel() const;
 
     inline char const* name() const { return thisName; }
     char const* paramName(int paramId) const;
@@ -56,6 +65,9 @@ class BitshiftPreset
     int* analogMap;
     int menuItemMapSize;
     int* menuItemMap;
+
+  private:
+    BitshiftEffect* effect;
 };
 
 #endif

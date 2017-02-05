@@ -14,11 +14,18 @@
 #ifndef BITSHIFT_EFFECT_H
 #define BITSHIFT_EFFECT_H
 
+#include <Audio.h>
+
 class BitshiftEffect
 {
   public:
     BitshiftEffect() {}
-    virtual ~BitshiftEffect() = 0;
+    virtual ~BitshiftEffect() {}
+
+    virtual AudioStream const* audioIn() const { return NULL; }
+    virtual AudioStream const* audioOut() const { return NULL; }
+    virtual int audioInChannel() const { return 0; }
+    virtual int audioOutChannel() const { return 0; }
 };
 
 #endif
