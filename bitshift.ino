@@ -96,6 +96,9 @@ BitshiftDisplaySSD1306 display(
   PIN_SCREEN_CS
 );
 
+// input
+AudioInputI2S audioIn;
+
 // presets
 const int PRESETS_TOTAL = 2;
 BitshiftPresetTremolo tremolo;
@@ -105,8 +108,18 @@ BitshiftPreset* presets[PRESETS_TOTAL] = {
   &bitcrusher
 };
 
+// output
+AudioOutputI2S audioOut;
+
 // audio
-BitshiftAudioDefault audio(presets, PRESETS_TOTAL);
+BitshiftAudioDefault audio(
+  audioIn,
+  0,
+  presets,
+  PRESETS_TOTAL,
+  audioOut,
+  0
+);
 
 // ui
 BitshiftUIDefault ui(

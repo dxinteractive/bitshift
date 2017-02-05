@@ -21,11 +21,25 @@
 
 #include "preset.h"
 
-BitshiftAudioDefault::BitshiftAudioDefault(BitshiftPreset** presets, int presetsTotal):
+BitshiftAudioDefault::BitshiftAudioDefault(
+  AudioStream& audioIn,
+  int audioInChannel,
+  BitshiftPreset** presets,
+  int presetsTotal,
+  AudioStream& audioOut,
+  int audioOutChannel
+):
   BitshiftAudio(),
   presets(presets),
   presetsTotal(presetsTotal),
-  inToOut(audioIn, 0, audioOut, 0)
+  router(
+    audioIn,
+    audioInChannel,
+    presets,
+    presetsTotal,
+    audioOut,
+    audioOutChannel
+  )
 {
 }
 
@@ -56,7 +70,7 @@ int BitshiftAudioDefault::setActivePreset(int presetId)
     presetId = 0;
 
   activePreset = presetId;
-  // set active preset in effectbay
+  //router.setActivePreset(activePreset);
   return activePreset;
 }
 

@@ -22,11 +22,19 @@
 
 #include "audio.h"
 #include "preset.h"
+#include "router.h"
 
 class BitshiftAudioDefault: public BitshiftAudio
 {
   public:
-    BitshiftAudioDefault(BitshiftPreset** presets, int presetsTotal);
+    BitshiftAudioDefault(
+      AudioStream& audioIn,
+      int audioInChannel,
+      BitshiftPreset** presets,
+      int presetsTotal,
+      AudioStream& audioOut,
+      int audioOutChannel
+    );
     ~BitshiftAudioDefault() {}
 
     virtual void setup();
@@ -59,9 +67,7 @@ class BitshiftAudioDefault: public BitshiftAudio
     int presetsTotal;
     int activePreset;
 
-    AudioInputI2S audioIn;
-    AudioOutputI2S audioOut;
-    AudioConnection inToOut;
+    BitshiftRouter router;
     AudioControlSGTL5000 audioAdaptor;
 };
 
