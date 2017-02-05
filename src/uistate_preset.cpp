@@ -74,7 +74,6 @@ void BitshiftUIStatePreset::render()
   for(int i = 0; i < visibleAnalogsTotal(); i++)
     props.analogParamNames[i] = audio->analogParamName(i + analogParamOffset);
 
-  //props.poo = audio->getPresetParamAnalog(0);
   display->render(props);
 }
 

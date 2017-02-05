@@ -43,7 +43,7 @@ class BitshiftUIState
     bool passDownEventInvisibleButton(int id, int value);
     bool passDownEventInvisibleAnalog(int id, float value);
 
-    void setTimeout(int duration = 1000);
+    void setTimeout(int duration = 1500);
 
   protected:
     BitshiftAudio* audio;

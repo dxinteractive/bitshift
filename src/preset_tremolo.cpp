@@ -88,16 +88,19 @@ void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
   switch(paramId)
   {
     case SPEED:
-      // exponential range from 0.125 (2^-3) - 64.0 (2^6)
-      value = pow(2, value * 9.0 - 3.0);
-      break;
+      {
+        // exponential range from 0.125 (2^-3) to 64.0 (2^6)
+        value = pow(2, value * 9.0 - 3.0);
+        setParam(paramId, value);
+        return;
+      }
+
     case DEPTH:
     case VOLUME:
-      break;
-    default:
+      // default range from 0.0 to 0.1
+      setParam(paramId, value);
       return;
   }
-  setParam(paramId, value);
 }
 
 void BitshiftPresetTremolo::setMenuItemParam(int itemId, int value)
@@ -107,11 +110,9 @@ void BitshiftPresetTremolo::setMenuItemParam(int itemId, int value)
   {
     case SHAPE:
     case DIVISION:
-      break;
-    default:
+      setParam(paramId, value);
       return;
   }
-  setParam(paramId, value);
 }
 
 void BitshiftPresetTremolo::setParam(int paramId, float value)

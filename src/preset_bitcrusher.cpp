@@ -17,7 +17,7 @@
 
 static const int RATE = 0;
 static const int DEPTH = 1;
-static const int VOLUME = 5;
+static const int VOLUME = 2;
 
 char const* BitshiftPresetBitcrusher::NAME = "Bitcrusher";
 char const* BitshiftPresetBitcrusher::PARAM_NAMES[] = {
@@ -66,18 +66,30 @@ void BitshiftPresetBitcrusher::setAnalogParam(int analogId, float value)
   switch(paramId)
   {
     case RATE:
-      //value = pow(2, value * 44100.0 - 1.0);
-      value = value * 44100.0;
-      break;
+      {
+        // exponential range from 256.0 (2^8) to 44100.0 (2^15.5 capped at 44100.0)
+        value = pow(2, 8 + (value * 7.5));
+        if(value > 44100.0)
+          value = 44100.0;
+        setParam(paramId, value);
+        return;
+      }
+
     case DEPTH:
-      //setParam(paramId, value);
-      break;
+      {
+        // range from 1 to 16
+        int intValue = int(value * 16.0) + 1;
+        if(intValue > 16)
+          intValue = 16;
+        setParam(paramId, intValue);
+        return;
+      }
+
     case VOLUME:
-      break;
-    default:
+      // default range of 0.0 to 1.0
+      setParam(paramId, value);
       return;
   }
-  setParam(paramId, value);
 }
 
 void BitshiftPresetBitcrusher::setParam(int paramId, float value)
