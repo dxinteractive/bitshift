@@ -19,26 +19,24 @@ BitshiftPreset::~BitshiftPreset()
 {
   clearAnalogMap();
   clearMenuItemMap();
-  //deletePresets(paramsTotal());
+  delete patchSendToEffect;
 }
-
-// void BitshiftPreset::deletePresets(int totalPresets)
-// {
-//   for(int i = 0; i < totalPresets; i++)
-//     delete[] state[i];
-
-//   delete[] state;
-// }
 
 void BitshiftPreset::setEffect(BitshiftEffect* effect) {
   this->effect = effect;
+  this->patchSendToEffect = new AudioConnection(
+    send,
+    0,
+    *(effect->audioIn()),
+    effect->audioInChannel()
+  );
 }
 
-AudioStream const* BitshiftPreset::audioIn() const {
-  return effect ? effect->audioIn() : NULL;
+AudioStream* BitshiftPreset::audioIn() {
+  return &send;
 }
 
-AudioStream const* BitshiftPreset::audioOut() const {
+AudioStream* BitshiftPreset::audioOut() {
   return effect ? effect->audioOut() : NULL;
 }
 

@@ -22,8 +22,8 @@ class BitshiftEffect
     BitshiftEffect() {}
     virtual ~BitshiftEffect() {}
 
-    virtual AudioStream const* audioIn() const { return NULL; }
-    virtual AudioStream const* audioOut() const { return NULL; }
+    virtual AudioStream* audioIn() { return NULL; }
+    virtual AudioStream* audioOut() { return NULL; }
     virtual int audioInChannel() const { return 0; }
     virtual int audioOutChannel() const { return 0; }
 };

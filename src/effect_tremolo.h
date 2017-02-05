@@ -24,8 +24,8 @@ class BitshiftEffectTremolo: public BitshiftEffect
       BitshiftEffect() {};
     ~BitshiftEffectTremolo() {}
 
-    virtual AudioStream const* audioIn() const { return &fade; }
-    virtual AudioStream const* audioOut() const { return &fade; }
+    virtual AudioStream* audioIn() { return &fade; }
+    virtual AudioStream* audioOut() { return &fade; }
 
     float speed(float hz) { return hz; }
     float depth(float depth) { return depth; }

@@ -25,8 +25,8 @@ class BitshiftPreset
     virtual ~BitshiftPreset();
 
     void setEffect(BitshiftEffect* effect);
-    AudioStream const* audioIn() const;
-    AudioStream const* audioOut() const;
+    AudioStream* audioIn();
+    AudioStream* audioOut();
     int audioInChannel() const;
     int audioOutChannel() const;
 
@@ -58,6 +58,9 @@ class BitshiftPreset
     void clearMenuItemMap();
 
   protected:
+    AudioEffectFade send;
+    AudioConnection* patchSendToEffect;
+
     char const* thisName;
     char const** thisParamNames;
     int thisParamsTotal;

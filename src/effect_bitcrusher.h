@@ -24,8 +24,8 @@ class BitshiftEffectBitcrusher: public BitshiftEffect
       BitshiftEffect() {};
     ~BitshiftEffectBitcrusher() {}
 
-    virtual AudioStream const* audioIn() const { return &bitcrusher; }
-    virtual AudioStream const* audioOut() const { return &bitcrusher; }
+    virtual AudioStream* audioIn() { return &bitcrusher; }
+    virtual AudioStream* audioOut() { return &bitcrusher; }
 
     float rate(float hz) { return hz; }
     int depth(int depth) { return depth; }
