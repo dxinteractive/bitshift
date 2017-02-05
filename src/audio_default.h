@@ -32,8 +32,9 @@ class BitshiftAudioDefault: public BitshiftAudio
     virtual void setup();
     virtual void update();
 
-    virtual void nextPreset();
-    virtual void prevPreset();
+    virtual int setActivePreset(int presetId);
+    virtual int nextPreset();
+    virtual int prevPreset();
 
     virtual char const* presetName() const;
     virtual char const* paramName(int paramId) const;

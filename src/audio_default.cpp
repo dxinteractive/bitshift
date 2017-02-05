@@ -50,18 +50,32 @@ void BitshiftAudioDefault::update()
 {
 }
 
-void BitshiftAudioDefault::nextPreset()
+int BitshiftAudioDefault::setActivePreset(int presetId)
 {
-  activePreset++;
-  if(activePreset >= presetsTotal)
-    activePreset = 0;
+  if(presetId >= presetsTotal || presetId < 0)
+    presetId = 0;
+
+  activePreset = presetId;
+  // set active preset in effectbay
+  return activePreset;
 }
 
-void BitshiftAudioDefault::prevPreset()
+int BitshiftAudioDefault::nextPreset()
 {
-  activePreset--;
-  if(activePreset < 0)
-    activePreset = presetsTotal - 1;
+  int newPresetId = activePreset + 1;
+  if(newPresetId >= presetsTotal)
+    newPresetId = 0;
+
+  return setActivePreset(newPresetId);
+}
+
+int BitshiftAudioDefault::prevPreset()
+{
+  int newPresetId = activePreset - 1;
+  if(newPresetId < 0)
+    newPresetId = presetsTotal - 1;
+
+  return setActivePreset(newPresetId);
 }
 
 char const* BitshiftAudioDefault::presetName() const

@@ -23,8 +23,9 @@ class BitshiftAudio
     virtual void setup() = 0;
     virtual void update() = 0;
 
-    virtual void nextPreset() = 0;
-    virtual void prevPreset() = 0;
+    virtual int setActivePreset(int presetId) = 0;
+    virtual int nextPreset() = 0;
+    virtual int prevPreset() = 0;
 
     virtual char const* presetName() const = 0;
     virtual char const* paramName(int paramId) const = 0;
