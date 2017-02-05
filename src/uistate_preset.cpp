@@ -29,6 +29,7 @@ void BitshiftUIStatePreset::eventButton(int id, int value)
       if(value == BUTTONEVENT_PRESS || value == BUTTONEVENT_REPEAT)
       {
         audio->prevPreset();
+        analogParamOffset = 0;
         render();
       }
       return;
@@ -37,6 +38,7 @@ void BitshiftUIStatePreset::eventButton(int id, int value)
       if(value == BUTTONEVENT_PRESS || value == BUTTONEVENT_REPEAT)
       {
         audio->nextPreset();
+        analogParamOffset = 0;
         render();
       }
       return;
