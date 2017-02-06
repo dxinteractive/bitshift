@@ -26,6 +26,10 @@ class BitshiftEffect
     virtual AudioStream* audioOut() { return NULL; }
     virtual int audioInChannel() const { return 0; }
     virtual int audioOutChannel() const { return 0; }
+
+  protected:
+    int clamp(int value, int low, int high);
+    float clamp(float value, float low, float high);
 };
 
 #endif
