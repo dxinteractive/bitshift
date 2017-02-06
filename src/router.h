@@ -30,17 +30,21 @@ class BitshiftRouter
     );
     ~BitshiftRouter();
 
-    void setActivePreset(int presetId) { activePresetId = presetId; }
+    void setActivePreset(int presetId);
 
   private:
     BitshiftPreset** presets;
     int presetsTotal;
-    int activePresetId;
+    int activePresetId = -1;
 
+    AudioMixer4 mixer;
+
+    AudioConnection patchMixerToOutput;
     AudioConnection** patchInputToPresets;
+    AudioConnection** patchPresetsToMixer;
 
     // for testing
-    AudioConnection inToOut;
+    //AudioConnection inToOut;
 };
 
 #endif

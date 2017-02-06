@@ -25,9 +25,11 @@ BitshiftRouter::BitshiftRouter(
 ):
   presets(presets),
   presetsTotal(presetsTotal),
-  inToOut(audioIn, audioInChannel, audioOut, audioOutChannel)
+  patchMixerToOutput(mixer, 0, audioOut, audioOutChannel)
+  //inToOut(audioIn, audioInChannel, audioOut, audioOutChannel)
 {
   patchInputToPresets = new AudioConnection*[presetsTotal];
+  patchPresetsToMixer = new AudioConnection*[presetsTotal];
   for(int i = 0; i < presetsTotal; i++)
   {
     patchInputToPresets[i] = new AudioConnection(
@@ -35,6 +37,13 @@ BitshiftRouter::BitshiftRouter(
       audioInChannel,
       *(presets[i]->audioIn()),
       presets[i]->audioInChannel()
+    );
+
+    patchPresetsToMixer[i] = new AudioConnection(
+      *(presets[i]->audioOut()),
+      presets[i]->audioOutChannel(),
+      mixer,
+      i
     );
   }
 }
@@ -44,6 +53,17 @@ BitshiftRouter::~BitshiftRouter()
   for(int i = 0; i < presetsTotal; i++)
   {
     delete patchInputToPresets[i];
+    delete patchPresetsToMixer[i];
   }
   delete[] patchInputToPresets;
+  delete[] patchPresetsToMixer;
+}
+
+void BitshiftRouter::setActivePreset(int presetId)
+{
+  if(activePresetId != -1)
+    presets[activePresetId]->audioDisable();
+
+  activePresetId = presetId;
+  presets[activePresetId]->audioEnable();
 }
