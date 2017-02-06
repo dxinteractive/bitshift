@@ -15,24 +15,26 @@
 #define BITSHIFT_EFFECT_BITCRUSHER_H
 
 #include "effect.h"
+#include "effect_volume.h"
 #include <Audio.h>
 
 class BitshiftEffectBitcrusher: public BitshiftEffect
 {
   public:
-    BitshiftEffectBitcrusher():
-      BitshiftEffect() {};
+    BitshiftEffectBitcrusher();
     ~BitshiftEffectBitcrusher() {}
 
     virtual AudioStream* audioIn() { return &bitcrusher; }
-    virtual AudioStream* audioOut() { return &bitcrusher; }
+    virtual AudioStream* audioOut() { return volumeEffect.audioOut(); }
 
-    float rate(float hz) { return hz; }
-    int depth(int depth) { return depth; }
-    float volume(float volume) { return volume; }
+    float rate(float hz);
+    int depth(int depth);
+    float volume(float volume);
 
   private:
     AudioEffectBitcrusher bitcrusher;
+    BitshiftEffectVolume volumeEffect;
+    AudioConnection patchBitcrusherToVolume;
 };
 
 #endif
