@@ -56,9 +56,11 @@ void BitshiftAudioDefault::setup()
   audioAdaptor.adcHighPassFilterDisable();
   // good combination for minimum ADC noise when used with non-active guitar as input
   // large line in sensitivity, bring down dac and volume so overall gain is close to unity
-  audioAdaptor.lineInLevel(12);
+  audioAdaptor.lineInLevel(15);
   audioAdaptor.lineOutLevel(31);
   audioAdaptor.dacVolume(0.9);
+
+  setActivePreset(0);
 }
 
 void BitshiftAudioDefault::update()
@@ -71,7 +73,7 @@ int BitshiftAudioDefault::setActivePreset(int presetId)
     presetId = 0;
 
   activePreset = presetId;
-  //router.setActivePreset(activePreset);
+  router.setActivePreset(activePreset);
   return activePreset;
 }
 

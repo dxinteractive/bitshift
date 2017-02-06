@@ -15,6 +15,12 @@
 #include "preset.h"
 #include <Audio.h>
 
+BitshiftPreset::BitshiftPreset()
+{
+  // start every preset muted
+  send.fadeOut(1);
+}
+
 BitshiftPreset::~BitshiftPreset()
 {
   clearAnalogMap();
@@ -30,6 +36,14 @@ void BitshiftPreset::setEffect(BitshiftEffect* effect) {
     *(effect->audioIn()),
     effect->audioInChannel()
   );
+}
+
+void BitshiftPreset::audioEnable() {
+  send.fadeIn(10);
+}
+
+void BitshiftPreset::audioDisable() {
+  send.fadeOut(10);
 }
 
 AudioStream* BitshiftPreset::audioIn() {
