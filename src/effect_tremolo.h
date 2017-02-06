@@ -20,21 +20,27 @@
 class BitshiftEffectTremolo: public BitshiftEffect
 {
   public:
-    BitshiftEffectTremolo():
-      BitshiftEffect() {};
+    BitshiftEffectTremolo();
     ~BitshiftEffectTremolo() {}
 
-    virtual AudioStream* audioIn() { return &fade; }
-    virtual AudioStream* audioOut() { return &fade; }
+    virtual AudioStream* audioIn() { return &multiplier; }
+    virtual AudioStream* audioOut() { return &multiplier; }
 
-    float speed(float hz) { return hz; }
-    float depth(float depth) { return depth; }
-    int shape(int shape) { return shape; }
-    int division(int division) { return division; }
-    float volume(float volume) { return volume; }
+    float speed(float hz);
+    float depth(float depth);
+    int shape(int shape);
+    int division(int division);
+    float volume(float volume);
 
   private:
-    AudioEffectFade fade;
+    AudioSynthWaveform lfo;
+    AudioSynthWaveformDc offset;
+    AudioMixer4 signalMixer;
+    AudioEffectMultiply multiplier;
+
+    AudioConnection patchLfoToSignalMixer;
+    AudioConnection patchOffsetToSignalMixer;
+    AudioConnection patchSignalMixerToMultiplier;
 };
 
 #endif
