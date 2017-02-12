@@ -22,6 +22,7 @@ void BitshiftUIState::init(BitshiftUI* const ui)
   this->ui = ui;
   this->audio = ui->audio;
   this->display = ui->display;
+  init();
 }
 
 

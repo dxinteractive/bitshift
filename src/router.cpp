@@ -26,7 +26,6 @@ BitshiftRouter::BitshiftRouter(
   presets(presets),
   presetsTotal(presetsTotal),
   patchMixerToOutput(mixer, 0, audioOut, audioOutChannel)
-  //inToOut(audioIn, audioInChannel, audioOut, audioOutChannel)
 {
   patchInputToPresets = new AudioConnection*[presetsTotal];
   patchPresetsToMixer = new AudioConnection*[presetsTotal];

@@ -40,15 +40,20 @@
 const int ANALOG_TOTAL = 5;
 const int ANALOG_PINS[ANALOG_TOTAL] = {A2, A3, A6, A7, A11};
 const int ANALOG_VISIBLE = 4;
-// ^ this signifies that the first 4 analog inputs should display their parameter changes on the UI (use with knobs)
-// Any analog pins after that will not cause any UI changes (use with expression pedals and control voltages)
+// ^ this signifies that the first 4 analog inputs should display
+// their parameter changes on the UI (use with knobs).
+// Any analog pins after that will not cause any UI changes.
+// To be used with inputs like expression pedals and control voltages.
 
 // input - buttons
 const int BUTTONS_PIN = A10;
 const int BUTTONS_TOTAL = 7;
 const int BUTTONS_VISIBLE = 4;
-// ^ this signifies that the first 4 buttons should display their parameter changes on the UI (up, down, back and select)
-// Any button assign values higher that that will not cause any UI changes and should usually not be affected by 
+// ^ this signifies that the first 4 buttons should display
+// their parameter changes on the UI.
+// In a standard setup these buttons are up, down, back and select.
+// Any button_assign values higher that that
+// will not cause any UI changes.
 
 const int BUTTONS_VALUES[BUTTONS_TOTAL] = {
   0,
@@ -96,10 +101,14 @@ BitshiftDisplaySSD1306 display(
   PIN_SCREEN_CS
 );
 
-// input
+// audio
+// Always instanciate audio objects in the order
+// that the audio signal will flow through them
+
+// audio input
 AudioInputI2S audioIn;
 
-// presets
+// audio presets
 const int PRESETS_TOTAL = 2;
 BitshiftPresetTremolo tremolo;
 BitshiftPresetBitcrusher bitcrusher;
@@ -108,10 +117,10 @@ BitshiftPreset* presets[PRESETS_TOTAL] = {
   &bitcrusher
 };
 
-// output
+// audio output
 AudioOutputI2S audioOut;
 
-// audio
+// audio object
 BitshiftAudioDefault audio(
   audioIn,
   0,
@@ -126,7 +135,7 @@ BitshiftUIDefault ui(
   audio,
   input,
   display,
-  new BitshiftUIStatePreset(),
+  new BitshiftUIStateSplash(new BitshiftUIStatePreset()),
   BUTTONS_VISIBLE,
   ANALOG_VISIBLE
 );
@@ -144,16 +153,5 @@ void setup() {
 
 void loop() {
   bitshift.update(millis());
-  
-  /*Serial.print("CPU: ");
-  Serial.print(AudioProcessorUsage());
-  Serial.print(",");
-  Serial.print(AudioProcessorUsageMax());
-  Serial.print("    ");
-  Serial.print("Memory: ");
-  Serial.print(AudioMemoryUsage());
-  Serial.print(",");
-  Serial.print(AudioMemoryUsageMax());
-  Serial.println("");*/
 }
 

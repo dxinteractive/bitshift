@@ -32,6 +32,12 @@ char const* BitshiftPresetTremolo::PARAM_NAMES[] = {
   "Volume"
 };
 
+char const* BitshiftPresetTremolo::OPTIONS_SHAPE[] = {
+  "Sine",
+  "Triangle",
+  "Square"
+};
+
 BitshiftPresetTremolo::BitshiftPresetTremolo():
   BitshiftPreset()
 {
@@ -39,7 +45,7 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
 
   params.speed = 1.0;
   params.depth = 0.5;
-  params.shape = 3;
+  params.shape = 0;
   params.division = 0;
   params.bias = 0.2;
   params.volume = 0.8;
@@ -52,9 +58,14 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
   int analogMap[ANALOG_MAP_SIZE] = {0,1,2,3,4,5};
   setAnalogMap(analogMap, ANALOG_MAP_SIZE);
 
-  const int MENU_ITEM_MAP_SIZE = 1;
-  int menuItemMap[MENU_ITEM_MAP_SIZE] = {3};
-  setMenuItemMap(menuItemMap, MENU_ITEM_MAP_SIZE);
+  const int MENU_ITEM_MAP_SIZE = 2;
+  int menuItemMap[MENU_ITEM_MAP_SIZE] = {3,2};
+  char const** menuItemOptions[MENU_ITEM_MAP_SIZE] = {
+    OPTIONS_BOOLEAN,
+    OPTIONS_SHAPE
+  };
+
+  setMenuItemMap(menuItemMap, MENU_ITEM_MAP_SIZE, menuItemOptions);
 }
 
 void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
@@ -68,7 +79,7 @@ void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
       sprintf(str, "%0.0f%%", params.depth * 100.0);
       break;
     case SHAPE:
-      sprintf(str, "...");
+      sprintf(str, OPTIONS_SHAPE[params.shape]);
       break;
     case DIVISION:
       sprintf(str, "...");
@@ -96,6 +107,13 @@ void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
         setParam(paramId, value);
         return;
       }
+
+    case SHAPE:
+    {
+      // 0, 1 or 2
+      setParam(paramId, intRange(value, 0, 2));
+      return;
+    }
 
     case DEPTH:
     case VOLUME:

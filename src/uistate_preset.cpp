@@ -14,6 +14,7 @@
 #include "uistate_preset.h"
 #include "uistate_param.h"
 #include "uistate_message.h"
+#include "uistate_menu_main.h"
 #include "uistate.h"
 #include "ui.h"
 #include "display.h"
@@ -51,7 +52,7 @@ void BitshiftUIStatePreset::eventButton(int id, int value)
       return;
 
     case BUTTON_SELECT:
-      //pushState(new BitshiftUIStatePreset());
+      pushState(new BitshiftUIStateMenuMain());
       return;
   }
 }
@@ -73,7 +74,9 @@ void BitshiftUIStatePreset::render()
 {
   BitshiftPropsPreset props;
   props.presetName = audio->presetName();
-  for(int i = 0; i < visibleAnalogsTotal(); i++)
+
+  int visibleAnalogsTotalInt = visibleAnalogsTotal();
+  for(int i = 0; i < visibleAnalogsTotalInt; i++)
     props.analogParamNames[i] = audio->analogParamName(i + analogParamOffset);
 
   display->render(props);
@@ -82,7 +85,8 @@ void BitshiftUIStatePreset::render()
 void BitshiftUIStatePreset::analogOffset()
 {
   int analogParamsTotal = audio->analogParamsTotal();
-  if(analogParamsTotal <= visibleAnalogsTotal())
+  int visibleAnalogsTotalInt = visibleAnalogsTotal();
+  if(analogParamsTotal <= visibleAnalogsTotalInt)
   {
     BitshiftUIStateMessage* newState = new BitshiftUIStateMessage("No more params available on this preset");
     newState->setTimeout(2500);
@@ -90,7 +94,7 @@ void BitshiftUIStatePreset::analogOffset()
     return;
   }
 
-  analogParamOffset += visibleAnalogsTotal();
+  analogParamOffset += visibleAnalogsTotalInt;
   if(analogParamOffset > analogParamsTotal)
     analogParamOffset = 0;
 

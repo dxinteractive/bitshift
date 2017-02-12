@@ -45,8 +45,8 @@ BitshiftAudioDefault::BitshiftAudioDefault(
 
 void BitshiftAudioDefault::setup()
 {
-  // "12" is arbitrary right now (todo, adjust for reasons)
-  AudioMemory(12);
+  // todo: pass into constructor
+  AudioMemory(180);
   // todo: move this out and apply via a default config
   audioAdaptor.enable();
   audioAdaptor.inputSelect(AUDIO_INPUT_LINEIN);
@@ -113,6 +113,11 @@ char const* BitshiftAudioDefault::analogParamName(int analogId) const
 char const* BitshiftAudioDefault::menuItemParamName(int itemId) const
 {
   return presets[activePreset]->menuItemParamName(itemId);
+}
+
+char const** BitshiftAudioDefault::menuItemParamOptions(int itemId) const
+{
+  return presets[activePreset]->menuItemParamOptions(itemId);
 }
 
 void BitshiftAudioDefault::paramValueString(char* str, int paramId) const

@@ -1,7 +1,7 @@
 /*
- * uistate_message
- * UI state for displaying a message
- * Copyright (c) 2016 Damien Clarke
+ * uistate_menu
+ * UI state for displaying a menu with selectable options
+ * Copyright (c) 2017 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
  * .-.    _  .-.      .-.    _  .--. .-.
@@ -11,25 +11,28 @@
  * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
-#ifndef BITSHIFT_UISTATE_MESSAGE_H
-#define BITSHIFT_UISTATE_MESSAGE_H
+#ifndef BITSHIFT_UISTATE_MENU_H
+#define BITSHIFT_UISTATE_MENU_H
 
 #include "uistate.h"
 
-class BitshiftUIStateMessage: public BitshiftUIState
+class BitshiftUIStateMenu: public BitshiftUIState
 {
   public:
-    BitshiftUIStateMessage(char const* message):
-      BitshiftUIState(),
-      message(message) {}
-    ~BitshiftUIStateMessage() {}
+    BitshiftUIStateMenu();
+    virtual ~BitshiftUIStateMenu() {}
 
     virtual void render();
     virtual void eventButton(int id, int value);
     virtual void eventAnalog(int id, float value);
 
+    void setItems(char const** itemLabels, int itemsTotal);
+    virtual void onSelect(int cursor) {}
+
   private:
-    char const* message;
+    char const** itemLabels;
+    int itemsTotal = 0;
+    int cursor = 0;
 };
 
 #endif

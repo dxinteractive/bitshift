@@ -20,9 +20,6 @@ BitshiftEffectBitcrusher::BitshiftEffectBitcrusher():
   BitshiftEffect(),
   patchBitcrusherToVolume(bitcrusher, *(volumeEffect.audioIn()))
 {
-  // defaults
-  rate(11000.0);
-  depth(8);
 }
 
 float BitshiftEffectBitcrusher::rate(float hz)

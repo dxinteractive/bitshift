@@ -15,6 +15,11 @@
 #include "preset.h"
 #include <Audio.h>
 
+char const* BitshiftPreset::OPTIONS_BOOLEAN[] = {
+  "Off",
+  "On"
+};
+
 BitshiftPreset::BitshiftPreset()
 {
   // start every preset muted
@@ -80,6 +85,11 @@ char const* BitshiftPreset::menuItemParamName(int itemId) const
   return paramName(paramIdByMenuItemId(itemId));
 }
 
+char const** BitshiftPreset::menuItemParamOptions(int itemId) const
+{
+  return optionsByMenuItemId(itemId);
+}
+
 void BitshiftPreset::analogParamValueString(char* str, int analogId) const
 {
   paramValueString(str, paramIdByAnalogId(analogId));
@@ -100,10 +110,18 @@ int BitshiftPreset::paramIdByAnalogId(int analogId) const
 
 int BitshiftPreset::paramIdByMenuItemId(int itemId) const
 {
-  if(itemId >= menuItemMapSize || itemId < 0)
+  if(!menuItemMap || itemId >= menuItemMapSize || itemId < 0)
     return -1;
 
   return menuItemMap[itemId];
+}
+
+char const** BitshiftPreset::optionsByMenuItemId(int itemId) const
+{
+  if(!menuItemOptions || itemId >= menuItemMapSize || itemId < 0)
+    return NULL;
+
+  return menuItemOptions[itemId];
 }
 
 void BitshiftPreset::setAnalogMap(int inputMap[], int size)
@@ -116,7 +134,7 @@ void BitshiftPreset::setAnalogMap(int inputMap[], int size)
     analogMap[i] = inputMap[i];
 }
 
-void BitshiftPreset::setMenuItemMap(int inputMap[], int size)
+void BitshiftPreset::setMenuItemMap(int inputMap[], int size, char const** inputOptions[])
 {
   clearMenuItemMap();
 
@@ -124,6 +142,13 @@ void BitshiftPreset::setMenuItemMap(int inputMap[], int size)
   menuItemMapSize = size;
   for(int i = 0; i < size; i++)
     menuItemMap[i] = inputMap[i];
+
+  if(inputOptions)
+  {
+    menuItemOptions = new char const**[size];
+    for(int i = 0; i < size; i++)
+      menuItemOptions[i] = inputOptions[i];
+  }
 }
 
 void BitshiftPreset::clearAnalogMap()
@@ -135,5 +160,15 @@ void BitshiftPreset::clearAnalogMap()
 void BitshiftPreset::clearMenuItemMap()
 {
   delete [] menuItemMap;
+  delete [] menuItemOptions;
   menuItemMapSize = 0;
+}
+
+int BitshiftPreset::intRange(float value, int min, int max)
+{
+  int intValue = int(value * (max - min + 1)) + min;
+  if(intValue > max)
+    intValue = max;
+
+  return intValue;
 }

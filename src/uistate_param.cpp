@@ -21,6 +21,10 @@
 
 void BitshiftUIStateParam::eventButton(int id, int value)
 {
+  if((id == BUTTON_UP || id == BUTTON_DOWN || id == BUTTON_BACK) && value == BUTTONEVENT_PRESS) {
+    popState();
+    return;
+  }
   passDownEventInvisibleButton(id, value);
 }
 

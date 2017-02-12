@@ -1,7 +1,7 @@
 /*
- * uistate_message
- * UI state for displaying a message
- * Copyright (c) 2016 Damien Clarke
+ * uistate_usage
+ * UI state for displaying CPU and processor usage for analysis / debugging
+ * Copyright (c) 2017 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
  * .-.    _  .-.      .-.    _  .--. .-.
@@ -11,25 +11,25 @@
  * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
  */
 
-#ifndef BITSHIFT_UISTATE_MESSAGE_H
-#define BITSHIFT_UISTATE_MESSAGE_H
+#ifndef BITSHIFT_UISTATE_USAGE_H
+#define BITSHIFT_UISTATE_USAGE_H
 
 #include "uistate.h"
 
-class BitshiftUIStateMessage: public BitshiftUIState
+class BitshiftUIStateUsage: public BitshiftUIState
 {
   public:
-    BitshiftUIStateMessage(char const* message):
-      BitshiftUIState(),
-      message(message) {}
-    ~BitshiftUIStateMessage() {}
+    BitshiftUIStateUsage():
+      BitshiftUIState() {}
+    ~BitshiftUIStateUsage() {}
 
+    virtual void update(unsigned long ms);
     virtual void render();
     virtual void eventButton(int id, int value);
     virtual void eventAnalog(int id, float value);
 
   private:
-    char const* message;
+    unsigned long ms = 0;
 };
 
 #endif

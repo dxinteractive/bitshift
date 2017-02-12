@@ -22,9 +22,6 @@ BitshiftEffectTremolo::BitshiftEffectTremolo():
   patchOffsetToSignalMixer(offset, 0, signalMixer, 1),
   patchSignalMixerToMultiplier(signalMixer, 0, multiplier, 1)
 {
-  // defaults
-  speed(3.0);
-  depth(0.5);
   lfo.begin(1.0, 1.0, WAVEFORM_SINE);
   offset.amplitude(1.0);
 }

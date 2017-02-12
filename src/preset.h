@@ -36,6 +36,7 @@ class BitshiftPreset
     char const* paramName(int paramId) const;
     char const* analogParamName(int analogId) const;
     char const* menuItemParamName(int itemId) const;
+    char const** menuItemParamOptions(int itemId) const;
 
     virtual void paramValueString(char* str, int paramId) const {}
     void analogParamValueString(char* str, int analogId) const;
@@ -52,15 +53,14 @@ class BitshiftPreset
 
     int paramIdByAnalogId(int analogId) const;
     int paramIdByMenuItemId(int itemId) const;
-
-    void setAnalogMap(int inputMap[], int size);
-    void setMenuItemMap(int inputMap[], int size);
-
-    void clearAnalogMap();
-    void clearMenuItemMap();
+    char const** optionsByMenuItemId(int itemId) const;
 
   protected:
     void setEffect(BitshiftEffect* effect);
+    void setAnalogMap(int inputMap[], int size);
+    void setMenuItemMap(int inputMap[], int size, char const** inputOptions[] = NULL);
+
+    int intRange(float value, int min, int max);
 
     AudioEffectFade send;
     AudioConnection* patchSendToEffect;
@@ -72,8 +72,15 @@ class BitshiftPreset
     int* analogMap;
     int menuItemMapSize;
     int* menuItemMap;
+    char const*** menuItemOptions;
+
+    static const int OPTIONS_BOOLEAN_TOTAL = 3;
+    static char const* OPTIONS_BOOLEAN[OPTIONS_BOOLEAN_TOTAL];
 
   private:
+    void clearAnalogMap();
+    void clearMenuItemMap();
+
     BitshiftEffect* effect;
 };
 

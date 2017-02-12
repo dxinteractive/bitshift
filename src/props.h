@@ -21,6 +21,14 @@ class BitshiftProps
     virtual ~BitshiftProps() {}
 };
 
+class BitshiftPropsMenu: public BitshiftProps
+{
+  public:
+    int itemsTotal;
+    int cursor;
+    char const* itemLabels[20]; // todo dont hardcode this
+};
+
 class BitshiftPropsMessage: public BitshiftProps
 {
   public:
@@ -38,7 +46,23 @@ class BitshiftPropsPreset: public BitshiftProps
 {
   public:
     char const* presetName;
-    char const* analogParamNames[4]; // todo dont hardcode this
+    char const* analogParamNames[10]; // todo dont hardcode this
 };
+
+class BitshiftPropsSplash: public BitshiftProps {
+  public:
+    int frame;
+};
+
+class BitshiftPropsUsage: public BitshiftProps
+{
+  public:
+    int processorUsage;
+    int processorUsageMax;
+    int memoryUsage;
+    int memoryUsageMax;
+    unsigned long ms;
+};
+
 
 #endif

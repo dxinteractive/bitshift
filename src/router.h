@@ -42,9 +42,6 @@ class BitshiftRouter
     AudioConnection patchMixerToOutput;
     AudioConnection** patchInputToPresets;
     AudioConnection** patchPresetsToMixer;
-
-    // for testing
-    //AudioConnection inToOut;
 };
 
 #endif

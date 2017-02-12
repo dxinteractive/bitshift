@@ -27,6 +27,9 @@ class BitshiftUIState
 
     void init(BitshiftUI* const ui);
     void init(BitshiftUI* const ui, BitshiftUIState* const lowerState);
+    virtual void init() {}
+    // ^ this init call can be overriden by derived classes and is called after init(ui) is called
+
     void pushState(BitshiftUIState* newState);
     void popState(bool render = true);
 

@@ -31,9 +31,9 @@ BitshiftPresetBitcrusher::BitshiftPresetBitcrusher():
 {
   setEffect(&bitcrusher);
 
-  params.rate = 44100.0;
-  params.depth = 16;
-  params.volume = 0.8;
+  params.rate = 11000.0;
+  params.depth = 8;
+  params.volume = 1.0;
 
   thisName = NAME;
   thisParamsTotal = PARAMS_TOTAL;
@@ -80,10 +80,7 @@ void BitshiftPresetBitcrusher::setAnalogParam(int analogId, float value)
     case DEPTH:
       {
         // range from 1 to 16
-        int intValue = int(value * 16.0) + 1;
-        if(intValue > 16)
-          intValue = 16;
-        setParam(paramId, intValue);
+        setParam(paramId, intRange(value, 1, 16));
         return;
       }
 
