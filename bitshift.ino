@@ -33,7 +33,20 @@
 #include <bitshift.h>
 //#include <bitshift-presets.h>
 
+// display
+const int PIN_SCREEN_SID = 4;
+const int PIN_SCREEN_SCLK = 3;
+const int PIN_SCREEN_DC = 2;
+const int PIN_SCREEN_RST = 1;
+const int PIN_SCREEN_CS = 0;
 
+BitshiftDisplaySSD1306 display(
+  PIN_SCREEN_SID,
+  PIN_SCREEN_SCLK,
+  PIN_SCREEN_DC,
+  PIN_SCREEN_RST,
+  PIN_SCREEN_CS
+);
 
 // set pins and consts for your specific setup
 // input - analog
@@ -84,21 +97,6 @@ BitshiftInputDefault input(
   BUTTONS_TOTAL,
   BUTTONS_VALUES,
   BUTTONS_ASSIGN
-);
-
-// display
-const int PIN_SCREEN_SID = 4;
-const int PIN_SCREEN_SCLK = 3;
-const int PIN_SCREEN_DC = 2;
-const int PIN_SCREEN_RST = 1;
-const int PIN_SCREEN_CS = 0;
-
-BitshiftDisplaySSD1306 display(
-  PIN_SCREEN_SID,
-  PIN_SCREEN_SCLK,
-  PIN_SCREEN_DC,
-  PIN_SCREEN_RST,
-  PIN_SCREEN_CS
 );
 
 // audio

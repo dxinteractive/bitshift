@@ -4,16 +4,13 @@
  * Copyright (c) 2017 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
- * .-.    _  .-.      .-.    _  .--. .-.
- * : :   :_;.' `.     : :   :_;: .-'.' `.
- * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : :
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_;
+ * █▄   ▀ ▄█▄    █▄   ▀ ▄▀ ▄█▄
+ * █▄▀ ▀█  ▀▄ ▄▀ █ █ ▀█ █▀  ▀▄
+ *
  */
 
 #include "uistate_usage.h"
 #include "uistate.h"
-#include "menuitem.h"
 #include "display.h"
 #include "props.h"
 #include "input_consts.h"
