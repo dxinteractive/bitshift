@@ -12,6 +12,7 @@
 #include "uistate_menu_main.h"
 #include "uistate_menu.h"
 #include "uistate_usage.h"
+#include "uistate_menu_param.h"
 #include "audio.h"
 #include <Arduino.h>
 
@@ -32,14 +33,10 @@ void BitshiftUIStateMenuMain::init()
 
   allItemLabels = new char const*[allItemsTotal];
   for(int i = 0; i < menuItemParamsTotal; i++)
-  {
     allItemLabels[i] = audio->menuItemParamName(i);
-  }
 
   for(int i = 0; i < BitshiftUIStateMenuMain::ITEMS_TOTAL; i++)
-  {
     allItemLabels[i + menuItemParamsTotal] = BitshiftUIStateMenuMain::ITEM_LABELS[i];
-  }
 
   setItems(allItemLabels, allItemsTotal);
 }
@@ -48,7 +45,8 @@ void BitshiftUIStateMenuMain::onSelect(int cursor)
 {
   if(cursor < menuItemParamsTotal)
   {
-    // do a menu item param thing
+    int initialValue = audio->menuItemParamValueInt(cursor);
+    pushState(new BitshiftUIStateMenuParam(cursor, initialValue, allItemLabels[cursor]));
     return;
   }
 

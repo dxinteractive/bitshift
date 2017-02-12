@@ -63,7 +63,25 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
     OPTIONS_SHAPE
   };
 
-  setMenuItemMap(menuItemMap, MENU_ITEM_MAP_SIZE, menuItemOptions);
+  int menuItemOptionsTotals[MENU_ITEM_MAP_SIZE] = {
+    OPTIONS_BOOLEAN_TOTAL,
+    3
+  };
+
+  setMenuItemMap(menuItemMap, MENU_ITEM_MAP_SIZE, menuItemOptions, menuItemOptionsTotals);
+}
+
+int BitshiftPresetTremolo::paramValueInt(int paramId) const
+{
+  switch(paramId)
+  {
+    case SHAPE:
+      return params.shape;
+
+    case DIVISION:
+      return 0; // temp (todo)
+  }
+  return -1;
 }
 
 void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
@@ -72,23 +90,26 @@ void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
   {
     case SPEED:
       sprintf(str, "%0.1fHz", params.speed);
-      break;
+      return;
+
     case DEPTH:
       sprintf(str, "%0.0f%%", params.depth * 100.0);
-      break;
+      return;
+
     case SHAPE:
       sprintf(str, OPTIONS_SHAPE[params.shape]);
-      break;
+      return;
+
     case DIVISION:
       sprintf(str, "...");
-      break;
+      return;
+
     case BIAS:
       sprintf(str, "...");
-      break;
+      return;
+
     case VOLUME:
       sprintf(str, "%0.0f%%", params.volume * 100.0);
-      break;
-    default:
       return;
   }
 }
@@ -123,6 +144,9 @@ void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
 
 void BitshiftPresetTremolo::setMenuItemParam(int itemId, int value)
 {
+  Serial.println(".");
+  Serial.println(itemId);
+  Serial.println(value);
   int paramId = paramIdByMenuItemId(itemId);
   switch(paramId)
   {

@@ -118,6 +118,11 @@ char const** BitshiftAudioDefault::menuItemParamOptions(int itemId) const
   return presets[activePreset]->menuItemParamOptions(itemId);
 }
 
+int BitshiftAudioDefault::menuItemParamValueInt(int itemId) const
+{
+  return presets[activePreset]->menuItemParamValueInt(itemId);
+}
+
 void BitshiftAudioDefault::paramValueString(char* str, int paramId) const
 {
   presets[activePreset]->paramValueString(str, paramId);
@@ -146,6 +151,11 @@ int BitshiftAudioDefault::analogParamsTotal() const
 int BitshiftAudioDefault::menuItemParamsTotal() const
 {
   return presets[activePreset]->menuItemParamsTotal();
+}
+
+int BitshiftAudioDefault::menuItemParamOptionsTotal(int itemId) const
+{
+  return presets[activePreset]->menuItemParamOptionsTotal(itemId);
 }
 
 void BitshiftAudioDefault::setParam(int id, int value)

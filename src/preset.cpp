@@ -88,6 +88,11 @@ char const** BitshiftPreset::menuItemParamOptions(int itemId) const
   return optionsByMenuItemId(itemId);
 }
 
+int BitshiftPreset::menuItemParamValueInt(int itemId) const
+{
+  return paramValueInt(paramIdByMenuItemId(itemId));
+}
+
 void BitshiftPreset::analogParamValueString(char* str, int analogId) const
 {
   paramValueString(str, paramIdByAnalogId(analogId));
@@ -96,6 +101,11 @@ void BitshiftPreset::analogParamValueString(char* str, int analogId) const
 void BitshiftPreset::menuItemParamValueString(char* str, int itemId) const
 {
   paramValueString(str, paramIdByMenuItemId(itemId));
+}
+
+int BitshiftPreset::menuItemParamOptionsTotal(int itemId) const
+{
+  return optionsTotalByMenuItemId(itemId);
 }
 
 int BitshiftPreset::paramIdByAnalogId(int analogId) const
@@ -122,6 +132,14 @@ char const** BitshiftPreset::optionsByMenuItemId(int itemId) const
   return menuItemOptions[itemId];
 }
 
+int BitshiftPreset::optionsTotalByMenuItemId(int itemId) const
+{
+  if(!menuItemOptionsTotal || itemId >= menuItemMapSize || itemId < 0)
+    return -1;
+
+  return menuItemOptionsTotal[itemId];
+}
+
 void BitshiftPreset::setAnalogMap(int inputMap[], int size)
 {
   clearAnalogMap();
@@ -132,7 +150,12 @@ void BitshiftPreset::setAnalogMap(int inputMap[], int size)
     analogMap[i] = inputMap[i];
 }
 
-void BitshiftPreset::setMenuItemMap(int inputMap[], int size, char const** inputOptions[])
+void BitshiftPreset::setMenuItemMap(
+  int inputMap[],
+  int size,
+  char const** inputOptions[],
+  int inputOptionsTotals[]
+)
 {
   clearMenuItemMap();
 
@@ -144,8 +167,12 @@ void BitshiftPreset::setMenuItemMap(int inputMap[], int size, char const** input
   if(inputOptions)
   {
     menuItemOptions = new char const**[size];
+    menuItemOptionsTotal = new int[size];
     for(int i = 0; i < size; i++)
+    {
       menuItemOptions[i] = inputOptions[i];
+      menuItemOptionsTotal[i] = inputOptionsTotals[i];
+    }
   }
 }
 
@@ -159,6 +186,7 @@ void BitshiftPreset::clearMenuItemMap()
 {
   delete [] menuItemMap;
   delete [] menuItemOptions;
+  delete [] menuItemOptionsTotal;
   menuItemMapSize = 0;
 }
 

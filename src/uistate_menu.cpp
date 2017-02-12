@@ -15,8 +15,10 @@
 #include "props.h"
 #include "input_consts.h"
 
-BitshiftUIStateMenu::BitshiftUIStateMenu():
-  BitshiftUIState()
+BitshiftUIStateMenu::BitshiftUIStateMenu(int initialValue, char const* heading):
+  BitshiftUIState(),
+  heading(heading),
+  cursor(initialValue)
 {
 }
 
@@ -49,6 +51,7 @@ void BitshiftUIStateMenu::eventButton(int id, int value)
     case BUTTON_BACK:
       if(value == BUTTONEVENT_PRESS)
       {
+        onBack(cursor);
         popState();
       }
       return;
@@ -74,6 +77,7 @@ void BitshiftUIStateMenu::render()
   BitshiftPropsMenu props;
   props.itemsTotal = itemsTotal;
   props.cursor = cursor;
+  props.heading = heading;
 
   if(itemLabels)
   {

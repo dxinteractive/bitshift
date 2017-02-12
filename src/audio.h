@@ -31,6 +31,8 @@ class BitshiftAudio
     virtual char const* menuItemParamName(int itemId) const = 0;
     virtual char const** menuItemParamOptions(int itemId) const = 0;
 
+    virtual int menuItemParamValueInt(int itemId) const = 0;
+
     virtual void paramValueString(char* str, int paramId) const = 0;
     virtual void analogParamValueString(char* str, int analogId) const = 0;
     virtual void menuItemParamValueString(char* str, int itemId) const = 0;
@@ -38,6 +40,7 @@ class BitshiftAudio
     virtual int paramsTotal() const = 0;
     virtual int analogParamsTotal() const = 0;
     virtual int menuItemParamsTotal() const = 0;
+    virtual int menuItemParamOptionsTotal(int itemId) const = 0;
 
     virtual void setParam(int paramId, int value) = 0;
     virtual void setParam(int paramId, float value) = 0;

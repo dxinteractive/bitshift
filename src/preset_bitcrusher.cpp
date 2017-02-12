@@ -48,14 +48,14 @@ void BitshiftPresetBitcrusher::paramValueString(char* str, int paramId) const
   {
     case RATE:
       sprintf(str, "%0.0fHz", params.rate);
-      break;
+      return;
+
     case DEPTH:
       sprintf(str, "%dbit", params.depth);
-      break;
+      return;
+
     case VOLUME:
       sprintf(str, "%0.0f%%", params.volume * 100.0);
-      break;
-    default:
       return;
   }
 }

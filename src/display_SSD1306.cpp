@@ -28,7 +28,7 @@ BitshiftDisplaySSD1306::BitshiftDisplaySSD1306(
   screen.begin(SSD1306_SWITCHCAPVCC);
   screen.clearDisplay();
   screen.setTextColor(WHITE);
-  //screen.drawPixel(1, 1, WHITE);
+  screen.fillRect(18, 24, 4, 2, WHITE);
   screen.display();
 }
 
@@ -37,15 +37,25 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsMenu &props)
   screen.clearDisplay();
   screen.setCursor(0,0);
   screen.setTextSize(1);
+  if(props.heading)
+  {
+    screen.print("  ");
+    screen.print(props.heading);
+  }
+
   for(int i = 0; i < props.itemsTotal; i++)
   {
     if(props.cursor == i)
     {
-      screen.print("> ");
-    } else {
-      screen.print("  ");
+      int y = 24 + 10 * i;
+      screen.drawPixel(3, y, WHITE);
+      screen.drawPixel(6, y, WHITE);
+      screen.drawPixel(123, y, WHITE);
+      screen.drawPixel(120, y, WHITE);
     }
+    screen.setCursor(12, 20 + 10 * i);
     screen.println(props.itemLabels[i]);
+
   }
   screen.display();
 }

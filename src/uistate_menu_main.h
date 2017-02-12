@@ -18,7 +18,7 @@ class BitshiftUIStateMenuMain: public BitshiftUIStateMenu
 {
   public:
     BitshiftUIStateMenuMain()
-      :BitshiftUIStateMenu() {}
+      :BitshiftUIStateMenu(0, "Main menu") {}
     ~BitshiftUIStateMenuMain();
 
   protected:

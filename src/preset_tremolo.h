@@ -33,6 +33,7 @@ class BitshiftPresetTremolo: public BitshiftPreset
     BitshiftPresetTremolo();
     virtual ~BitshiftPresetTremolo() {}
 
+    virtual int paramValueInt(int paramId) const;
     virtual void paramValueString(char* str, int paramId) const;
 
     virtual void setParam(int paramId, int value);

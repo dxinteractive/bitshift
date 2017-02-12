@@ -17,7 +17,7 @@
 class BitshiftUIStateMenu: public BitshiftUIState
 {
   public:
-    BitshiftUIStateMenu();
+    BitshiftUIStateMenu(int initialValue, char const* heading);
     virtual ~BitshiftUIStateMenu() {}
 
     virtual void render();
@@ -26,9 +26,11 @@ class BitshiftUIStateMenu: public BitshiftUIState
 
     void setItems(char const** itemLabels, int itemsTotal);
     virtual void onSelect(int cursor) {}
+    virtual void onBack(int cursor) {}
 
   private:
     char const** itemLabels;
+    char const* heading;
     int itemsTotal = 0;
     int cursor = 0;
 };
