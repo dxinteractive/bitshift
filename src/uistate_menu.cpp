@@ -78,6 +78,7 @@ void BitshiftUIStateMenu::render()
   props.itemsTotal = itemsTotal;
   props.cursor = cursor;
   props.heading = heading;
+  props.selection = selection;
 
   if(itemLabels)
   {
@@ -88,8 +89,9 @@ void BitshiftUIStateMenu::render()
   display->render(props);
 }
 
-void BitshiftUIStateMenu::setItems(char const** itemLabels, int itemsTotal)
+void BitshiftUIStateMenu::setItems(char const** itemLabels, int itemsTotal, bool selection)
 {
   this->itemLabels = itemLabels;
   this->itemsTotal = itemsTotal;
+  this->selection = selection;
 }

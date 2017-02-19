@@ -24,6 +24,7 @@ class BitshiftPropsMenu: public BitshiftProps
   public:
     int itemsTotal;
     int cursor;
+    bool selection;
     char const* heading;
     char const* itemLabels[20]; // todo dont hardcode this
 };

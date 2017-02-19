@@ -24,7 +24,7 @@ class BitshiftUIStateMenu: public BitshiftUIState
     virtual void eventButton(int id, int value);
     virtual void eventAnalog(int id, float value);
 
-    void setItems(char const** itemLabels, int itemsTotal);
+    void setItems(char const** itemLabels, int itemsTotal, bool selection = false);
     virtual void onSelect(int cursor) {}
     virtual void onBack(int cursor) {}
 
@@ -33,6 +33,7 @@ class BitshiftUIStateMenu: public BitshiftUIState
     char const* heading;
     int itemsTotal = 0;
     int cursor = 0;
+    bool selection = false;
 };
 
 #endif

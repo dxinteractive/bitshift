@@ -52,9 +52,14 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsMenu &props)
       screen.drawPixel(6, y, WHITE);
       screen.drawPixel(123, y, WHITE);
       screen.drawPixel(120, y, WHITE);
+      if(props.selection)
+      {
+        screen.drawLine(107, y, 109, y + 2, WHITE);
+        screen.drawLine(109, y + 2, 114, y - 3, WHITE);
+      }
     }
     screen.setCursor(12, 20 + 10 * i);
-    screen.println(props.itemLabels[i]);
+    screen.print(props.itemLabels[i]);
 
   }
   screen.display();
