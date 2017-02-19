@@ -11,47 +11,50 @@
 
 #include "effect_tremolo.h"
 #include "effect.h"
+#include "effect_lfo.h"
 #include "effect_volume.h"
 #include <Audio.h>
 
 BitshiftEffectTremolo::BitshiftEffectTremolo():
   BitshiftEffect(),
-  patchLfoToSignalMixer(lfo, 0, signalMixer, 0),
-  patchOffsetToSignalMixer(offset, 0, signalMixer, 1),
-  patchSignalMixerToMultiplier(signalMixer, 0, multiplier, 1)
+  patchLfoToMultiplier(*(lfo.audioOut()), 0, multiplier, 1)
 {
-  lfo.begin(1.0, 1.0, WAVEFORM_SINE);
-  offset.amplitude(1.0);
 }
 
 float BitshiftEffectTremolo::speed(float hz)
 {
-  lfo.frequency(hz);
-  return hz;
+  return lfo.speed(hz);
 }
 
 float BitshiftEffectTremolo::depth(float depth)
 {
-  // nothing yet
-  depth = clamp(depth, 0.0, 1.0);
-  signalMixer.gain(0, depth * 0.5);
-  signalMixer.gain(1, 1.0 - (depth * 0.5));
-  return depth;
+  _depth = clamp(depth, 0.0, 1.0);
+  updateMinMax();
+  return _depth;
 }
 
 int BitshiftEffectTremolo::shape(int shape)
 {
-  // nothing here yet
-  return shape;
+  return lfo.shape(shape);
 }
 
 int BitshiftEffectTremolo::division(int division)
 {
-  // nothing here yet
-  return division;
+  //lfo.division(division);
+  return 0;
 }
 
 float BitshiftEffectTremolo::volume(float volume)
 {
-  return volume;
+  _volume = clamp(volume, 0.0, 5.0);
+  updateMinMax();
+  return _volume;
+}
+
+void BitshiftEffectTremolo::updateMinMax()
+{
+  BitshiftEffect::audioNoInterrupts();
+  lfo.min((1.0 - _depth) * _volume);
+  lfo.max(_volume);
+  BitshiftEffect::audioInterrupts();
 }

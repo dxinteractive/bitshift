@@ -13,7 +13,7 @@
 #define BITSHIFT_EFFECT_TREMOLO_H
 
 #include "effect.h"
-#include <Audio.h>
+#include "effect_lfo.h"
 
 class BitshiftEffectTremolo: public BitshiftEffect
 {
@@ -31,14 +31,15 @@ class BitshiftEffectTremolo: public BitshiftEffect
     float volume(float volume);
 
   private:
-    AudioSynthWaveform lfo;
-    AudioSynthWaveformDc offset;
-    AudioMixer4 signalMixer;
+    void updateMinMax();
+
+    BitshiftEffectLfo lfo;
     AudioEffectMultiply multiplier;
 
-    AudioConnection patchLfoToSignalMixer;
-    AudioConnection patchOffsetToSignalMixer;
-    AudioConnection patchSignalMixerToMultiplier;
+    AudioConnection patchLfoToMultiplier;
+
+    float _volume = 1.0;
+    float _depth = 1.0;
 };
 
 #endif
