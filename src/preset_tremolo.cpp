@@ -10,15 +10,14 @@
  */
 
 #include "preset_tremolo.h"
-#include <Arduino.h>
 #include "paramset.h"
+#include "effect_lfo.h"
 
 static const int SPEED = 0;
 static const int DEPTH = 1;
 static const int SHAPE = 2;
 static const int DIVISION = 3;
-static const int BIAS = 4;
-static const int VOLUME = 5;
+static const int VOLUME = 4;
 
 char const* BitshiftPresetTremolo::NAME = "Tremolo";
 char const* BitshiftPresetTremolo::PARAM_NAMES[] = {
@@ -26,14 +25,7 @@ char const* BitshiftPresetTremolo::PARAM_NAMES[] = {
   "Depth",
   "Shape",
   "Division",
-  "Bias",
   "Volume"
-};
-
-char const* BitshiftPresetTremolo::OPTIONS_SHAPE[] = {
-  "Sine",
-  "Triangle",
-  "Square"
 };
 
 BitshiftPresetTremolo::BitshiftPresetTremolo():
@@ -45,7 +37,6 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
   params.depth = 0.5;
   params.shape = 0;
   params.division = 0;
-  params.bias = 0.2;
   params.volume = 0.8;
 
   thisName = NAME;
@@ -59,13 +50,13 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
   const int MENU_ITEM_MAP_SIZE = 2;
   int menuItemMap[MENU_ITEM_MAP_SIZE] = {3,2};
   char const** menuItemOptions[MENU_ITEM_MAP_SIZE] = {
-    OPTIONS_BOOLEAN,
-    OPTIONS_SHAPE
+    BitshiftPreset::OPTIONS_BOOLEAN,
+    BitshiftEffectLfo::OPTIONS_SHAPE
   };
 
   int menuItemOptionsTotals[MENU_ITEM_MAP_SIZE] = {
-    OPTIONS_BOOLEAN_TOTAL,
-    3
+    BitshiftPreset::OPTIONS_BOOLEAN_TOTAL,
+    BitshiftEffectLfo::OPTIONS_SHAPE_TOTAL
   };
 
   setMenuItemMap(menuItemMap, MENU_ITEM_MAP_SIZE, menuItemOptions, menuItemOptionsTotals);
@@ -97,14 +88,10 @@ void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
       return;
 
     case SHAPE:
-      sprintf(str, OPTIONS_SHAPE[params.shape]);
+      sprintf(str, BitshiftEffectLfo::OPTIONS_SHAPE[params.shape]);
       return;
 
     case DIVISION:
-      sprintf(str, "...");
-      return;
-
-    case BIAS:
       sprintf(str, "...");
       return;
 
@@ -120,12 +107,12 @@ void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
   switch(paramId)
   {
     case SPEED:
-      {
-        // exponential range from 0.125 (2^-3) to 64.0 (2^6)
-        value = pow(2, value * 9.0 - 3.0);
-        setParam(paramId, value);
-        return;
-      }
+    {
+      // exponential range from 0.125 (2^-3) to 64.0 (2^6)
+      value = pow(2, value * 9.0 - 3.0);
+      setParam(paramId, value);
+      return;
+    }
 
     case SHAPE:
     {

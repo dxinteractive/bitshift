@@ -17,7 +17,6 @@
 class BitshiftEffect
 {
   public:
-    static int noInterruptsCount;
     static void audioNoInterrupts();
     static void audioInterrupts();
 
@@ -32,6 +31,8 @@ class BitshiftEffect
     //virtual void disable() {}
 
   protected:
+    static int noInterruptsCount;
+
     int clamp(int value, int low, int high);
     float clamp(float value, float low, float high);
 };

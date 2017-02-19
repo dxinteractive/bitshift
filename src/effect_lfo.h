@@ -24,6 +24,9 @@
 class BitshiftEffectLfo: public BitshiftEffect
 {
   public:
+    static const int OPTIONS_SHAPE_TOTAL = 3;
+    static char const* OPTIONS_SHAPE[OPTIONS_SHAPE_TOTAL];
+
     BitshiftEffectLfo();
     ~BitshiftEffectLfo() {}
 
@@ -56,6 +59,7 @@ class BitshiftEffectLfo: public BitshiftEffect
     //int _division;
     float _min = -1.0;
     float _max = 1.0;
+
 };
 
 #endif

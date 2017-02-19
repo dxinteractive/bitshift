@@ -13,6 +13,12 @@
 #include "effect.h"
 #include <Audio.h>
 
+char const* BitshiftEffectLfo::OPTIONS_SHAPE[] = {
+  "Sine",
+  "Triangle",
+  "Square"
+};
+
 BitshiftEffectLfo::BitshiftEffectLfo():
   BitshiftEffect(),
   patchLfoToSignalMixer(lfo, 0, signalMixer, 0),

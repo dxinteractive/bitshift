@@ -46,9 +46,6 @@ class BitshiftPresetTremolo: public BitshiftPreset
     static char const* NAME;
     static char const* PARAM_NAMES[PARAMS_TOTAL];
 
-    static const int OPTIONS_SHAPE_TOTAL = 3;
-    static char const* OPTIONS_SHAPE[OPTIONS_SHAPE_TOTAL];
-
     BitshiftEffectTremolo tremolo;
     BitshiftParamsetTremolo params;
 };
