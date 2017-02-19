@@ -17,6 +17,10 @@
 class BitshiftEffect
 {
   public:
+    static int noInterruptsCount;
+    static void audioNoInterrupts();
+    static void audioInterrupts();
+
     BitshiftEffect() {}
     virtual ~BitshiftEffect() {}
 
@@ -24,6 +28,8 @@ class BitshiftEffect
     virtual AudioStream* audioOut() { return NULL; }
     virtual int audioInChannel() const { return 0; }
     virtual int audioOutChannel() const { return 0; }
+    //virtual void enable() {}
+    //virtual void disable() {}
 
   protected:
     int clamp(int value, int low, int high);

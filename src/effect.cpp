@@ -11,6 +11,27 @@
 
 #include "effect.h"
 
+int BitshiftEffect::noInterruptsCount = 0;
+
+void BitshiftEffect::audioNoInterrupts()
+{
+  if(BitshiftEffect::noInterruptsCount == 0)
+    AudioNoInterrupts();
+
+  BitshiftEffect::noInterruptsCount++;
+}
+
+void BitshiftEffect::audioInterrupts()
+{
+  if(BitshiftEffect::noInterruptsCount == 0)
+    return;
+
+  BitshiftEffect::noInterruptsCount--;
+  if(BitshiftEffect::noInterruptsCount == 0)
+    AudioInterrupts();
+}
+
+
 int BitshiftEffect::clamp(int value, int low, int high)
 {
   if(value < low)
