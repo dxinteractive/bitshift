@@ -39,10 +39,18 @@ BitshiftInputDefault::BitshiftInputDefault(
     this->buttonsAssign[i] = buttonsAssign[i];
 }
 
-void BitshiftInputDefault::update()
+void BitshiftInputDefault::update(unsigned long ms)
 {
+  // delay events a little so ADCs can settle down
+  if(msFirst == 0)
+    msFirst = ms;
+
+  if(!events && ms - msFirst > 500)
+    events = true;
+
   // each update, perform one read, cycling through each analog input each time
   analogInputToRead++;
+
   if(analogInputToRead > analogTotal)
     analogInputToRead = 0;
 
@@ -50,23 +58,26 @@ void BitshiftInputDefault::update()
   if(analogInputToRead == analogTotal)
   {
     buttons.update();
-    for(int i = 0; i < buttonsTotal; i++)
+    if(events)
     {
-      if(buttons.onPress(i))
-        eventButton(buttonsAssign[i], BUTTONEVENT_PRESS);
+      for(int i = 0; i < buttonsTotal; i++)
+      {
+        if(buttons.onPress(i))
+          eventButton(buttonsAssign[i], BUTTONEVENT_PRESS);
 
-      if(buttons.onRelease(i))
-        eventButton(buttonsAssign[i], BUTTONEVENT_RELEASE);
+        if(buttons.onRelease(i))
+          eventButton(buttonsAssign[i], BUTTONEVENT_RELEASE);
 
-      if(buttons.onPressAfter(i, 500, 500))
-        eventButton(buttonsAssign[i], BUTTONEVENT_REPEAT);
+        if(buttons.onPressAfter(i, 500, 500))
+          eventButton(buttonsAssign[i], BUTTONEVENT_REPEAT);
+      }
     }
     return;
   }
 
   // read analog input
   analogInputs[analogInputToRead]->update();
-  if(analogInputs[analogInputToRead]->hasChanged())
+  if(events && analogInputs[analogInputToRead]->hasChanged())
   {
     float value = (float)analogInputs[analogInputToRead]->getValue() / (float)BitshiftInputDefault::ANALOG_RESOLUTION;
     eventAnalog(analogInputToRead, value);

@@ -144,9 +144,6 @@ void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
 
 void BitshiftPresetTremolo::setMenuItemParam(int itemId, int value)
 {
-  Serial.println(".");
-  Serial.println(itemId);
-  Serial.println(value);
   int paramId = paramIdByMenuItemId(itemId);
   switch(paramId)
   {

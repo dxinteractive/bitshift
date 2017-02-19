@@ -43,7 +43,7 @@ BitshiftUI::~BitshiftUI()
 
 void BitshiftUI::update(unsigned long ms)
 {
-  input->update();
+  input->update(ms);
 
   BitshiftUIState* topState = stateStack.peek();
   if(topState)

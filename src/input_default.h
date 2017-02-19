@@ -33,14 +33,16 @@ class BitshiftInputDefault: public BitshiftInput
     );
     ~BitshiftInputDefault() {}
 
-    virtual void update();
+    virtual void update(unsigned long ms);
 
   private:
     int analogTotal;
     int buttonsTotal;
     AnalogMultiButton buttons;
     ResponsiveAnalogRead* analogInputs[BitshiftInputDefault::MAX_ANALOG];
-    int analogInputToRead;
+    bool events = false;
+    unsigned long msFirst;
+    int analogInputToRead = 0;
     int buttonsAssign[AnalogMultiButton::MAX_BUTTONS];
 };
 
