@@ -15,7 +15,7 @@
 
 static const int SPEED = 0;
 static const int DEPTH = 1;
-static const int SHAPE = 2;
+static const int SHAPEANDMOD = 2;
 static const int DIVISION = 3;
 static const int VOLUME = 4;
 
@@ -35,7 +35,7 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
 
   params.speed = 1.0;
   params.depth = 0.5;
-  params.shape = 0;
+  params.shapeAndMod = 0.5;
   params.division = 0;
   params.volume = 0.8;
 
@@ -43,20 +43,18 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
   thisParamsTotal = PARAMS_TOTAL;
   thisParamNames = PARAM_NAMES;
 
-  const int ANALOG_MAP_SIZE = 6;
-  int analogMap[ANALOG_MAP_SIZE] = {0,1,2,3,4,5};
+  const int ANALOG_MAP_SIZE = 5;
+  int analogMap[ANALOG_MAP_SIZE] = {0,1,2,3,4};
   setAnalogMap(analogMap, ANALOG_MAP_SIZE);
 
-  const int MENU_ITEM_MAP_SIZE = 2;
-  int menuItemMap[MENU_ITEM_MAP_SIZE] = {3,2};
+  const int MENU_ITEM_MAP_SIZE = 1;
+  int menuItemMap[MENU_ITEM_MAP_SIZE] = {3};
   char const** menuItemOptions[MENU_ITEM_MAP_SIZE] = {
-    BitshiftPreset::OPTIONS_BOOLEAN,
-    BitshiftEffectLfo::OPTIONS_SHAPE
+    BitshiftPreset::OPTIONS_BOOLEAN
   };
 
   int menuItemOptionsTotals[MENU_ITEM_MAP_SIZE] = {
-    BitshiftPreset::OPTIONS_BOOLEAN_TOTAL,
-    BitshiftEffectLfo::OPTIONS_SHAPE_TOTAL
+    BitshiftPreset::OPTIONS_BOOLEAN_TOTAL
   };
 
   setMenuItemMap(menuItemMap, MENU_ITEM_MAP_SIZE, menuItemOptions, menuItemOptionsTotals);
@@ -66,9 +64,6 @@ int BitshiftPresetTremolo::paramValueInt(int paramId) const
 {
   switch(paramId)
   {
-    case SHAPE:
-      return params.shape;
-
     case DIVISION:
       return 0; // temp (todo)
   }
@@ -87,8 +82,8 @@ void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
       sprintf(str, "%0.0f%%", params.depth * 100.0);
       return;
 
-    case SHAPE:
-      sprintf(str, BitshiftEffectLfo::OPTIONS_SHAPE[params.shape]);
+    case SHAPEANDMOD:
+      sprintf(str, BitshiftEffectLfo::OPTIONS_SHAPE[(int)params.shapeAndMod]);
       return;
 
     case DIVISION:
@@ -114,10 +109,10 @@ void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
       return;
     }
 
-    case SHAPE:
+    case SHAPEANDMOD:
     {
-      // 0, 1 or 2
-      setParam(paramId, intRange(value, 0, 2));
+      // 0.0 - 5.0
+      setParam(paramId, floatRange(value, 0.0, 5.0, false));
       return;
     }
 
@@ -134,7 +129,6 @@ void BitshiftPresetTremolo::setMenuItemParam(int itemId, int value)
   int paramId = paramIdByMenuItemId(itemId);
   switch(paramId)
   {
-    case SHAPE:
     case DIVISION:
       setParam(paramId, value);
       return;
@@ -153,6 +147,10 @@ void BitshiftPresetTremolo::setParam(int paramId, float value)
       params.depth = tremolo.depth(value);
       return;
 
+    case SHAPEANDMOD:
+      params.shapeAndMod = tremolo.shapeAndMod(value);
+      return;
+
     case VOLUME:
       params.volume = tremolo.volume(value);
       return;
@@ -164,10 +162,6 @@ void BitshiftPresetTremolo::setParam(int paramId, int value)
 {
   switch(paramId)
   {
-    case SHAPE:
-      params.shape = tremolo.shape(value);
-      return;
-
     case DIVISION:
       params.division = tremolo.division(value);
       return;

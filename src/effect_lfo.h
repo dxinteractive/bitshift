@@ -24,7 +24,7 @@
 class BitshiftEffectLfo: public BitshiftEffect
 {
   public:
-    static const int OPTIONS_SHAPE_TOTAL = 3;
+    static const int OPTIONS_SHAPE_TOTAL = 5;
     static char const* OPTIONS_SHAPE[OPTIONS_SHAPE_TOTAL];
 
     BitshiftEffectLfo();
@@ -42,6 +42,7 @@ class BitshiftEffectLfo: public BitshiftEffect
     float max(float max);
 
   private:
+    void updateWaveform();
     void updateMinMax();
 
     AudioSynthWaveform lfo;
@@ -59,6 +60,8 @@ class BitshiftEffectLfo: public BitshiftEffect
     //int _division;
     float _min = -1.0;
     float _max = 1.0;
+
+    int16_t wavetable[256];
 
 };
 

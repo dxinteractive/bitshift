@@ -64,6 +64,7 @@ class BitshiftPreset
     void setMenuItemMap(int inputMap[], int size, char const** inputOptions[] = NULL, int inputOptionsTotals[] = NULL);
 
     int intRange(float value, int min, int max);
+    float floatRange(float value, float min, float max, bool inclusive = true);
 
     AudioEffectFade send;
     AudioConnection* patchSendToEffect;

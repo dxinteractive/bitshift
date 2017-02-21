@@ -21,7 +21,7 @@ class BitshiftParamsetTremolo: public BitshiftParamset
   public:
     float speed;
     float depth;
-    int shape;
+    float shapeAndMod;
     int division;
     float bias;
     float volume;

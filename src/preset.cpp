@@ -198,3 +198,12 @@ int BitshiftPreset::intRange(float value, int min, int max)
 
   return intValue;
 }
+
+float BitshiftPreset::floatRange(float value, float min, float max, bool inclusive)
+{
+  value = ((1.0 - value) * min) + (value * max);
+  if(!inclusive && value == max)
+    value -= 0.00001; // todo: actually look up and use smallest possible decrement for a float...
+
+  return value;
+}

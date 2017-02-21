@@ -17,8 +17,10 @@
 
 BitshiftEffectTremolo::BitshiftEffectTremolo():
   BitshiftEffect(),
-  patchLfoToMultiplier(*(lfo.audioOut()), 0, multiplier, 1)
+  patchLfoToFilter(*(lfo.audioOut()), 0, filter, 0),
+  patchFilterToMultiplier(filter, 0, multiplier, 1)
 {
+  filter.frequency(100.0);
 }
 
 float BitshiftEffectTremolo::speed(float hz)
@@ -33,9 +35,9 @@ float BitshiftEffectTremolo::depth(float depth)
   return _depth;
 }
 
-int BitshiftEffectTremolo::shape(int shape)
+int BitshiftEffectTremolo::shapeAndMod(float value)
 {
-  return lfo.shape(shape);
+  return lfo.shapeAndMod(value);
 }
 
 int BitshiftEffectTremolo::division(int division)
@@ -46,7 +48,7 @@ int BitshiftEffectTremolo::division(int division)
 
 float BitshiftEffectTremolo::volume(float volume)
 {
-  _volume = clamp(volume, 0.0, 5.0);
+  _volume = clamp(volume, 0.0, 3.0);
   updateMinMax();
   return _volume;
 }
