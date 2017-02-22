@@ -27,6 +27,7 @@
  // presets for testing - move these out to their own repo once ready
 #include "preset_tremolo.h"
 #include "preset_bitcrusher.h"
+#include "preset_filter.h"
 
 class Bitshift
 {

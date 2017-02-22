@@ -107,12 +107,14 @@ BitshiftInputDefault input(
 AudioInputI2S audioIn;
 
 // audio presets
-const int PRESETS_TOTAL = 2;
+const int PRESETS_TOTAL = 3;
 BitshiftPresetTremolo tremolo;
 BitshiftPresetBitcrusher bitcrusher;
+BitshiftPresetFilter filter;
 BitshiftPreset* presets[PRESETS_TOTAL] = {
   &tremolo,
-  &bitcrusher
+  &bitcrusher,
+  &filter
 };
 
 // audio output

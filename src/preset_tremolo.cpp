@@ -118,8 +118,8 @@ void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
 
     case DEPTH:
     case VOLUME:
-      // default range from 0.0 to 0.1
-      setParam(paramId, value);
+      // linear range from 0.0 to 2.0
+      setParam(paramId, value * 2.0);
       return;
   }
 }
