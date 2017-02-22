@@ -25,8 +25,9 @@ class BitshiftUIStateMenu: public BitshiftUIState
     virtual void eventAnalog(int id, float value);
 
     void setItems(char const** itemLabels, int itemsTotal, bool selection = false);
-    virtual void onSelect(int cursor) {}
+    virtual void onMove(int cursor) {}
     virtual void onBack(int cursor) {}
+    virtual void onSelect(int cursor) {}
 
   private:
     char const** itemLabels;

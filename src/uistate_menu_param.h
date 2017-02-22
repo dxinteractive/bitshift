@@ -24,7 +24,7 @@ class BitshiftUIStateMenuParam: public BitshiftUIStateMenu
 
   protected:
     virtual void init();
-    virtual void onBack(int cursor);
+    virtual void onMove(int cursor);
 
   private:
     int itemId;

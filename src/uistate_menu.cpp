@@ -33,6 +33,7 @@ void BitshiftUIStateMenu::eventButton(int id, int value)
         if(cursor < 0)
           cursor = itemsTotal - 1;
 
+        onMove(cursor);
         render();
       }
       return;
@@ -44,6 +45,7 @@ void BitshiftUIStateMenu::eventButton(int id, int value)
         if(cursor >= itemsTotal)
           cursor = 0;
 
+        onMove(cursor);
         render();
       }
       return;

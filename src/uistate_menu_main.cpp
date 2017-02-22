@@ -12,12 +12,14 @@
 #include "uistate_menu_main.h"
 #include "uistate_menu.h"
 #include "uistate_usage.h"
+#include "uistate_inputs.h"
 #include "uistate_menu_param.h"
 #include "audio.h"
 #include <Arduino.h>
 
 char const* BitshiftUIStateMenuMain::ITEM_LABELS[] = {
-  "CPU Usage"
+  "CPU Usage",
+  "Debug inputs"
 };
 
 BitshiftUIStateMenuMain::~BitshiftUIStateMenuMain()
@@ -53,7 +55,11 @@ void BitshiftUIStateMenuMain::onSelect(int cursor)
   switch(cursor - menuItemParamsTotal)
   {
     case 0:
-    pushState(new BitshiftUIStateUsage());
-    return;
+      pushState(new BitshiftUIStateUsage());
+      return;
+
+    case 1:
+      pushState(new BitshiftUIStateInputs());
+      return;
   }
 }

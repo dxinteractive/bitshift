@@ -30,7 +30,7 @@ class BitshiftUIStateMenuMain: public BitshiftUIStateMenu
     int allItemsTotal = 0;
     char const** allItemLabels;
 
-    static const int ITEMS_TOTAL = 1;
+    static const int ITEMS_TOTAL = 2;
     static char const* ITEM_LABELS[ITEMS_TOTAL];
 };
 

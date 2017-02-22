@@ -212,3 +212,33 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsUsage &props)
   screen.println(props.ms);
   screen.display();
 }
+
+void BitshiftDisplaySSD1306::render(BitshiftPropsInputDebug &props)
+{
+  screen.clearDisplay();
+  screen.setCursor(0,0);
+  screen.setTextSize(1);
+  screen.println("Debug inputs");
+  screen.println("");
+  screen.print("Button pressed: ");
+
+  if(props.buttonId != -1)
+  {
+    screen.println(props.buttonId);
+  } else {
+    screen.println("-");
+  }
+
+  for(int i = 0; i < 10; i++)
+  {
+    if(props.analogValues[i] != -1.0)
+    {
+      screen.print("Analog ");
+      screen.print(i);
+      screen.print(": ");
+      screen.println(props.analogValues[i], 4);
+    }
+  }
+
+  screen.display();
+}

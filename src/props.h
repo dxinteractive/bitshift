@@ -64,5 +64,11 @@ class BitshiftPropsUsage: public BitshiftProps
     unsigned long ms;
 };
 
+class BitshiftPropsInputDebug: public BitshiftProps
+{
+  public:
+    int buttonId;
+    float* analogValues;
+};
 
 #endif

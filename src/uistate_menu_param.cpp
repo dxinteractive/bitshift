@@ -20,7 +20,7 @@ void BitshiftUIStateMenuParam::init()
   setItems(menuItemParamOptions, menuItemParamOptionsTotal, true);
 }
 
-void BitshiftUIStateMenuParam::onBack(int cursor)
+void BitshiftUIStateMenuParam::onMove(int cursor)
 {
   audio->setMenuItemParam(itemId, cursor);
 }
