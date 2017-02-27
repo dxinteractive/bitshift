@@ -13,6 +13,7 @@
 #ifndef BITSHIFT_UI_DEFAULT_H
 #define BITSHIFT_UI_DEFAULT_H
 
+#include "StackArray.h"
 #include "ui.h"
 #include "uistate.h"
 #include "uistate_preset.h"
