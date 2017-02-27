@@ -1,6 +1,6 @@
 /*
  * ui_default
- * Default set of UI states for input handling and updating audio objects and display
+ * Default UI comprised of a stack of UI states
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
  *
@@ -26,11 +26,21 @@ class BitshiftUIDefault: public BitshiftUI
       BitshiftAudio& audio,
       BitshiftInput& input,
       BitshiftDisplay& display,
-      BitshiftUIState* initialState,
-      int analogVisible,
-      int buttonsVisible
+      BitshiftUIState* initialState
     );
-    ~BitshiftUIDefault() {}
+    ~BitshiftUIDefault();
+
+    virtual void update(unsigned long ms);
+    virtual void render();
+    virtual void eventButton(int id, int value);
+    virtual void eventAnalog(int id, float value);
+
+    void initialState(BitshiftUIState* initialState);
+    void pushState(BitshiftUIState* newState);
+    void popState(bool render = true);
+
+  private:
+    StackArray <BitshiftUIState*> stateStack;
 };
 
 #endif
