@@ -13,8 +13,7 @@
 #include "effect.h"
 #include <Audio.h>
 
-BitshiftEffectVolume::BitshiftEffectVolume():
-  BitshiftEffect()
+void BitshiftEffectVolume::setup()
 {
   volume(1.0);
 }

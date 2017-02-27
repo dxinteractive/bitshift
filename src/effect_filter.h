@@ -21,7 +21,12 @@ class BitshiftEffectFilter: public BitshiftEffect
     static const int OPTIONS_TYPE_TOTAL = 3;
     static char const* OPTIONS_TYPE[OPTIONS_TYPE_TOTAL];
 
-    BitshiftEffectFilter();
+    BitshiftEffectFilter():
+      BitshiftEffect(),
+      patchLowPassToMixer(filter, 0, mixer, 0),
+      patchBandPassToMixer(filter, 1, mixer, 1),
+      patchHighPassToMixer(filter, 2, mixer, 2),
+      patchFilterToVolume(mixer, *(volumeEffect.audioIn())) {}
     ~BitshiftEffectFilter() {}
 
     virtual AudioStream* audioIn() { return &filter; }

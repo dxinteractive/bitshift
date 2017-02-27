@@ -23,12 +23,15 @@ class BitshiftEffect
     BitshiftEffect() {}
     virtual ~BitshiftEffect() {}
 
+    virtual void setup() {}
+
     virtual AudioStream* audioIn() { return NULL; }
     virtual AudioStream* audioOut() { return NULL; }
     virtual int audioInChannel() const { return 0; }
     virtual int audioOutChannel() const { return 0; }
-    //virtual void enable() {}
-    //virtual void disable() {}
+
+    virtual void audioEnable() {}
+    virtual void audioDisable() {}
 
   protected:
     static int noInterruptsCount;

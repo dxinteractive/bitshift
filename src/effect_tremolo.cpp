@@ -15,10 +15,7 @@
 #include "effect_volume.h"
 #include <Audio.h>
 
-BitshiftEffectTremolo::BitshiftEffectTremolo():
-  BitshiftEffect(),
-  patchLfoToFilter(*(lfo.audioOut()), 0, filter, 0),
-  patchFilterToMultiplier(filter, 0, multiplier, 1)
+void BitshiftEffectTremolo::setup()
 {
   filter.frequency(100.0);
 }

@@ -18,8 +18,13 @@
 class BitshiftEffectTremolo: public BitshiftEffect
 {
   public:
-    BitshiftEffectTremolo();
+    BitshiftEffectTremolo():
+      BitshiftEffect(),
+      patchLfoToFilter(*(lfo.audioOut()), 0, filter, 0),
+      patchFilterToMultiplier(filter, 0, multiplier, 1) {}
     ~BitshiftEffectTremolo() {}
+
+    virtual void setup();
 
     virtual AudioStream* audioIn() { return &multiplier; }
     virtual AudioStream* audioOut() { return &multiplier; }

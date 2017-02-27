@@ -31,12 +31,10 @@ char const* BitshiftEffectLfo::OPTIONS_SHAPE[] = {
   "Square"
 };
 
-BitshiftEffectLfo::BitshiftEffectLfo():
-  BitshiftEffect(),
-  patchLfoToSignalMixer(lfo, 0, signalMixer, 0),
-  patchOffsetToSignalMixer(offset, 0, signalMixer, 1)
+void BitshiftEffectLfo::setup()
 {
-  //shape(0);
+  // default values
+  shape(SINE);
   lfo.begin(1.0, 1.0, WAVEFORM_ARBITRARY);
   offset.amplitude(1.0);
 }

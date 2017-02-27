@@ -27,8 +27,13 @@ class BitshiftEffectLfo: public BitshiftEffect
     static const int OPTIONS_SHAPE_TOTAL = 5;
     static char const* OPTIONS_SHAPE[OPTIONS_SHAPE_TOTAL];
 
-    BitshiftEffectLfo();
+    BitshiftEffectLfo():
+      BitshiftEffect(),
+      patchLfoToSignalMixer(lfo, 0, signalMixer, 0),
+      patchOffsetToSignalMixer(offset, 0, signalMixer, 1) {}
     ~BitshiftEffectLfo() {}
+
+    virtual void setup();
 
     virtual AudioStream* audioOut() { return &signalMixer; }
 

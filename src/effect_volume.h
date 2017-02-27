@@ -18,8 +18,11 @@
 class BitshiftEffectVolume: public BitshiftEffect
 {
   public:
-    BitshiftEffectVolume();
+    BitshiftEffectVolume():
+      BitshiftEffect() {}
     ~BitshiftEffectVolume() {}
+
+    virtual void setup();
 
     virtual AudioStream* audioIn() { return &mixer; }
     virtual AudioStream* audioOut() { return &mixer; }

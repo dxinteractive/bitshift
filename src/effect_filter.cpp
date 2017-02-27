@@ -20,15 +20,6 @@ char const* BitshiftEffectFilter::OPTIONS_TYPE[] = {
   "High pass"
 };
 
-BitshiftEffectFilter::BitshiftEffectFilter():
-  BitshiftEffect(),
-  patchLowPassToMixer(filter, 0, mixer, 0),
-  patchBandPassToMixer(filter, 1, mixer, 1),
-  patchHighPassToMixer(filter, 2, mixer, 2),
-  patchFilterToVolume(mixer, *(volumeEffect.audioIn()))
-{
-}
-
 float BitshiftEffectFilter::frequency(float hz)
 {
   hz = clamp(hz, 64.0, 16000.0);
