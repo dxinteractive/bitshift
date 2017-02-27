@@ -80,11 +80,11 @@ void BitshiftUIStatePreset::eventButton(int id, int value)
 
 void BitshiftUIStatePreset::eventAnalog(int id, float value)
 {
-  //analogsAssign[id]
-  //if(id >= ////////analogTotalsByType[ANALOG_VISIBLE]()) {
-  //  //audio->setAnalogParam(id, value);
-  //  return;
-  //}
+  if(analogsAssign[id] >> ANALOG_TYPES_BITSHIFT == ANALOG_EXP >> ANALOG_TYPES_BITSHIFT)
+  {
+    audio->setExpParam(analogsAssign[id] - (1 << ANALOG_TYPES_BITSHIFT), value);
+    return;
+  }
 
   if(id + analogParamOffset >= audio->analogParamsTotal())
   {

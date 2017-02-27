@@ -13,6 +13,8 @@
 #include "preset.h"
 #include <Audio.h>
 
+ #include <Arduino.h>
+
 char const* BitshiftPreset::OPTIONS_BOOLEAN[] = {
   "Off",
   "On"
@@ -142,6 +144,15 @@ int BitshiftPreset::tapAssignment(int tapId) const
 int BitshiftPreset::menuItemParamOptionsTotal(int itemId) const
 {
   return optionsTotalByMenuItemId(itemId);
+}
+
+void BitshiftPreset::setExpParam(int expId, float value)
+{
+  int analogId = expAssignment(expId);
+  if(analogId == -1)
+    return;
+
+  setAnalogParam(analogId, value);
 }
 
 void BitshiftPreset::setExpAssignment(int expId, int analogId)

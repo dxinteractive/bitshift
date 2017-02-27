@@ -191,6 +191,11 @@ void BitshiftAudioDefault::setMenuItemParam(int itemId, int value)
   presets[activePreset]->setMenuItemParam(itemId, value);
 }
 
+void BitshiftAudioDefault::setExpParam(int expId, float value)
+{
+  presets[activePreset]->setExpParam(expId, value);
+}
+
 void BitshiftAudioDefault::setExpAssignment(int expId, int analogId)
 {
   presets[activePreset]->setExpAssignment(expId, analogId);

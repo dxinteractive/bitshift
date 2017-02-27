@@ -66,6 +66,7 @@ class BitshiftAudioDefault: public BitshiftAudio
     virtual void setParam(int paramId, float value);
     virtual void setAnalogParam(int analogId, float value);
     virtual void setMenuItemParam(int itemId, int value);
+    virtual void setExpParam(int expId, float value);
     virtual void setExpAssignment(int expId, int analogId);
 
   private:

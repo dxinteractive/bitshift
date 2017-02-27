@@ -58,6 +58,7 @@ class BitshiftPreset
     virtual void setParam(int paramId, float value) {}
     virtual void setAnalogParam(int analogId, float value) {}
     virtual void setMenuItemParam(int itemId, int value) {}
+    void setExpParam(int expId, float value);
     void setExpAssignment(int expId, int analogId);
     //void setTapAssignment(int tapId, int tapOptionId);
 
