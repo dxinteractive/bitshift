@@ -3,12 +3,6 @@
  * Arduino / Teensy dev project file for Deeep Bitshift digital guitar pedal
  * Copyright (c) 2016 Damien Clarke
  * damienclarke.me | github.com/dxinteractive/bitshift
- * 
- * .-.    _  .-.      .-.    _  .--. .-. 
- * : :   :_;.' `.     : :   :_;: .-'.' `.
- * : `-. .-.`. .'.--. : `-. .-.: `; `. .'
- * ' .; :: : : :`._-.': .. :: :: :   : : 
- * `.__.':_; :_;`.__.':_;:_;:_;:_;   :_; 
  */
 
 /* 
@@ -50,24 +44,33 @@ BitshiftDisplaySSD1306 display(
 
 // set pins and consts for your specific setup
 // input - analog
-const int ANALOG_TOTAL = 5;
-const int ANALOG_PINS[ANALOG_TOTAL] = {A2, A3, A6, A7, A11};
-const int ANALOG_VISIBLE = 4;
-// ^ this signifies that the first 4 analog inputs should display
-// their parameter changes on the UI (use with knobs).
-// Any analog pins after that will not cause any UI changes.
-// To be used with inputs like expression pedals and control voltages.
+const int ANALOGS_TOTAL = 5;
+const int ANALOGS_PINS[ANALOGS_TOTAL] = {A2, A3, A6, A7, A11};
+const int ANALOGS_ASSIGN[ANALOGS_TOTAL] = {
+  ANALOG_VISIBLE,
+  ANALOG_VISIBLE + 1,
+  ANALOG_VISIBLE + 2,
+  ANALOG_VISIBLE + 3,
+  ANALOG_EXP
+};
+
+// ^ this signifies that the first 4 analog inputs (0)
+// should display their parameter changes on the UI (use with knobs).
+
+// The 5th one (1) will affect params after being assigned
+// and will not cause any UI changes. To be used with inputs
+// like expression pedals and control voltages.
 
 // input - buttons
 const int BUTTONS_PIN = A10;
 const int BUTTONS_TOTAL = 7;
-const int BUTTONS_VISIBLE = 4;
 // ^ this signifies that the first 4 buttons should display
 // their parameter changes on the UI.
 // In a standard setup these buttons are up, down, back and select.
 // Any button_assign values higher that that
 // will not cause any UI changes.
 
+// analog readings when each button is pressed, in ascending order
 const int BUTTONS_VALUES[BUTTONS_TOTAL] = {
   0,
   182,
@@ -77,22 +80,21 @@ const int BUTTONS_VALUES[BUTTONS_TOTAL] = {
   764,
   855
 };
-// ^ analog readings when each button is pressed, in ascending order
 
+// buttons corresponding to each of the BUTTON_VALUES
 const int BUTTONS_ASSIGN[BUTTONS_TOTAL] = {
   BUTTON_DOWN, // 0
   BUTTON_BACK, // 182
-  BUTTONS_VISIBLE + 1, // 353 (tap 2)
-  BUTTONS_VISIBLE + 2, // 508 (tap 3)
+  BUTTON_TAP2, // 353
+  BUTTON_TAP3, // 508
   BUTTON_SELECT, // 605
   BUTTON_UP, // 764
-  BUTTONS_VISIBLE // 855 (tap 1)
+  BUTTON_TAP1 // 855
 };
-// ^ buttons corresponding to each of the BUTTON_VALUES
 
 BitshiftInputDefault input(
-  ANALOG_PINS,
-  ANALOG_TOTAL,
+  ANALOGS_PINS,
+  ANALOGS_TOTAL,
   BUTTONS_PIN,
   BUTTONS_TOTAL,
   BUTTONS_VALUES,
@@ -131,13 +133,16 @@ BitshiftAudioDefault audio(
 );
 
 // ui
+BitshiftUIStatePreset* baseUIState = new BitshiftUIStatePreset(
+  ANALOGS_ASSIGN,
+  ANALOGS_TOTAL
+);
+
 BitshiftUIDefault ui(
   audio,
   input,
   display,
-  new BitshiftUIStateSplash(new BitshiftUIStatePreset()),
-  BUTTONS_VISIBLE,
-  ANALOG_VISIBLE
+  new BitshiftUIStateSplash(baseUIState)
 );
 
 // bitshift

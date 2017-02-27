@@ -15,12 +15,15 @@
 
 #include <Audio.h>
 #include "effect.h"
+#include "paramset.h"
 
 class BitshiftPreset
 {
   public:
     BitshiftPreset();
     virtual ~BitshiftPreset();
+
+    void setup();
 
     void audioEnable();
     void audioDisable();
@@ -30,7 +33,7 @@ class BitshiftPreset
     int audioInChannel() const;
     int audioOutChannel() const;
 
-    inline char const* name() const { return thisName; }
+    inline char const* name() const { return _name; }
     char const* paramName(int paramId) const;
     char const* analogParamName(int analogId) const;
     char const* menuItemParamName(int itemId) const;
@@ -43,15 +46,20 @@ class BitshiftPreset
     void analogParamValueString(char* str, int analogId) const;
     void menuItemParamValueString(char* str, int itemId) const;
 
-    inline int paramsTotal() const { return thisParamsTotal; }
-    inline int analogParamsTotal() const { return analogMapSize; }
-    inline int menuItemParamsTotal() const { return menuItemMapSize; }
+    int expAssignment(int expId) const;
+    int tapAssignment(int tapId) const;
+
+    inline int paramsTotal() const { return _paramsTotal; }
+    inline int analogParamsTotal() const { return _analogMapSize; }
+    inline int menuItemParamsTotal() const { return _menuItemMapSize; }
     int menuItemParamOptionsTotal(int itemId) const;
 
     virtual void setParam(int paramId, int value) {}
     virtual void setParam(int paramId, float value) {}
     virtual void setAnalogParam(int analogId, float value) {}
     virtual void setMenuItemParam(int itemId, int value) {}
+    void setExpAssignment(int expId, int analogId);
+    //void setTapAssignment(int tapId, int tapOptionId);
 
     int paramIdByAnalogId(int analogId) const;
     int paramIdByMenuItemId(int itemId) const;
@@ -59,25 +67,28 @@ class BitshiftPreset
     int optionsTotalByMenuItemId(int itemId) const;
 
   protected:
-    void setEffect(BitshiftEffect* effect);
-    void setAnalogMap(int inputMap[], int size);
-    void setMenuItemMap(int inputMap[], int size, char const** inputOptions[] = NULL, int inputOptionsTotals[] = NULL);
+    void initBase(
+      BitshiftEffect* effect,
+      BitshiftParamset* paramset,
+      char const* name,
+      char const** paramNames,
+      int paramsTotal
+    );
+
+    void setAnalogMap(
+      int inputMap[],
+      int size
+    );
+
+    void setMenuItemMap(
+      int inputMap[],
+      int size,
+      char const** inputOptions[] = NULL,
+      int inputOptionsTotals[] = NULL
+    );
 
     int intRange(float value, int min, int max);
     float floatRange(float value, float min, float max, bool inclusive = true);
-
-    AudioEffectFade send;
-    AudioConnection* patchSendToEffect;
-
-    char const* thisName;
-    char const** thisParamNames;
-    int thisParamsTotal;
-    int analogMapSize;
-    int* analogMap;
-    int menuItemMapSize;
-    int* menuItemMap;
-    char const*** menuItemOptions;
-    int* menuItemOptionsTotal;
 
     static const int OPTIONS_BOOLEAN_TOTAL = 2;
     static char const* OPTIONS_BOOLEAN[OPTIONS_BOOLEAN_TOTAL];
@@ -86,7 +97,23 @@ class BitshiftPreset
     void clearAnalogMap();
     void clearMenuItemMap();
 
+    AudioEffectFade send;
+    AudioConnection* patchSendToEffect;
+
     BitshiftEffect* effect;
+    BitshiftParamset* paramset;
+
+    char const* _name;
+    char const** _paramNames;
+    int _paramsTotal;
+
+    int _analogMapSize;
+    int* _analogMap;
+
+    int _menuItemMapSize;
+    int* _menuItemMap;
+    char const*** _menuItemOptions;
+    int* _menuItemOptionsTotal;
 };
 
 #endif

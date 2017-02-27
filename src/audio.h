@@ -37,6 +37,9 @@ class BitshiftAudio
     virtual void analogParamValueString(char* str, int analogId) const = 0;
     virtual void menuItemParamValueString(char* str, int itemId) const = 0;
 
+    virtual int tapAssignment(int tapId) const { return -1; }
+    virtual int expAssignment(int expId) const { return -1; }
+
     virtual int paramsTotal() const = 0;
     virtual int analogParamsTotal() const = 0;
     virtual int menuItemParamsTotal() const = 0;
@@ -46,6 +49,7 @@ class BitshiftAudio
     virtual void setParam(int paramId, float value) = 0;
     virtual void setAnalogParam(int analogId, float value) = 0;
     virtual void setMenuItemParam(int itemId, int value) = 0;
+    virtual void setExpAssignment(int expId, int analogId) {}
 };
 
 #endif

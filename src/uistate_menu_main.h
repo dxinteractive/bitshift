@@ -17,8 +17,9 @@
 class BitshiftUIStateMenuMain: public BitshiftUIStateMenu
 {
   public:
-    BitshiftUIStateMenuMain()
-      :BitshiftUIStateMenu(0, "Main menu") {}
+    BitshiftUIStateMenuMain(int analogExpTotal)
+      :BitshiftUIStateMenu(0, "Main menu"),
+      analogExpTotal(analogExpTotal) {}
     ~BitshiftUIStateMenuMain();
 
   protected:
@@ -27,11 +28,14 @@ class BitshiftUIStateMenuMain: public BitshiftUIStateMenu
 
   private:
     int menuItemParamsTotal = 0;
+    int analogExpTotal = 0;
     int allItemsTotal = 0;
+    char** analogExpLabels;
     char const** allItemLabels;
 
     static const int ITEMS_TOTAL = 2;
     static char const* ITEM_LABELS[ITEMS_TOTAL];
+    static char const* ITEM_EXP_LABEL;
 };
 
 #endif

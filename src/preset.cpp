@@ -30,22 +30,42 @@ BitshiftPreset::~BitshiftPreset()
   clearMenuItemMap();
   delete patchSendToEffect;
 }
+\
 
-void BitshiftPreset::setEffect(BitshiftEffect* effect) {
+void BitshiftPreset::initBase(
+  BitshiftEffect* effect,
+  BitshiftParamset* paramset,
+  char const* name,
+  char const** paramNames,
+  int paramsTotal
+) {
   this->effect = effect;
+  this->paramset = paramset;
   this->patchSendToEffect = new AudioConnection(
     send,
     0,
     *(effect->audioIn()),
     effect->audioInChannel()
   );
+
+  this->_name = name;
+  this->_paramNames = paramNames;
+  this->_paramsTotal = paramsTotal;
+}
+
+void BitshiftPreset::setup()
+{
+  if(!effect) return;
+  effect->setup();
 }
 
 void BitshiftPreset::audioEnable() {
+  effect->audioEnable();
   send.fadeIn(10);
 }
 
 void BitshiftPreset::audioDisable() {
+  effect->audioDisable(); // todo, do we need to delay this?
   send.fadeOut(10);
 }
 
@@ -67,10 +87,10 @@ int BitshiftPreset::audioOutChannel() const {
 
 char const* BitshiftPreset::paramName(int paramId) const
 {
-  if(paramId >= thisParamsTotal || paramId < 0)
+  if(paramId >= _paramsTotal || paramId < 0)
     return "";
 
-  return thisParamNames[paramId];
+  return _paramNames[paramId];
 }
 
 char const* BitshiftPreset::analogParamName(int analogId) const
@@ -103,51 +123,79 @@ void BitshiftPreset::menuItemParamValueString(char* str, int itemId) const
   paramValueString(str, paramIdByMenuItemId(itemId));
 }
 
+int BitshiftPreset::expAssignment(int expId) const
+{
+  if(!paramset || expId < 0 || expId >= EXPASSIGN_MAX)
+    return -1;
+
+  return paramset->expAssignment[expId];
+}
+
+int BitshiftPreset::tapAssignment(int tapId) const
+{
+  if(!paramset || tapId < 0 || tapId >= TAPASSIGN_MAX)
+    return -1;
+
+  return paramset->tapAssignment[tapId];
+}
+
 int BitshiftPreset::menuItemParamOptionsTotal(int itemId) const
 {
   return optionsTotalByMenuItemId(itemId);
 }
 
+void BitshiftPreset::setExpAssignment(int expId, int analogId)
+{
+  if(!paramset
+    || expId < 0
+    || expId >= EXPASSIGN_MAX
+    || analogId < -1
+    || analogId >= _analogMapSize
+  ) return;
+
+  paramset->expAssignment[expId] = analogId;
+}
+
 int BitshiftPreset::paramIdByAnalogId(int analogId) const
 {
-  if(analogId >= analogMapSize || analogId < 0)
+  if(analogId >= _analogMapSize || analogId < 0)
     return -1;
 
-  return analogMap[analogId];
+  return _analogMap[analogId];
 }
 
 int BitshiftPreset::paramIdByMenuItemId(int itemId) const
 {
-  if(!menuItemMap || itemId >= menuItemMapSize || itemId < 0)
+  if(!_menuItemMap || itemId >= _menuItemMapSize || itemId < 0)
     return -1;
 
-  return menuItemMap[itemId];
+  return _menuItemMap[itemId];
 }
 
 char const** BitshiftPreset::optionsByMenuItemId(int itemId) const
 {
-  if(!menuItemOptions || itemId >= menuItemMapSize || itemId < 0)
+  if(!_menuItemOptions || itemId >= _menuItemMapSize || itemId < 0)
     return NULL;
 
-  return menuItemOptions[itemId];
+  return _menuItemOptions[itemId];
 }
 
 int BitshiftPreset::optionsTotalByMenuItemId(int itemId) const
 {
-  if(!menuItemOptionsTotal || itemId >= menuItemMapSize || itemId < 0)
+  if(!_menuItemOptionsTotal || itemId >= _menuItemMapSize || itemId < 0)
     return -1;
 
-  return menuItemOptionsTotal[itemId];
+  return _menuItemOptionsTotal[itemId];
 }
 
 void BitshiftPreset::setAnalogMap(int inputMap[], int size)
 {
   clearAnalogMap();
 
-  analogMap = new int[size];
-  analogMapSize = size;
+  _analogMap = new int[size];
+  _analogMapSize = size;
   for(int i = 0; i < size; i++)
-    analogMap[i] = inputMap[i];
+    _analogMap[i] = inputMap[i];
 }
 
 void BitshiftPreset::setMenuItemMap(
@@ -159,36 +207,40 @@ void BitshiftPreset::setMenuItemMap(
 {
   clearMenuItemMap();
 
-  menuItemMap = new int[size];
-  menuItemMapSize = size;
+  _menuItemMap = new int[size];
+  _menuItemMapSize = size;
   for(int i = 0; i < size; i++)
-    menuItemMap[i] = inputMap[i];
+    _menuItemMap[i] = inputMap[i];
 
   if(inputOptions)
   {
-    menuItemOptions = new char const**[size];
-    menuItemOptionsTotal = new int[size];
+    _menuItemOptions = new char const**[size];
+    _menuItemOptionsTotal = new int[size];
     for(int i = 0; i < size; i++)
     {
-      menuItemOptions[i] = inputOptions[i];
-      menuItemOptionsTotal[i] = inputOptionsTotals[i];
+      _menuItemOptions[i] = inputOptions[i];
+      _menuItemOptionsTotal[i] = inputOptionsTotals[i];
     }
   }
 }
 
 void BitshiftPreset::clearAnalogMap()
 {
-  delete [] analogMap;
-  analogMapSize = 0;
+  delete [] _analogMap;
+  _analogMapSize = 0;
 }
 
 void BitshiftPreset::clearMenuItemMap()
 {
-  delete [] menuItemMap;
-  delete [] menuItemOptions;
-  delete [] menuItemOptionsTotal;
-  menuItemMapSize = 0;
+  delete [] _menuItemMap;
+  delete [] _menuItemOptions;
+  delete [] _menuItemOptionsTotal;
+  _menuItemMapSize = 0;
 }
+
+//
+// helpers for derived classes to set param values
+//
 
 int BitshiftPreset::intRange(float value, int min, int max)
 {

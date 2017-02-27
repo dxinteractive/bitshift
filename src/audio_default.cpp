@@ -58,6 +58,9 @@ void BitshiftAudioDefault::setup()
   audioAdaptor.lineOutLevel(31);
   audioAdaptor.dacVolume(0.9);
 
+  for(int i = 0; i < presetsTotal; i++)
+    presets[i]->setup();
+
   setActivePreset(0);
 }
 
@@ -138,6 +141,16 @@ void BitshiftAudioDefault::menuItemParamValueString(char* str, int itemId) const
   presets[activePreset]->menuItemParamValueString(str, itemId);
 }
 
+int BitshiftAudioDefault::tapAssignment(int tapId) const
+{
+  return presets[activePreset]->tapAssignment(tapId);
+}
+
+int BitshiftAudioDefault::expAssignment(int expId) const
+{
+  return presets[activePreset]->expAssignment(expId);
+}
+
 int BitshiftAudioDefault::paramsTotal() const
 {
   return presets[activePreset]->paramsTotal();
@@ -176,4 +189,9 @@ void BitshiftAudioDefault::setAnalogParam(int analogId, float value)
 void BitshiftAudioDefault::setMenuItemParam(int itemId, int value)
 {
   presets[activePreset]->setMenuItemParam(itemId, value);
+}
+
+void BitshiftAudioDefault::setExpAssignment(int expId, int analogId)
+{
+  presets[activePreset]->setExpAssignment(expId, analogId);
 }
