@@ -30,13 +30,13 @@ class BitshiftDisplaySSD1306: public BitshiftDisplay
     );
     ~BitshiftDisplaySSD1306() {}
 
+    virtual void render(BitshiftPropsInputDebug &props);
     virtual void render(BitshiftPropsMenu &props);
     virtual void render(BitshiftPropsMessage &props);
     virtual void render(BitshiftPropsPreset &props);
     virtual void render(BitshiftPropsParam &props);
     virtual void render(BitshiftPropsSplash &props);
     virtual void render(BitshiftPropsUsage &props);
-    virtual void render(BitshiftPropsInputDebug &props);
 
   protected:
     Adafruit_SSD1306 screen;

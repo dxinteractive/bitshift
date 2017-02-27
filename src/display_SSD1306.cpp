@@ -32,6 +32,37 @@ BitshiftDisplaySSD1306::BitshiftDisplaySSD1306(
   screen.display();
 }
 
+void BitshiftDisplaySSD1306::render(BitshiftPropsInputDebug &props)
+{
+  screen.clearDisplay();
+  screen.setCursor(0,0);
+  screen.setTextSize(1);
+  screen.println("Debug inputs");
+  screen.println("");
+  screen.print("Button pressed: ");
+
+  if(props.buttonId != -1)
+  {
+    screen.println(props.buttonId);
+  } else {
+    screen.println("-");
+  }
+
+  for(int i = 0; i < 10; i++)
+  {
+    if(props.analogValues[i] != -1.0)
+    {
+      screen.print("Analog ");
+      screen.print(i);
+      screen.print(": ");
+      screen.println(props.analogValues[i], 4);
+    }
+  }
+
+  screen.display();
+}
+
+
 void BitshiftDisplaySSD1306::render(BitshiftPropsMenu &props)
 {
   screen.clearDisplay();
@@ -43,11 +74,20 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsMenu &props)
     screen.print(props.heading);
   }
 
-  for(int i = 0; i < props.itemsTotal; i++)
+  int start = 0;
+  if(props.cursor > 2)
+    start = props.cursor - 2;
+
+  int end = props.itemsTotal;
+  if(start + 5 < end)
+    end = start + 5;
+
+  int line = 0;
+  for(int i = start; i < props.itemsTotal; i++)
   {
     if(props.cursor == i)
     {
-      int y = 24 + 10 * i;
+      int y = 24 + 10 * line;
       screen.drawPixel(3, y, WHITE);
       screen.drawPixel(6, y, WHITE);
       screen.drawPixel(123, y, WHITE);
@@ -58,8 +98,9 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsMenu &props)
         screen.drawLine(109, y + 2, 114, y - 3, WHITE);
       }
     }
-    screen.setCursor(12, 20 + 10 * i);
+    screen.setCursor(12, 20 + 10 * line);
     screen.print(props.itemLabels[i]);
+    line++;
 
   }
   screen.display();
@@ -78,27 +119,30 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsPreset &props)
 {
   screen.clearDisplay();
   screen.setTextSize(1);
-  if(props.analogParamNames[0][0])
+  if(props.analogParamNamesTotal > 0)
   {
     screen.setCursor(0,0);
     screen.print("A:");
     screen.print(props.analogParamNames[0]);
   }
-  if(props.analogParamNames[2][0])
+
+  if(props.analogParamNamesTotal > 2)
   {
-    screen.setCursor(60,0);
+    screen.setCursor(63,0);
     screen.print("C:");
     screen.print(props.analogParamNames[2]);
   }
-  if(props.analogParamNames[1][0])
+
+  if(props.analogParamNamesTotal > 1)
   {
     screen.setCursor(0,9);
     screen.print("B:");
     screen.print(props.analogParamNames[1]);
   }
-  if(props.analogParamNames[3][0])
+
+  if(props.analogParamNamesTotal > 3)
   {
-    screen.setCursor(60,9);
+    screen.setCursor(63,9);
     screen.print("D:");
     screen.print(props.analogParamNames[3]);
   }
@@ -106,6 +150,14 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsPreset &props)
   screen.setCursor(64 - strlen(props.presetName) * 6, 26);
   screen.setTextSize(2);
   screen.println(props.presetName);
+
+  if(props.moreParams)
+  {
+    screen.drawPixel(127, 0, WHITE);
+    screen.drawPixel(127, 2, WHITE);
+    screen.drawPixel(127, 4, WHITE);
+  }
+
   screen.display();
 }
 
@@ -210,35 +262,5 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsUsage &props)
   screen.println(props.memoryUsageMax);
   screen.print("Time (ms):  ");
   screen.println(props.ms);
-  screen.display();
-}
-
-void BitshiftDisplaySSD1306::render(BitshiftPropsInputDebug &props)
-{
-  screen.clearDisplay();
-  screen.setCursor(0,0);
-  screen.setTextSize(1);
-  screen.println("Debug inputs");
-  screen.println("");
-  screen.print("Button pressed: ");
-
-  if(props.buttonId != -1)
-  {
-    screen.println(props.buttonId);
-  } else {
-    screen.println("-");
-  }
-
-  for(int i = 0; i < 10; i++)
-  {
-    if(props.analogValues[i] != -1.0)
-    {
-      screen.print("Analog ");
-      screen.print(i);
-      screen.print(": ");
-      screen.println(props.analogValues[i], 4);
-    }
-  }
-
   screen.display();
 }
