@@ -11,11 +11,11 @@
 
 #include <Arduino.h>
 #include "uistate.h"
-#include "ui.h"
+#include "ui_default.h"
 #include "audio.h"
 #include "display.h"
 
-void BitshiftUIState::init(BitshiftUI* const ui)
+void BitshiftUIState::init(BitshiftUIDefault* const ui)
 {
   this->ui = ui;
   this->audio = ui->audio;
@@ -24,7 +24,7 @@ void BitshiftUIState::init(BitshiftUI* const ui)
 }
 
 
-void BitshiftUIState::init(BitshiftUI* const ui, BitshiftUIState* const lowerState)
+void BitshiftUIState::init(BitshiftUIDefault* const ui, BitshiftUIState* const lowerState)
 {
   init(ui);
   this->lowerState = lowerState;
@@ -46,16 +46,6 @@ void BitshiftUIState::popState(bool render)
   ui->popState(render);
 }
 
-int BitshiftUIState::visibleButtonsTotal()
-{
-  return ui->visibleButtonsTotal;
-}
-
-int BitshiftUIState::visibleAnalogsTotal()
-{
-  return ui->visibleAnalogsTotal;
-}
-
 void BitshiftUIState::passDownEventButton(int id, int value)
 {
   if(lowerState)
@@ -66,26 +56,6 @@ void BitshiftUIState::passDownEventAnalog(int id, float value)
 {
   if(lowerState)
     lowerState->eventAnalog(id, value);
-}
-
-bool BitshiftUIState::passDownEventInvisibleButton(int id, int value)
-{
-  if(lowerState && id >= ui->visibleButtonsTotal)
-  {
-    lowerState->eventButton(id, value);
-    return true;
-  }
-  return false;
-}
-
-bool BitshiftUIState::passDownEventInvisibleAnalog(int id, float value)
-{
-  if(lowerState && id >= ui->visibleAnalogsTotal)
-  {
-    lowerState->eventAnalog(id, value);
-    return true;
-  }
-  return false;
 }
 
 void BitshiftUIState::setTimeout(int duration)

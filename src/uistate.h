@@ -13,7 +13,7 @@
 #define BITSHIFT_UISTATE_H
 
 // forward declarations
-class BitshiftUI;
+class BitshiftUIDefault;
 class BitshiftAudio;
 class BitshiftDisplay;
 
@@ -23,8 +23,8 @@ class BitshiftUIState
     BitshiftUIState() {}
     virtual ~BitshiftUIState() {}
 
-    void init(BitshiftUI* const ui);
-    void init(BitshiftUI* const ui, BitshiftUIState* const lowerState);
+    void init(BitshiftUIDefault* const ui);
+    void init(BitshiftUIDefault* const ui, BitshiftUIState* const lowerState);
     virtual void init() {}
     // ^ this init call can be overriden by derived classes and is called after init(ui) is called
 
@@ -37,19 +37,15 @@ class BitshiftUIState
     virtual void eventButton(int id, int value) = 0;
     virtual void eventAnalog(int id, float value) = 0;
 
-    int visibleButtonsTotal();
-    int visibleAnalogsTotal();
     void passDownEventButton(int id, int value);
     void passDownEventAnalog(int id, float value);
-    bool passDownEventInvisibleButton(int id, int value);
-    bool passDownEventInvisibleAnalog(int id, float value);
 
     void setTimeout(int duration = 1500);
 
   protected:
     BitshiftAudio* audio;
     BitshiftDisplay* display;
-    BitshiftUI* ui;
+    BitshiftUIDefault* ui;
     BitshiftUIState* lowerState;
 
   private:
