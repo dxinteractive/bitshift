@@ -27,15 +27,17 @@ char const* BitshiftPresetBitcrusher::PARAM_NAMES[] = {
 BitshiftPresetBitcrusher::BitshiftPresetBitcrusher():
   BitshiftPreset()
 {
-  setEffect(&bitcrusher);
-
   params.rate = 11000.0;
   params.depth = 8;
   params.volume = 1.0;
 
-  thisName = NAME;
-  thisParamsTotal = PARAMS_TOTAL;
-  thisParamNames = PARAM_NAMES;
+  initBase(
+    &bitcrusher,
+    &params,
+    NAME,
+    PARAM_NAMES,
+    PARAMS_TOTAL
+  );
 
   const int ANALOG_MAP_SIZE = 3;
   int analogMap[ANALOG_MAP_SIZE] = {0,1,2};

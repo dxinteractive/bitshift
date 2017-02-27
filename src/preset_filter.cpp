@@ -29,16 +29,18 @@ char const* BitshiftPresetFilter::PARAM_NAMES[] = {
 BitshiftPresetFilter::BitshiftPresetFilter():
   BitshiftPreset()
 {
-  setEffect(&filter);
-
   params.frequency = 1000.0;
   params.resonance = 1.0;
   params.type = 0;
   params.volume = 1.0;
 
-  thisName = NAME;
-  thisParamsTotal = PARAMS_TOTAL;
-  thisParamNames = PARAM_NAMES;
+  initBase(
+    &filter,
+    &params,
+    NAME,
+    PARAM_NAMES,
+    PARAMS_TOTAL
+  );
 
   const int ANALOG_MAP_SIZE = 4;
   int analogMap[ANALOG_MAP_SIZE] = {0,1,2,3};
@@ -54,7 +56,12 @@ BitshiftPresetFilter::BitshiftPresetFilter():
     BitshiftEffectFilter::OPTIONS_TYPE_TOTAL
   };
 
-  setMenuItemMap(menuItemMap, MENU_ITEM_MAP_SIZE, menuItemOptions, menuItemOptionsTotals);
+  setMenuItemMap(
+    menuItemMap,
+    MENU_ITEM_MAP_SIZE,
+    menuItemOptions,
+    menuItemOptionsTotals
+  );
 }
 
 int BitshiftPresetFilter::paramValueInt(int paramId) const

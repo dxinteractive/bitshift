@@ -31,17 +31,19 @@ char const* BitshiftPresetTremolo::PARAM_NAMES[] = {
 BitshiftPresetTremolo::BitshiftPresetTremolo():
   BitshiftPreset()
 {
-  setEffect(&tremolo);
-
   params.speed = 1.0;
   params.depth = 0.5;
   params.shapeAndMod = 0.5;
   params.division = 0;
   params.volume = 0.8;
 
-  thisName = NAME;
-  thisParamsTotal = PARAMS_TOTAL;
-  thisParamNames = PARAM_NAMES;
+  initBase(
+    &tremolo,
+    &params,
+    NAME,
+    PARAM_NAMES,
+    PARAMS_TOTAL
+  );
 
   const int ANALOG_MAP_SIZE = 5;
   int analogMap[ANALOG_MAP_SIZE] = {0,1,2,3,4};
@@ -57,7 +59,12 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
     BitshiftPreset::OPTIONS_BOOLEAN_TOTAL
   };
 
-  setMenuItemMap(menuItemMap, MENU_ITEM_MAP_SIZE, menuItemOptions, menuItemOptionsTotals);
+  setMenuItemMap(
+    menuItemMap,
+    MENU_ITEM_MAP_SIZE,
+    menuItemOptions,
+    menuItemOptionsTotals
+  );
 }
 
 int BitshiftPresetTremolo::paramValueInt(int paramId) const
