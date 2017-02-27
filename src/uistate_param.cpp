@@ -23,7 +23,7 @@ void BitshiftUIStateParam::eventButton(int id, int value)
     popState();
     return;
   }
-  passDownEventInvisibleButton(id, value);
+  passDownEventButton(id, value);
 }
 
 void BitshiftUIStateParam::eventAnalog(int id, float value)

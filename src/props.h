@@ -19,6 +19,13 @@ class BitshiftProps
     virtual ~BitshiftProps() {}
 };
 
+class BitshiftPropsInputDebug: public BitshiftProps
+{
+  public:
+    int buttonId;
+    float* analogValues;
+};
+
 class BitshiftPropsMenu: public BitshiftProps
 {
   public:
@@ -46,7 +53,9 @@ class BitshiftPropsPreset: public BitshiftProps
 {
   public:
     char const* presetName;
-    char const* analogParamNames[10]; // todo dont hardcode this
+    char const** analogParamNames;
+    int analogParamNamesTotal;
+    bool moreParams;
 };
 
 class BitshiftPropsSplash: public BitshiftProps {
@@ -62,13 +71,6 @@ class BitshiftPropsUsage: public BitshiftProps
     int memoryUsage;
     int memoryUsageMax;
     unsigned long ms;
-};
-
-class BitshiftPropsInputDebug: public BitshiftProps
-{
-  public:
-    int buttonId;
-    float* analogValues;
 };
 
 #endif

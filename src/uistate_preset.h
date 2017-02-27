@@ -14,12 +14,15 @@
 #define BITSHIFT_UISTATE_PRESET_H
 
 #include "uistate.h"
+#include "input_consts.h"
 
 class BitshiftUIStatePreset: public BitshiftUIState
 {
   public:
-    BitshiftUIStatePreset():
-      BitshiftUIState() {}
+    BitshiftUIStatePreset(
+      const int* analogsAssign,
+      int analogsTotal
+    );
     ~BitshiftUIStatePreset() {}
 
     virtual void render();
@@ -28,6 +31,11 @@ class BitshiftUIStatePreset: public BitshiftUIState
 
   protected:
     void analogOffset();
+
+    const int* analogsAssign;
+    int analogsTotal;
+    int analogTotalsByType[ANALOG_TYPES_TOTAL];
+
   	int analogParamOffset = 0;
 };
 

@@ -22,12 +22,11 @@ void BitshiftUIStateUsage::eventButton(int id, int value)
     popState();
     return;
   }
-  passDownEventInvisibleButton(id, value);
 }
 
 void BitshiftUIStateUsage::eventAnalog(int id, float value)
 {
-  passDownEventInvisibleAnalog(id, value);
+  passDownEventAnalog(id, value);
 }
 
 void BitshiftUIStateUsage::update(unsigned long ms)

@@ -20,6 +20,27 @@
 #include "audio.h"
 #include "input_consts.h"
 
+#include <Arduino.h>
+
+BitshiftUIStatePreset::BitshiftUIStatePreset(
+  const int* analogsAssign,
+  int analogsTotal
+):
+  BitshiftUIState(),
+  analogsAssign(analogsAssign),
+  analogsTotal(analogsTotal)
+{
+  for(int i = 0; i < ANALOG_TYPES_TOTAL; i++)
+    analogTotalsByType[i] = 0;
+
+  for(int i = 0; i < analogsTotal; i++)
+  {
+    int assign = analogsAssign[i] >> ANALOG_TYPES_BITSHIFT;
+    if(assign >= 0 && assign < ANALOG_TYPES_TOTAL)
+      analogTotalsByType[assign]++;
+  }
+}
+
 void BitshiftUIStatePreset::eventButton(int id, int value)
 {
   switch(id)
@@ -50,13 +71,21 @@ void BitshiftUIStatePreset::eventButton(int id, int value)
       return;
 
     case BUTTON_SELECT:
-      pushState(new BitshiftUIStateMenuMain());
-      return;
+      {
+        pushState(new BitshiftUIStateMenuMain(analogTotalsByType[ANALOG_EXP >> ANALOG_TYPES_BITSHIFT]));
+        return;
+      }
   }
 }
 
 void BitshiftUIStatePreset::eventAnalog(int id, float value)
 {
+  //analogsAssign[id]
+  //if(id >= ////////analogTotalsByType[ANALOG_VISIBLE]()) {
+  //  //audio->setAnalogParam(id, value);
+  //  return;
+  //}
+
   if(id + analogParamOffset >= audio->analogParamsTotal())
   {
     render();
@@ -70,29 +99,41 @@ void BitshiftUIStatePreset::eventAnalog(int id, float value)
 
 void BitshiftUIStatePreset::render()
 {
+  int analogParamNamesTotal = 4; //analogTotalsByType[ANALOG_VISIBLE];
+  int paramsTotal = audio->analogParamsTotal();
+  int visibleParams = paramsTotal - analogParamOffset;
+  if(analogParamNamesTotal > visibleParams)
+    analogParamNamesTotal = visibleParams;
+
+  const char* analogParamNames[analogParamNamesTotal];
+
+  int j = 0;
+  for(int i = 0; i < analogsTotal; i++)
+  {
+    if(analogsAssign[i] >> ANALOG_TYPES_BITSHIFT == ANALOG_VISIBLE)
+      analogParamNames[j++] = audio->analogParamName(i + analogParamOffset);
+  }
+
   BitshiftPropsPreset props;
   props.presetName = audio->presetName();
-
-  int visibleAnalogsTotalInt = visibleAnalogsTotal();
-  for(int i = 0; i < visibleAnalogsTotalInt; i++)
-    props.analogParamNames[i] = audio->analogParamName(i + analogParamOffset);
-
+  props.analogParamNames = analogParamNames;
+  props.analogParamNamesTotal = analogParamNamesTotal;
+  props.moreParams = paramsTotal > analogParamNamesTotal;
   display->render(props);
 }
 
 void BitshiftUIStatePreset::analogOffset()
 {
   int analogParamsTotal = audio->analogParamsTotal();
-  int visibleAnalogsTotalInt = visibleAnalogsTotal();
-  if(analogParamsTotal <= visibleAnalogsTotalInt)
+  if(analogParamsTotal <= analogTotalsByType[ANALOG_VISIBLE])
   {
-    BitshiftUIStateMessage* newState = new BitshiftUIStateMessage("No more params available on this preset");
-    newState->setTimeout(2500);
+    BitshiftUIStateMessage* newState = new BitshiftUIStateMessage("No more params");
+    newState->setTimeout(1000);
     pushState(newState);
     return;
   }
 
-  analogParamOffset += visibleAnalogsTotalInt;
+  analogParamOffset += analogTotalsByType[ANALOG_VISIBLE];
   if(analogParamOffset > analogParamsTotal)
     analogParamOffset = 0;
 

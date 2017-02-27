@@ -17,12 +17,11 @@
 
 void BitshiftUIStateMessage::eventButton(int id, int value)
 {
-  passDownEventInvisibleButton(id, value);
 }
 
 void BitshiftUIStateMessage::eventAnalog(int id, float value)
 {
-  passDownEventInvisibleAnalog(id, value);
+  passDownEventAnalog(id, value);
 }
 
 void BitshiftUIStateMessage::render()

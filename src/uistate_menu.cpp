@@ -66,12 +66,12 @@ void BitshiftUIStateMenu::eventButton(int id, int value)
       return;
   }
 
-  passDownEventInvisibleButton(id, value);
+  passDownEventButton(id, value);
 }
 
 void BitshiftUIStateMenu::eventAnalog(int id, float value)
 {
-  passDownEventInvisibleAnalog(id, value);
+  passDownEventAnalog(id, value);
 }
 
 void BitshiftUIStateMenu::render()
