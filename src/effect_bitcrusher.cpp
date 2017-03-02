@@ -14,6 +14,12 @@
 #include "effect_volume.h"
 #include <Audio.h>
 
+void BitshiftEffectBitcrusher::setup()
+{
+  volumeEffect.setup();
+}
+
+
 float BitshiftEffectBitcrusher::rate(float hz)
 {
   hz = clamp(hz, 250.0, 44100.0);

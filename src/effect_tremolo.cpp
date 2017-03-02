@@ -18,6 +18,7 @@
 void BitshiftEffectTremolo::setup()
 {
   filter.frequency(100.0);
+  lfo.setup();
 }
 
 float BitshiftEffectTremolo::speed(float hz)
@@ -54,6 +55,6 @@ void BitshiftEffectTremolo::updateMinMax()
 {
   BitshiftEffect::audioNoInterrupts();
   lfo.min((1.0 - _depth) * _volume);
-  lfo.max(_volume);
+  lfo.max(_volume + (_depth * 0.5));
   BitshiftEffect::audioInterrupts();
 }

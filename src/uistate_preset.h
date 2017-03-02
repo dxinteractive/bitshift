@@ -34,7 +34,7 @@ class BitshiftUIStatePreset: public BitshiftUIState
 
     const int* analogsAssign;
     int analogsTotal;
-    int analogTotalsByType[ANALOG_TYPES_TOTAL];
+    int analogTotalsByType[ANALOGTYPES_TOTAL];
 
   	int analogParamOffset = 0;
 };

@@ -70,6 +70,12 @@ void BitshiftInputDefault::update(unsigned long ms)
 
         if(buttons.onPressAfter(i, 500, 500))
           eventButton(buttonsAssign[i], BUTTONEVENT_REPEAT);
+
+        if(buttons.onReleaseBefore(i, 1000))
+          eventButton(buttonsAssign[i], BUTTONEVENT_TAP);
+
+        if(buttons.onPressAfter(i, 1000))
+          eventButton(buttonsAssign[i], BUTTONEVENT_HOLD);
       }
     }
     return;

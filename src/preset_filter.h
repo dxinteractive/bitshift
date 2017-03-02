@@ -31,6 +31,8 @@ class BitshiftPresetFilter: public BitshiftPreset
     BitshiftPresetFilter();
     virtual ~BitshiftPresetFilter() {}
 
+    virtual void initialParams();
+
     virtual int paramValueInt(int paramId) const;
     virtual void paramValueString(char* str, int paramId) const;
 

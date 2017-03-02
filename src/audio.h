@@ -51,6 +51,8 @@ class BitshiftAudio
     virtual void setMenuItemParam(int itemId, int value) = 0;
     virtual void setExpParam(int expId, float value) {}
     virtual void setExpAssignment(int expId, int analogId) {}
+    virtual void setTapAssignment(int tapId, int tapOptionId) {}
+    virtual void eventTap(int tapId, int value) {}
 };
 
 #endif

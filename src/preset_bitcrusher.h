@@ -30,6 +30,8 @@ class BitshiftPresetBitcrusher: public BitshiftPreset
     BitshiftPresetBitcrusher();
     virtual ~BitshiftPresetBitcrusher() {}
 
+    virtual void initialParams();
+
     virtual void paramValueString(char* str, int paramId) const;
 
     virtual void setParam(int paramId, int value);

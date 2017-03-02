@@ -29,11 +29,6 @@ char const* BitshiftPresetFilter::PARAM_NAMES[] = {
 BitshiftPresetFilter::BitshiftPresetFilter():
   BitshiftPreset()
 {
-  params.frequency = 1000.0;
-  params.resonance = 1.0;
-  params.type = 0;
-  params.volume = 1.0;
-
   initBase(
     &filter,
     &params,
@@ -62,6 +57,14 @@ BitshiftPresetFilter::BitshiftPresetFilter():
     menuItemOptions,
     menuItemOptionsTotals
   );
+}
+
+void BitshiftPresetFilter::initialParams()
+{
+  setParam(FREQUENCY, 1000.0);
+  setParam(RESONANCE, 2.0);
+  setParam(TYPE, 0);
+  setParam(VOLUME, 1.0);
 }
 
 int BitshiftPresetFilter::paramValueInt(int paramId) const

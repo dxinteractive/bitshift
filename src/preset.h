@@ -24,6 +24,7 @@ class BitshiftPreset
     virtual ~BitshiftPreset();
 
     void setup();
+    virtual void initialParams() {}
 
     void audioEnable();
     void audioDisable();
@@ -58,9 +59,10 @@ class BitshiftPreset
     virtual void setParam(int paramId, float value) {}
     virtual void setAnalogParam(int analogId, float value) {}
     virtual void setMenuItemParam(int itemId, int value) {}
+    virtual void eventTap(int tapId, int value) {}
     void setExpParam(int expId, float value);
     void setExpAssignment(int expId, int analogId);
-    //void setTapAssignment(int tapId, int tapOptionId);
+    void setTapAssignment(int tapId, int tapOptionId);
 
     int paramIdByAnalogId(int analogId) const;
     int paramIdByMenuItemId(int itemId) const;

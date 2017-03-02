@@ -23,7 +23,6 @@ class BitshiftParamsetTremolo: public BitshiftParamset
     float depth;
     float shapeAndMod;
     int division;
-    float bias;
     float volume;
 };
 
@@ -32,6 +31,8 @@ class BitshiftPresetTremolo: public BitshiftPreset
   public:
     BitshiftPresetTremolo();
     virtual ~BitshiftPresetTremolo() {}
+
+    virtual void initialParams();
 
     virtual int paramValueInt(int paramId) const;
     virtual void paramValueString(char* str, int paramId) const;
@@ -42,7 +43,7 @@ class BitshiftPresetTremolo: public BitshiftPreset
     virtual void setMenuItemParam(int itemId, int value);
 
   private:
-    static const int PARAMS_TOTAL = 6;
+    static const int PARAMS_TOTAL = 5;
     static char const* NAME;
     static char const* PARAM_NAMES[PARAMS_TOTAL];
 

@@ -200,3 +200,13 @@ void BitshiftAudioDefault::setExpAssignment(int expId, int analogId)
 {
   presets[activePreset]->setExpAssignment(expId, analogId);
 }
+
+void BitshiftAudioDefault::setTapAssignment(int tapId, int tapOptionId)
+{
+  presets[activePreset]->setTapAssignment(tapId, tapOptionId);
+}
+
+void BitshiftAudioDefault::eventTap(int tapId, int value)
+{
+  presets[activePreset]->eventTap(tapId, value);
+}

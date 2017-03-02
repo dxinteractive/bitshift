@@ -12,8 +12,7 @@
 
 #include "preset.h"
 #include <Audio.h>
-
- #include <Arduino.h>
+#include <Arduino.h>
 
 char const* BitshiftPreset::OPTIONS_BOOLEAN[] = {
   "Off",
@@ -59,6 +58,7 @@ void BitshiftPreset::setup()
 {
   if(!effect) return;
   effect->setup();
+  initialParams();
 }
 
 void BitshiftPreset::audioEnable() {
@@ -166,6 +166,19 @@ void BitshiftPreset::setExpAssignment(int expId, int analogId)
 
   paramset->expAssignment[expId] = analogId;
 }
+
+void BitshiftPreset::setTapAssignment(int tapId, int tapOptionId)
+{
+  if(!paramset
+    || tapId < 0
+    || tapId >= TAPASSIGN_MAX
+    || tapOptionId < -1
+    /*|| analogId >= _analogMapSize TODO WHEN WE ACTUALLY HAVE AN EFFECT THAT USES TAP */
+  ) return;
+
+  paramset->tapAssignment[tapId] = tapOptionId;
+}
+    void eventTap(int tapId, int value);
 
 int BitshiftPreset::paramIdByAnalogId(int analogId) const
 {

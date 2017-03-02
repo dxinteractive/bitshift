@@ -30,59 +30,73 @@ BitshiftUIStatePreset::BitshiftUIStatePreset(
   analogsAssign(analogsAssign),
   analogsTotal(analogsTotal)
 {
-  for(int i = 0; i < ANALOG_TYPES_TOTAL; i++)
+  for(int i = 0; i < ANALOGTYPES_TOTAL; i++)
     analogTotalsByType[i] = 0;
 
   for(int i = 0; i < analogsTotal; i++)
   {
-    int assign = analogsAssign[i] >> ANALOG_TYPES_BITSHIFT;
-    if(assign >= 0 && assign < ANALOG_TYPES_TOTAL)
+    int assign = analogsAssign[i] >> ANALOGTYPES_BITSHIFT;
+    if(assign >= 0 && assign < ANALOGTYPES_TOTAL)
       analogTotalsByType[assign]++;
   }
 }
 
 void BitshiftUIStatePreset::eventButton(int id, int value)
 {
-  switch(id)
+  int buttonType = id >> BUTTONTYPES_BITSHIFT;
+
+  // try this as a BUTTON_VISIBLE...
+  if(buttonType == BUTTON_VISIBLE >> BUTTONTYPES_BITSHIFT)
   {
-    case BUTTON_UP:
-      if(value == BUTTONEVENT_PRESS || value == BUTTONEVENT_REPEAT)
-      {
-        audio->prevPreset();
-        analogParamOffset = 0;
-        render();
-      }
-      return;
-
-    case BUTTON_DOWN:
-      if(value == BUTTONEVENT_PRESS || value == BUTTONEVENT_REPEAT)
-      {
-        audio->nextPreset();
-        analogParamOffset = 0;
-        render();
-      }
-      return;
-
-    case BUTTON_BACK:
-      if(value == BUTTONEVENT_PRESS)
-      {
-        analogOffset();
-      }
-      return;
-
-    case BUTTON_SELECT:
-      {
-        pushState(new BitshiftUIStateMenuMain(analogTotalsByType[ANALOG_EXP >> ANALOG_TYPES_BITSHIFT]));
+    switch(id)
+    {
+      case BUTTON_UP:
+        if(value == BUTTONEVENT_PRESS || value == BUTTONEVENT_REPEAT)
+        {
+          audio->prevPreset();
+          analogParamOffset = 0;
+          render();
+        }
         return;
-      }
+
+      case BUTTON_DOWN:
+        if(value == BUTTONEVENT_PRESS || value == BUTTONEVENT_REPEAT)
+        {
+          audio->nextPreset();
+          analogParamOffset = 0;
+          render();
+        }
+        return;
+
+      case BUTTON_BACK:
+        if(value == BUTTONEVENT_PRESS)
+        {
+          analogOffset();
+        }
+        return;
+
+      case BUTTON_SELECT:
+        {
+          pushState(new BitshiftUIStateMenuMain(analogTotalsByType[ANALOG_EXP >> ANALOGTYPES_BITSHIFT]));
+          return;
+        }
+    }
+    return;
+  }
+
+  // ...or else try this as a BUTTON_TAP
+  if(buttonType == BUTTON_TAP >> BUTTONTYPES_BITSHIFT)
+  {
+    audio->eventTap(id - BUTTON_TAP, value);
+    return;
   }
 }
 
 void BitshiftUIStatePreset::eventAnalog(int id, float value)
 {
-  if(analogsAssign[id] >> ANALOG_TYPES_BITSHIFT == ANALOG_EXP >> ANALOG_TYPES_BITSHIFT)
+  if(analogsAssign[id] >> ANALOGTYPES_BITSHIFT == ANALOG_EXP >> ANALOGTYPES_BITSHIFT)
   {
-    audio->setExpParam(analogsAssign[id] - (1 << ANALOG_TYPES_BITSHIFT), value);
+    audio->setExpParam(analogsAssign[id] - (1 << ANALOGTYPES_BITSHIFT), value);
     return;
   }
 
@@ -110,7 +124,7 @@ void BitshiftUIStatePreset::render()
   int j = 0;
   for(int i = 0; i < analogsTotal; i++)
   {
-    if(analogsAssign[i] >> ANALOG_TYPES_BITSHIFT == ANALOG_VISIBLE)
+    if(analogsAssign[i] >> ANALOGTYPES_BITSHIFT == ANALOG_VISIBLE)
       analogParamNames[j++] = audio->analogParamName(i + analogParamOffset);
   }
 

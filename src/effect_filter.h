@@ -29,6 +29,8 @@ class BitshiftEffectFilter: public BitshiftEffect
       patchFilterToVolume(mixer, *(volumeEffect.audioIn())) {}
     ~BitshiftEffectFilter() {}
 
+    virtual void setup();
+
     virtual AudioStream* audioIn() { return &filter; }
     virtual AudioStream* audioOut() { return volumeEffect.audioOut(); }
 

@@ -31,12 +31,6 @@ char const* BitshiftPresetTremolo::PARAM_NAMES[] = {
 BitshiftPresetTremolo::BitshiftPresetTremolo():
   BitshiftPreset()
 {
-  params.speed = 1.0;
-  params.depth = 0.5;
-  params.shapeAndMod = 0.5;
-  params.division = 0;
-  params.volume = 0.8;
-
   initBase(
     &tremolo,
     &params,
@@ -65,6 +59,15 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
     menuItemOptions,
     menuItemOptionsTotals
   );
+}
+
+void BitshiftPresetTremolo::initialParams()
+{
+  setParam(SPEED, 3.0);
+  setParam(DEPTH, 0.5);
+  setParam(SHAPEANDMOD, 0.5);
+  setParam(DIVISION, 0);
+  setParam(VOLUME, 1.0);
 }
 
 int BitshiftPresetTremolo::paramValueInt(int paramId) const
@@ -124,9 +127,13 @@ void BitshiftPresetTremolo::setAnalogParam(int analogId, float value)
     }
 
     case DEPTH:
+      // linear range from 0.0 to 1.0
+      setParam(paramId, value);
+      return;
+
     case VOLUME:
-      // linear range from 0.0 to 2.0
-      setParam(paramId, value * 2.0);
+      // squared range from 0.0 to 2.0
+      setParam(paramId, value * value * 2.0);
       return;
   }
 }

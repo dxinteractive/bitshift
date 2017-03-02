@@ -24,6 +24,8 @@ class BitshiftEffectBitcrusher: public BitshiftEffect
       patchBitcrusherToVolume(bitcrusher, *(volumeEffect.audioIn())) {}
     ~BitshiftEffectBitcrusher() {}
 
+    virtual void setup();
+
     virtual AudioStream* audioIn() { return &bitcrusher; }
     virtual AudioStream* audioOut() { return volumeEffect.audioOut(); }
 
