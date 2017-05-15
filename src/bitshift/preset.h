@@ -16,6 +16,7 @@
 #include <Audio.h>
 #include "effect.h"
 #include "paramset.h"
+#include "visualizationdata.h"
 
 class BitshiftPreset
 {
@@ -63,6 +64,10 @@ class BitshiftPreset
     void setExpParam(int expId, float value);
     void setExpAssignment(int expId, int analogId);
     void setTapAssignment(int tapId, int tapOptionId);
+
+    // virtual BitshiftVisualizationData const* paramVisualizationData(int paramId) { return 0; }
+    // BitshiftVisualizationData const* analogParamVisualizationData(int analogId);
+    // BitshiftVisualizationData const* menuItemParamVisualizationData(int itemId);
 
     int paramIdByAnalogId(int analogId) const;
     int paramIdByMenuItemId(int itemId) const;

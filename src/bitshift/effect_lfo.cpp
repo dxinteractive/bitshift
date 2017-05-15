@@ -13,11 +13,12 @@
 #include "effect.h"
 #include <Audio.h>
 #include <Arduino.h>
+#include "visualizationdata.h"
 
 static const uint8_t SINE = 0;
 static const uint8_t SAW = 1;
 static const uint8_t TRIANGLE = 2;
-static const uint8_t SAW_REVERSE = 3;
+static const uint8_t REVSAW = 3;
 static const uint8_t SQUARE = 4;
 
 static const int16_t WAVETABLE_VALUE_MAX = 32766;
@@ -27,9 +28,19 @@ char const* BitshiftEffectLfo::OPTIONS_SHAPE[] = {
   "Sine",
   "Saw",
   "Triangle",
-  "Saw reverse",
+  "Revsaw",
   "Square"
 };
+
+BitshiftEffectLfo::BitshiftEffectLfo():
+  BitshiftEffect(),
+  patchLfoToSignalMixer(lfo, 0, signalMixer, 0),
+  patchOffsetToSignalMixer(offset, 0, signalMixer, 1)
+{
+  //waveformVis.data = waveformVisData;
+  //waveformVis.dataTotal = 256;
+  //waveformVis.type = 0; // TODO - should be a visualizaiton const representing a LINE
+}
 
 void BitshiftEffectLfo::setup()
 {
@@ -114,12 +125,12 @@ void BitshiftEffectLfo::updateWaveform()
     {
       int32_t val = WAVETABLE_VALUE_MAX;
       uint8_t intMod = int(_mod * 255);
-      int32_t slopeDown = 65536 / (intMod + 1);
+      int32_t slope = -65536 / (intMod + 1);
 
       for(int i = 0; i < 256; i++)
       {
         wavetable[i] = val;
-        val -= slopeDown;
+        val += slope;
         if(val < WAVETABLE_VALUE_MIN)
           val = WAVETABLE_VALUE_MIN;
       }
@@ -147,17 +158,17 @@ void BitshiftEffectLfo::updateWaveform()
       break;
     }
 
-    case SAW_REVERSE:
+    case REVSAW:
     {
-      int32_t val = WAVETABLE_VALUE_MIN;
+      int32_t val = WAVETABLE_VALUE_MAX;
       uint8_t intMod = int(_mod * 255);
-      int32_t slope = 65536 / (256 - intMod);
+      int32_t slope = -65536 / (256 - intMod);
 
-      for(int i = 0; i < 256; i++)
+      for(int i = 255; i >= 0; i--)
       {
         val += slope;
-        if(val > WAVETABLE_VALUE_MAX)
-          val = WAVETABLE_VALUE_MAX;
+        if(val < WAVETABLE_VALUE_MIN)
+          val = WAVETABLE_VALUE_MIN;
 
         wavetable[i] = val;
       }
@@ -179,6 +190,11 @@ void BitshiftEffectLfo::updateWaveform()
   }
 
   lfo.arbitraryWaveform(wavetable, 0.0);
+
+  // update waveform visualization data
+  //for(int i = 0; i < 256; i++)
+  //  waveformVisData[i] = wavetable[i];
+
   BitshiftEffect::audioInterrupts();
 }
 

@@ -31,7 +31,8 @@ class BitshiftUIState
     void pushState(BitshiftUIState* newState);
     void popState(bool render = true);
 
-    virtual void update(unsigned long ms);
+    virtual void update(unsigned long ms) {}
+    virtual void updateTimeout(unsigned long ms);
     virtual void render() = 0;
 
     virtual void eventButton(int id, int value) = 0;

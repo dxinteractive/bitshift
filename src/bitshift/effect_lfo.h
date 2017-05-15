@@ -14,6 +14,7 @@
 
 #include "effect.h"
 #include <Audio.h>
+#include "visualizationdata.h"
 
 // damn arduino's "helpful" default macros...
 // might have to deal with this differently as this could be potentially annoying
@@ -27,10 +28,7 @@ class BitshiftEffectLfo: public BitshiftEffect
     static const int OPTIONS_SHAPE_TOTAL = 5;
     static char const* OPTIONS_SHAPE[OPTIONS_SHAPE_TOTAL];
 
-    BitshiftEffectLfo():
-      BitshiftEffect(),
-      patchLfoToSignalMixer(lfo, 0, signalMixer, 0),
-      patchOffsetToSignalMixer(offset, 0, signalMixer, 1) {}
+    BitshiftEffectLfo();
     ~BitshiftEffectLfo() {}
 
     virtual void setup();
@@ -45,6 +43,8 @@ class BitshiftEffectLfo: public BitshiftEffect
     //int division(int division);
     float min(float min);
     float max(float max);
+
+    //BitshiftVisualizationData const* waveformVisualization() { return &waveformVis; }
 
   private:
     void updateWaveform();
@@ -67,7 +67,8 @@ class BitshiftEffectLfo: public BitshiftEffect
     float _max = 1.0;
 
     int16_t wavetable[256];
-
+    //int waveformVisData[256];
+    BitshiftVisualizationData waveformVis;
 };
 
 #endif

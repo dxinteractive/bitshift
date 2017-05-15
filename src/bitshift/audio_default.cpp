@@ -18,6 +18,7 @@
 #include <SerialFlash.h>
 
 #include "preset.h"
+#include "visualizationdata.h"
 
 BitshiftAudioDefault::BitshiftAudioDefault(
   AudioStream& audioIn,
@@ -210,3 +211,16 @@ void BitshiftAudioDefault::eventTap(int tapId, int value)
 {
   presets[activePreset]->eventTap(tapId, value);
 }
+
+// BitshiftVisualizationData const* BitshiftAudioDefault::paramVisualizationData(int paramId)
+// {
+//   return presets[activePreset]->paramVisualizationData(paramId);
+// }
+// BitshiftVisualizationData const* BitshiftAudioDefault::analogParamVisualizationData(int analogId)
+// {
+//   return presets[activePreset]->analogParamVisualizationData(analogId);
+// }
+// BitshiftVisualizationData const* BitshiftAudioDefault::menuItemParamVisualizationData(int itemId)
+// {
+//   return presets[activePreset]->menuItemParamVisualizationData(itemId);
+// }

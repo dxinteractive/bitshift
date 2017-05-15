@@ -15,6 +15,7 @@
 #include "preset.h"
 #include "paramset.h"
 #include "effect_tremolo.h"
+#include "visualizationdata.h"
 
 class BitshiftParamsetTremolo: public BitshiftParamset
 {
@@ -41,6 +42,8 @@ class BitshiftPresetTremolo: public BitshiftPreset
     virtual void setParam(int paramId, float value);
     virtual void setAnalogParam(int analogId, float value);
     virtual void setMenuItemParam(int itemId, int value);
+
+    //virtual BitshiftVisualizationData const* paramVisualizationData(int paramId);
 
   private:
     static const int PARAMS_TOTAL = 5;

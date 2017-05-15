@@ -12,6 +12,7 @@
 
 #include "preset.h"
 #include <Audio.h>
+#include "visualizationdata.h"
 #include <Arduino.h>
 
 char const* BitshiftPreset::OPTIONS_BOOLEAN[] = {
@@ -178,7 +179,16 @@ void BitshiftPreset::setTapAssignment(int tapId, int tapOptionId)
 
   paramset->tapAssignment[tapId] = tapOptionId;
 }
-    void eventTap(int tapId, int value);
+
+// BitshiftVisualizationData const* BitshiftPreset::analogParamVisualizationData(int analogId)
+// {
+//   return paramVisualizationData(paramIdByAnalogId(analogId));
+// }
+
+// BitshiftVisualizationData const* BitshiftPreset::menuItemParamVisualizationData(int itemId)
+// {
+//   return paramVisualizationData(paramIdByMenuItemId(itemId));
+// }
 
 int BitshiftPreset::paramIdByAnalogId(int analogId) const
 {

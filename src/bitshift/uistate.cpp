@@ -30,7 +30,7 @@ void BitshiftUIState::init(BitshiftUIDefault* const ui, BitshiftUIState* const l
   this->lowerState = lowerState;
 }
 
-void BitshiftUIState::update(unsigned long ms)
+void BitshiftUIState::updateTimeout(unsigned long ms)
 {
   if(timeout > 0 && timeout < ms)
     popState();
