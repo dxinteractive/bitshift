@@ -12,6 +12,8 @@
 #ifndef BITSHIFT_AUDIO_H
 #define BITSHIFT_AUDIO_H
 
+#include "visualizationdata.h"
+
 class BitshiftAudio
 {
   public:
@@ -53,6 +55,10 @@ class BitshiftAudio
     virtual void setExpAssignment(int expId, int analogId) {}
     virtual void setTapAssignment(int tapId, int tapOptionId) {}
     virtual void eventTap(int tapId, int value) {}
+
+    //virtual BitshiftVisualizationData const* paramVisualizationData(int paramId) { return 0; }
+    //virtual BitshiftVisualizationData const* analogParamVisualizationData(int analogId) { return 0; }
+    //virtual BitshiftVisualizationData const* menuItemParamVisualizationData(int itemId) { return 0; }
 };
 
 #endif

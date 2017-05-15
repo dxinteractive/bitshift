@@ -14,6 +14,7 @@
 #include "props.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "visualizationdata.h"
 
 BitshiftDisplaySSD1306::BitshiftDisplaySSD1306(
  int pin_sid,
@@ -168,6 +169,43 @@ void BitshiftDisplaySSD1306::render(BitshiftPropsParam &props)
   screen.setTextSize(2);
   screen.println(props.paramName);
   screen.println(props.paramValueString);
+  // if(props.visualizationData) {
+  //   int y, y1, y2, i2, h;
+  //   int yCentre = 52;
+  //   int i = (128 + int(props.phase * 256)) % 256;
+  //   int total = props.visualizationData->dataTotal;
+  //   bool dotted = true;
+  //   int const* data = props.visualizationData->data;
+
+  //   for(int x = 0; x < 128; x++)
+  //   {
+  //     y1 = (data[i] >> 12);
+  //     if(dotted) {
+  //       if(x % 4 == 0)
+  //         screen.drawPixel(x, yCentre - y1, WHITE);
+
+  //     } else {
+  //       i2 = i + 4;
+  //       if(i2 >= total)
+  //         i2 = i;
+
+  //       y2 = (data[i2] >> 12);
+  //       h = abs(y1 - y2);
+  //       y = y1 < y2 ? y1 : y2;
+  //       screen.fillRect(x, yCentre - (y + h), 1, h + 1, WHITE);
+  //     }
+
+  //     i += 4;
+  //     if(i >= total)
+  //       i -= total;
+
+  //     if(dotted && x > 32)
+  //       dotted = false;
+
+  //     if(!dotted && x > 96)
+  //       dotted = true;
+  //   }
+  // }
   screen.display();
 }
 

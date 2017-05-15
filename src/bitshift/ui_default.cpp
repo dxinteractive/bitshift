@@ -45,6 +45,7 @@ void BitshiftUIDefault::update(unsigned long ms)
 
   BitshiftUIState* topState = stateStack.peek();
   if(topState)
+    topState->updateTimeout(ms);
     topState->update(ms);
 }
 

@@ -12,6 +12,8 @@
 #ifndef BITSHIFT_PROPS_H
 #define BITSHIFT_PROPS_H
 
+#include "visualizationdata.h"
+
 class BitshiftProps
 {
   public:
@@ -47,6 +49,8 @@ class BitshiftPropsParam: public BitshiftProps
   public:
     char const* paramName;
     char const* paramValueString;
+    // BitshiftVisualizationData const* visualizationData;
+    // float phase;
 };
 
 class BitshiftPropsPreset: public BitshiftProps

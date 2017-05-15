@@ -24,6 +24,7 @@ class BitshiftUIStateParam: public BitshiftUIState
       analogParamOffset(analogParamOffset) {}
     ~BitshiftUIStateParam() {}
 
+    virtual void update(unsigned long ms);
     virtual void render();
     virtual void eventButton(int id, int value);
     virtual void eventAnalog(int id, float value);
@@ -31,6 +32,7 @@ class BitshiftUIStateParam: public BitshiftUIState
   private:
     int analogId;
     int analogParamOffset;
+    unsigned long ms = 0;
 };
 
 #endif

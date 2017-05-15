@@ -40,6 +40,15 @@ void BitshiftUIStateParam::eventAnalog(int id, float value)
   setTimeout();
 }
 
+void BitshiftUIStateParam::update(unsigned long ms)
+{
+  if(ms > this->ms + 30)
+  {
+    this->ms = ms;
+    render();
+  }
+}
+
 void BitshiftUIStateParam::render()
 {
   BitshiftPropsParam props;
@@ -50,6 +59,10 @@ void BitshiftUIStateParam::render()
   char paramValueString[30];
   audio->analogParamValueString(paramValueString, analogId + analogParamOffset);
   props.paramValueString = paramValueString;
+
+  // get visualization data for current analogId
+  // props.visualizationData = audio->analogParamVisualizationData(analogId);
+  // props.phase = this->ms * 0.01;
 
   // render
   display->render(props);

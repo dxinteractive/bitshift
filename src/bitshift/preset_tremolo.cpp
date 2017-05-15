@@ -12,6 +12,7 @@
 #include "preset_tremolo.h"
 #include "paramset.h"
 #include "effect_lfo.h"
+#include "visualizationdata.h"
 
 static const int SPEED = 0;
 static const int DEPTH = 1;
@@ -85,7 +86,10 @@ void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
   switch(paramId)
   {
     case SPEED:
-      sprintf(str, "%0.1fHz", params.speed);
+      // TODO use this style everywhere
+      char str_temp[6];
+      dtostrf(params.speed, 2, 1, str_temp);
+      sprintf(str, "%sHz", str_temp);
       return;
 
     case DEPTH:
@@ -181,3 +185,13 @@ void BitshiftPresetTremolo::setParam(int paramId, int value)
       return;
   }
 }
+
+// BitshiftVisualizationData const* BitshiftPresetTremolo::paramVisualizationData(int paramId)
+// {
+//   //if(paramId == SHAPEANDMOD)
+//  // {
+//     return tremolo.waveformVisualization();
+//  // }
+
+//   //return 0;
+// }

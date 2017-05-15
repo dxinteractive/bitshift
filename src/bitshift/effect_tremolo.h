@@ -14,6 +14,7 @@
 
 #include "effect.h"
 #include "effect_lfo.h"
+#include "visualizationdata.h"
 
 class BitshiftEffectTremolo: public BitshiftEffect
 {
@@ -34,6 +35,8 @@ class BitshiftEffectTremolo: public BitshiftEffect
     int shapeAndMod(float value);
     int division(int division);
     float volume(float volume);
+
+    //BitshiftVisualizationData const* waveformVisualization() { return lfo.waveformVisualization(); }
 
   private:
     void updateMinMax();

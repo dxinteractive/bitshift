@@ -21,6 +21,7 @@
 #include "audio.h"
 #include "preset.h"
 #include "router.h"
+#include "visualizationdata.h"
 
 class BitshiftAudioDefault: public BitshiftAudio
 {
@@ -70,6 +71,10 @@ class BitshiftAudioDefault: public BitshiftAudio
     virtual void setExpAssignment(int expId, int analogId);
     virtual void setTapAssignment(int tapId, int tapOptionId);
     virtual void eventTap(int tapId, int value);
+
+    // virtual BitshiftVisualizationData const* paramVisualizationData(int paramId);
+    // virtual BitshiftVisualizationData const* analogParamVisualizationData(int analogId);
+    // virtual BitshiftVisualizationData const* menuItemParamVisualizationData(int itemId);
 
   private:
     BitshiftPreset** presets;

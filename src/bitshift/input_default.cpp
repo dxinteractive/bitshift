@@ -11,8 +11,8 @@
 
 #include "input_default.h"
 #include "input.h"
-#include "AnalogMultiButton.h"
-#include "ResponsiveAnalogRead.h"
+#include <AnalogMultiButton.h>
+#include <ResponsiveAnalogRead.h>
 #include "input_consts.h"
 
 BitshiftInputDefault::BitshiftInputDefault(
