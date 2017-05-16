@@ -68,7 +68,7 @@ class BitshiftEffectLfo: public BitshiftEffect
 
     int16_t wavetable[256];
     //int waveformVisData[256];
-    BitshiftVisualizationData waveformVis;
+    //BitshiftVisualizationData waveformVis;
 };
 
 #endif
