@@ -248,37 +248,13 @@
 	"buffers":
 	[
 		{
-			"contents": "[05/06/17 17:01:47] Processing teensy31 (platform: teensy, board: teensy31, framework: arduino)\n\nVerbose mode can be enabled via `-v, --verbose` option\nCollected 92 compatible libraries\nLooking for dependencies...\nLibrary Dependency Graph\n|-- <SerialFlash>\n|   |-- <SPI> v1.0\n|-- <Wire> v1.0\n|-- <Adafruit GFX Library> v1.1.5\n|-- <SPI> v1.0\n|-- <SD> v1.0.8\n|   |-- <SPI> v1.0\n|-- <ResponsiveAnalogRead> v1.1.0\n|-- <Adafruit SSD1306> v1.1.0\n|   |-- <Adafruit GFX Library> v1.1.5\n|   |-- <SPI> v1.0\n|   |-- <Wire> v1.0\nCompiling .pioenvs\\teensy31\\src\\audio_default.o\nCompiling .pioenvs\\teensy31\\src\\bitshift.o\nCompiling .pioenvs\\teensy31\\src\\effect.o\nCompiling .pioenvs\\teensy31\\src\\effect_bitcrusher.o\nCompiling .pioenvs\\teensy31\\src\\effect_filter.o\nCompiling .pioenvs\\teensy31\\src\\effect_lfo.o\nCompiling .pioenvs\\teensy31\\src\\effect_tremolo.o\nCompiling .pioenvs\\teensy31\\src\\effect_volume.o\nIn file included from src\\effect.cpp:12:0:\nsrc\\effect.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return NULL; }\n^\nsrc\\effect.h:29:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return NULL; }\n^\nsrc\\effect.cpp: In static member function 'static void BitshiftEffect::audioNoInterrupts()':\nsrc\\effect.cpp:20:23: error: 'AudioNoInterrupts' was not declared in this scope\nAudioNoInterrupts();\n^\nsrc\\effect.cpp: In static member function 'static void BitshiftEffect::audioInterrupts()':\nsrc\\effect.cpp:32:21: error: 'AudioInterrupts' was not declared in this scope\nAudioInterrupts();\n^\nIn file included from src\\effect_bitcrusher.h:15:0,\nfrom src\\effect_bitcrusher.cpp:12:\nsrc\\effect.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return NULL; }\n^\nsrc\\effect.h:29:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return NULL; }\n^\nIn file included from src\\effect_bitcrusher.h:16:0,\nfrom src\\effect_bitcrusher.cpp:12:\nsrc\\effect_volume.h:27:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return &mixer; }\n^\nsrc\\effect_volume.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return &mixer; }\n^\nsrc\\effect_volume.h:33:5: error: 'AudioMixer4' does not name a type\nAudioMixer4 mixer;\n^\nIn file included from src\\effect_bitcrusher.cpp:12:0:\nsrc\\effect_bitcrusher.h:29:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return &bitcrusher; }\n^\nsrc\\effect_bitcrusher.h:30:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return volumeEffect.audioOut(); }\n^\nsrc\\effect_bitcrusher.h:37:5: error: 'AudioEffectBitcrusher' does not name a type\nAudioEffectBitcrusher bitcrusher;\n^\nsrc\\effect_bitcrusher.h:39:5: error: 'AudioConnection' does not name a type\nAudioConnection patchBitcrusherToVolume;\n^\nsrc\\effect_bitcrusher.h: In constructor 'BitshiftEffectBitcrusher::BitshiftEffectBitcrusher()':\nsrc\\effect_bitcrusher.h:24:7: error: class 'BitshiftEffectBitcrusher' does not have any field named 'patchBitcrusherToVolume'\npatchBitcrusherToVolume(bitcrusher, *(volumeEffect.audioIn())) {}\n^\nsrc\\effect_bitcrusher.h:24:31: error: 'bitcrusher' was not declared in this scope\npatchBitcrusherToVolume(bitcrusher, *(volumeEffect.audioIn())) {}\n^\nsrc\\effect_bitcrusher.h:24:58: error: 'class BitshiftEffectVolume' has no member named 'audioIn'\npatchBitcrusherToVolume(bitcrusher, *(volumeEffect.audioIn())) {}\n^\nsrc\\effect_bitcrusher.cpp: In member function 'float BitshiftEffectBitcrusher::rate(float)':\nsrc\\effect_bitcrusher.cpp:26:3: error: 'bitcrusher' was not declared in this scope\nbitcrusher.sampleRate(hz);\n^\nsrc\\effect_bitcrusher.cpp: In member function 'int BitshiftEffectBitcrusher::depth(int)':\nsrc\\effect_bitcrusher.cpp:33:3: error: 'bitcrusher' was not declared in this scope\nbitcrusher.bits(depth);\n^\n*** [.pioenvs\\teensy31\\src\\effect.o] Error 1\nIn file included from src\\effect_filter.h:15:0,\nfrom src\\effect_filter.cpp:12:\nsrc\\effect.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return NULL; }\n^\nsrc\\effect.h:29:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return NULL; }\n^\nIn file included from src\\effect_filter.h:16:0,\nfrom src\\effect_filter.cpp:12:\nsrc\\effect_volume.h:27:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return &mixer; }\n^\nsrc\\effect_volume.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return &mixer; }\n^\nsrc\\effect_volume.h:33:5: error: 'AudioMixer4' does not name a type\nAudioMixer4 mixer;\n^\nIn file included from src\\effect_filter.cpp:12:0:\nsrc\\effect_filter.h:34:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return &filter; }\n^\nsrc\\effect_filter.h:35:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return volumeEffect.audioOut(); }\n^\nsrc\\effect_filter.h:43:5: error: 'AudioFilterStateVariable' does not name a type\nAudioFilterStateVariable filter;\n^\nsrc\\effect_filter.h:44:5: error: 'AudioMixer4' does not name a type\nAudioMixer4 mixer;\n^\nsrc\\effect_filter.h:47:5: error: 'AudioConnection' does not name a type\nAudioConnection patchLowPassToMixer;\n^\nsrc\\effect_filter.h:48:5: error: 'AudioConnection' does not name a type\nAudioConnection patchBandPassToMixer;\n^\nsrc\\effect_filter.h:49:5: error: 'AudioConnection' does not name a type\nAudioConnection patchHighPassToMixer;\n^\nsrc\\effect_filter.h:50:5: error: 'AudioConnection' does not name a type\nAudioConnection patchFilterToVolume;\n^\n*** [.pioenvs\\teensy31\\src\\effect_bitcrusher.o] Error 1\nsrc\\effect_filter.h: In constructor 'BitshiftEffectFilter::BitshiftEffectFilter()':\nsrc\\effect_filter.h:26:7: error: class 'BitshiftEffectFilter' does not have any field named 'patchLowPassToMixer'\npatchLowPassToMixer(filter, 0, mixer, 0),\n^\nsrc\\effect_filter.h:26:27: error: 'filter' was not declared in this scope\npatchLowPassToMixer(filter, 0, mixer, 0),\n^\nsrc\\effect_filter.h:26:38: error: 'mixer' was not declared in this scope\npatchLowPassToMixer(filter, 0, mixer, 0),\n^\nsrc\\effect_filter.h:27:7: error: class 'BitshiftEffectFilter' does not have any field named 'patchBandPassToMixer'\npatchBandPassToMixer(filter, 1, mixer, 1),\n^\nsrc\\effect_filter.h:28:7: error: class 'BitshiftEffectFilter' does not have any field named 'patchHighPassToMixer'\npatchHighPassToMixer(filter, 2, mixer, 2),\n^\nsrc\\effect_filter.h:29:7: error: class 'BitshiftEffectFilter' does not have any field named 'patchFilterToVolume'\npatchFilterToVolume(mixer, *(volumeEffect.audioIn())) {}\n^\nsrc\\effect_filter.h:29:49: error: 'class BitshiftEffectVolume' has no member named 'audioIn'\npatchFilterToVolume(mixer, *(volumeEffect.audioIn())) {}\n^\nsrc\\effect_filter.cpp: In member function 'float BitshiftEffectFilter::frequency(float)':\nsrc\\effect_filter.cpp:31:3: error: 'filter' was not declared in this scope\nfilter.frequency(hz);\n^\nsrc\\effect_filter.cpp: In member function 'float BitshiftEffectFilter::resonance(float)':\nsrc\\effect_filter.cpp:38:3: error: 'filter' was not declared in this scope\nfilter.resonance(resonance);\n^\nsrc\\effect_filter.cpp: In member function 'int BitshiftEffectFilter::type(int)':\nsrc\\effect_filter.cpp:46:3: error: 'mixer' was not declared in this scope\nmixer.gain(0, 0.0);\n^\n*** [.pioenvs\\teensy31\\src\\effect_filter.o] Error 1\nIn file included from src\\bitshift.h:23:0,\nfrom src\\bitshift.cpp:12:\nsrc\\input_default.h:17:31: fatal error: AnalogMultiButton.h: No such file or directory\n#include \"AnalogMultiButton.h\"\n^\ncompilation terminated.\nIn file included from src\\effect_tremolo.h:15:0,\nfrom src\\effect_tremolo.cpp:12:\nsrc\\effect.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return NULL; }\n^\nsrc\\effect.h:29:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return NULL; }\n^\nIn file included from src\\effect_tremolo.h:16:0,\nfrom src\\effect_tremolo.cpp:12:\nsrc\\effect_lfo.h:38:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return &signalMixer; }\n^\n*** [.pioenvs\\teensy31\\src\\bitshift.o] Error 1\nsrc\\effect_lfo.h:53:5: error: 'AudioSynthWaveform' does not name a type\nAudioSynthWaveform lfo;\n^\nsrc\\effect_lfo.h:54:5: error: 'AudioSynthWaveformDc' does not name a type\nAudioSynthWaveformDc offset;\n^\nsrc\\effect_lfo.h:55:5: error: 'AudioMixer4' does not name a type\nAudioMixer4 signalMixer;\n^\nsrc\\effect_lfo.h:57:5: error: 'AudioConnection' does not name a type\nAudioConnection patchLfoToSignalMixer;\n^\nsrc\\effect_lfo.h:58:5: error: 'AudioConnection' does not name a type\nAudioConnection patchOffsetToSignalMixer;\n^\nsrc\\effect_lfo.h:69:5: error: 'int16_t' does not name a type\nint16_t wavetable[256];\n^\nsrc\\effect_lfo.h: In constructor 'BitshiftEffectLfo::BitshiftEffectLfo()':\nsrc\\effect_lfo.h:32:7: error: class 'BitshiftEffectLfo' does not have any field named 'patchLfoToSignalMixer'\npatchLfoToSignalMixer(lfo, 0, signalMixer, 0),\n^\nsrc\\effect_lfo.h:32:29: error: 'lfo' was not declared in this scope\npatchLfoToSignalMixer(lfo, 0, signalMixer, 0),\n^\nsrc\\effect_lfo.h:32:37: error: 'signalMixer' was not declared in this scope\npatchLfoToSignalMixer(lfo, 0, signalMixer, 0),\n^\nsrc\\effect_lfo.h:33:7: error: class 'BitshiftEffectLfo' does not have any field named 'patchOffsetToSignalMixer'\npatchOffsetToSignalMixer(offset, 0, signalMixer, 1) {}\n^\nsrc\\effect_lfo.h:33:32: error: 'offset' was not declared in this scope\npatchOffsetToSignalMixer(offset, 0, signalMixer, 1) {}\n^\nIn file included from src\\effect_tremolo.cpp:12:0:\nsrc\\effect_tremolo.h: At global scope:\nsrc\\effect_tremolo.h:29:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return &multiplier; }\n^\nsrc\\effect_tremolo.h:30:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return &multiplier; }\n^\nsrc\\effect_tremolo.h:42:5: error: 'AudioFilterStateVariable' does not name a type\nAudioFilterStateVariable filter; // filter on modulation signal to prevent audible popping on extreme signal swings\n^\nsrc\\effect_tremolo.h:43:5: error: 'AudioEffectMultiply' does not name a type\nAudioEffectMultiply multiplier; // mutiplier to control the volume of the audio signal with the lfo\n^\nsrc\\effect_tremolo.h:45:5: error: 'AudioConnection' does not name a type\nAudioConnection patchLfoToFilter;\n^\nsrc\\effect_tremolo.h:46:5: error: 'AudioConnection' does not name a type\nAudioConnection patchFilterToMultiplier;\n^\nsrc\\effect_tremolo.h: In constructor 'BitshiftEffectTremolo::BitshiftEffectTremolo()':\nsrc\\effect_tremolo.h:23:7: error: class 'BitshiftEffectTremolo' does not have any field named 'patchLfoToFilter'\npatchLfoToFilter(*(lfo.audioOut()), 0, filter, 0),\n^\nsrc\\effect_tremolo.h:23:30: error: 'class BitshiftEffectLfo' has no member named 'audioOut'\npatchLfoToFilter(*(lfo.audioOut()), 0, filter, 0),\n^\nsrc\\effect_tremolo.h:23:46: error: 'filter' was not declared in this scope\npatchLfoToFilter(*(lfo.audioOut()), 0, filter, 0),\n^\nsrc\\effect_tremolo.h:24:7: error: class 'BitshiftEffectTremolo' does not have any field named 'patchFilterToMultiplier'\npatchFilterToMultiplier(filter, 0, multiplier, 1) {}\n^\nsrc\\effect_tremolo.h:24:42: error: 'multiplier' was not declared in this scope\npatchFilterToMultiplier(filter, 0, multiplier, 1) {}\n^\nIn file included from src\\effect_tremolo.cpp:15:0:\nsrc\\effect_volume.h: At global scope:\nsrc\\effect_volume.h:27:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return &mixer; }\n^\nsrc\\effect_volume.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return &mixer; }\n^\nsrc\\effect_volume.h:33:5: error: 'AudioMixer4' does not name a type\nAudioMixer4 mixer;\n^\nsrc\\effect_tremolo.cpp: In member function 'virtual void BitshiftEffectTremolo::setup()':\nsrc\\effect_tremolo.cpp:20:3: error: 'filter' was not declared in this scope\nfilter.frequency(100.0);\n^\nIn file included from src\\effect_volume.h:15:0,\nfrom src\\effect_volume.cpp:12:\nsrc\\effect.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return NULL; }\n^\nsrc\\effect.h:29:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return NULL; }\n^\nIn file included from src\\effect_volume.cpp:12:0:\nsrc\\effect_volume.h:27:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return &mixer; }\n^\nsrc\\effect_volume.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return &mixer; }\n^\nsrc\\effect_volume.h:33:5: error: 'AudioMixer4' does not name a type\nAudioMixer4 mixer;\n^\nsrc\\effect_volume.cpp: In member function 'float BitshiftEffectVolume::volume(float)':\nsrc\\effect_volume.cpp:24:3: error: 'mixer' was not declared in this scope\nmixer.gain(0, volume);\n^\n*** [.pioenvs\\teensy31\\src\\effect_tremolo.o] Error 1\n*** [.pioenvs\\teensy31\\src\\effect_volume.o] Error 1\nsrc\\effect_lfo.cpp:86:39: error: macro \"min\" requires 2 arguments, but only 1 given\nfloat BitshiftEffectLfo::min(float min)\n^\nIn file included from src\\preset.h:17:0,\nfrom src\\audio_default.h:22,\nfrom src\\audio_default.cpp:13:\nsrc\\effect.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return NULL; }\n^\nsrc\\effect_lfo.cpp:93:39: error: macro \"max\" requires 2 arguments, but only 1 given\nfloat BitshiftEffectLfo::max(float max)\n^\nsrc\\effect.h:29:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return NULL; }\n^\nIn file included from src\\audio_default.h:22:0,\nfrom src\\audio_default.cpp:13:\nsrc\\preset.h:32:5: error: 'AudioStream' does not name a type\nAudioStream* audioIn();\n^\nsrc\\preset.h:33:5: error: 'AudioStream' does not name a type\nAudioStream* audioOut();\n^\nsrc\\preset.h:103:5: error: 'AudioEffectFade' does not name a type\nAudioEffectFade send;\n^\nIn file included from src\\effect_lfo.h:15:0,\nfrom src\\effect_lfo.cpp:12:\nsrc\\effect.h:28:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioIn() { return NULL; }\n^\nsrc\\effect.h:29:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return NULL; }\n^\nsrc\\preset.h:104:5: error: 'AudioConnection' does not name a type\nAudioConnection* patchSendToEffect;\n^\nIn file included from src\\effect_lfo.cpp:12:0:\nsrc\\effect_lfo.h:38:13: error: 'AudioStream' does not name a type\nvirtual AudioStream* audioOut() { return &signalMixer; }\n^\nsrc\\effect_lfo.h:53:5: error: 'AudioSynthWaveform' does not name a type\nAudioSynthWaveform lfo;\n^\nIn file included from src\\audio_default.h:23:0,\nfrom src\\audio_default.cpp:13:\nsrc\\router.h:22:18: error: expected ')' before '&' token\nAudioStream& audioIn,\n^\nsrc\\effect_lfo.h:54:5: error: 'AudioSynthWaveformDc' does not name a type\nAudioSynthWaveformDc offset;\n^\nsrc\\effect_lfo.h:55:5: error: 'AudioMixer4' does not name a type\nAudioMixer4 signalMixer;\n^\nsrc\\router.h:38:5: error: 'AudioMixer4' does not name a type\nAudioMixer4 mixer;\n^\nsrc\\effect_lfo.h:57:5: error: 'AudioConnection' does not name a type\nAudioConnection patchLfoToSignalMixer;\n^\nsrc\\router.h:40:5: error: 'AudioConnection' does not name a type\nAudioConnection patchMixerToOutput;\n^\nsrc\\effect_lfo.h:58:5: error: 'AudioConnection' does not name a type\nAudioConnection patchOffsetToSignalMixer;\n^\nsrc\\router.h:41:5: error: 'AudioConnection' does not name a type\nAudioConnection** patchInputToPresets;\n^\nsrc\\effect_lfo.h:69:5: error: 'int16_t' does not name a type\nint16_t wavetable[256];\n^\nsrc\\router.h:42:5: error: 'AudioConnection' does not name a type\nAudioConnection** patchPresetsToMixer;\n^\nIn file included from src\\audio_default.cpp:13:0:\nsrc\\audio_default.h:29:18: error: expected ')' before '&' token\nAudioStream& audioIn,\n^\nsrc\\effect_lfo.h: In constructor 'BitshiftEffectLfo::BitshiftEffectLfo()':\nsrc\\effect_lfo.h:32:7: error: class 'BitshiftEffectLfo' does not have any field named 'patchLfoToSignalMixer'\npatchLfoToSignalMixer(lfo, 0, signalMixer, 0),\n^\nsrc\\effect_lfo.h:32:29: error: 'lfo' was not declared in this scope\npatchLfoToSignalMixer(lfo, 0, signalMixer, 0),\n^\nsrc\\effect_lfo.h:32:37: error: 'signalMixer' was not declared in this scope\npatchLfoToSignalMixer(lfo, 0, signalMixer, 0),\n^\nsrc\\effect_lfo.h:33:7: error: class 'BitshiftEffectLfo' does not have any field named 'patchOffsetToSignalMixer'\npatchOffsetToSignalMixer(offset, 0, signalMixer, 1) {}\n^\nsrc\\audio_default.h:80:5: error: 'AudioControlSGTL5000' does not name a type\nAudioControlSGTL5000 audioAdaptor;\n^\nsrc\\effect_lfo.h:33:32: error: 'offset' was not declared in this scope\npatchOffsetToSignalMixer(offset, 0, signalMixer, 1) {}\n^\nsrc\\audio_default.cpp:22:43: error: expected constructor, destructor, or type conversion before '(' token\nBitshiftAudioDefault::BitshiftAudioDefault(\n^\nsrc\\audio_default.cpp: In member function 'virtual void BitshiftAudioDefault::setup()':\nsrc\\audio_default.cpp:47:18: error: 'AudioMemory' was not declared in this scope\nAudioMemory(180);\n^\nsrc\\audio_default.cpp:49:3: error: 'audioAdaptor' was not declared in this scope\naudioAdaptor.enable();\n^\nsrc\\audio_default.cpp:50:28: error: 'AUDIO_INPUT_LINEIN' was not declared in this scope\naudioAdaptor.inputSelect(AUDIO_INPUT_LINEIN);\n^\n*** [.pioenvs\\teensy31\\src\\audio_default.o] Error 1\nsrc\\effect_lfo.cpp: In member function 'virtual void BitshiftEffectLfo::setup()':\nsrc\\effect_lfo.cpp:38:3: error: 'lfo' was not declared in this scope\nlfo.begin(1.0, 1.0, WAVEFORM_ARBITRARY);\n^\nsrc\\effect_lfo.cpp:38:23: error: 'WAVEFORM_ARBITRARY' was not declared in this scope\nlfo.begin(1.0, 1.0, WAVEFORM_ARBITRARY);\n^\nsrc\\effect_lfo.cpp:39:3: error: 'offset' was not declared in this scope\noffset.amplitude(1.0);\n^\nsrc\\effect_lfo.cpp: In member function 'float BitshiftEffectLfo::speed(float)':\nsrc\\effect_lfo.cpp:44:3: error: 'lfo' was not declared in this scope\nlfo.frequency(hz);\n^\nsrc\\effect_lfo.cpp: In member function 'float BitshiftEffectLfo::phase(float)':\nsrc\\effect_lfo.cpp:51:3: error: 'lfo' was not declared in this scope\nlfo.phase(angle);\n^\nsrc\\effect_lfo.cpp: At global scope:\nsrc\\effect_lfo.cpp:86:26: error: 'float BitshiftEffectLfo::min' is not a static member of 'class BitshiftEffectLfo'\nfloat BitshiftEffectLfo::min(float min)\n^\nIn file included from src\\effect_lfo.cpp:12:0:\nsrc\\effect_lfo.h:66:19: error: invalid use of non-static data member 'BitshiftEffectLfo::_min'\nfloat _min = -1.0;\n^\nsrc\\effect_lfo.cpp:88:3: error: from this location\n_min = clamp(min, -1.0, 1.0);\n^\nsrc\\effect_lfo.cpp:88:30: error: no matching function for call to 'BitshiftEffectLfo::clamp(<unresolved overloaded function type>, float, float)'\n_min = clamp(min, -1.0, 1.0);\n^\nsrc\\effect_lfo.cpp:88:30: note: candidates are:\nIn file included from src\\effect_lfo.h:15:0,\nfrom src\\effect_lfo.cpp:12:\nsrc\\effect.h:39:9: note: int BitshiftEffect::clamp(int, int, int)\nint clamp(int value, int low, int high);\n^\nsrc\\effect.h:39:9: note:   no known conversion for argument 1 from '<unresolved overloaded function type>' to 'int'\nsrc\\effect.h:40:11: note: float BitshiftEffect::clamp(float, float, float)\nfloat clamp(float value, float low, float high);\n^\nsrc\\effect.h:40:11: note:   no known conversion for argument 1 from '<unresolved overloaded function type>' to 'float'\nsrc\\effect_lfo.cpp:88:31: error: expected '}' before ';' token\n_min = clamp(min, -1.0, 1.0);\n^\nsrc\\effect_lfo.cpp:89:17: error: expected constructor, destructor, or type conversion before ';' token\nupdateMinMax();\n^\nsrc\\effect_lfo.cpp:90:3: error: expected unqualified-id before 'return'\nreturn _min;\n^\nsrc\\effect_lfo.cpp:91:1: error: expected declaration before '}' token\n}\n^\n*** [.pioenvs\\teensy31\\src\\effect_lfo.o] Error 1\n [ERROR] Took 1.43 seconds \n[Finished in 1.9s with exit code 1]\n[cmd: ['platformio', '-f', '-c', 'sublimetext', 'run', '--target', 'upload']]\n[dir: C:\\Users\\Damienn\\Documents\\make\\arduino\\bitshift]\n[path: C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\nodejs\\;%SystemRoot%\\system32;%SystemRoot%;%SystemRoot%\\System32\\Wbem;%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\;C:\\Users\\Damienn\\AppData\\Roaming\\npm;C:\\Users\\Damienn\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Python27;C:\\Python27\\Scripts]",
+			"contents": "[05/15/17 23:52:07] Processing teensy31 (platform: teensy, lib_deps: Audio@1.3, board: teensy31, framework: arduino)\n\nVerbose mode can be enabled via `-v, --verbose` option\nCollected 98 compatible libraries\nLooking for dependencies...\nLibrary Dependency Graph\n|-- <Audio> v1.3\n|   |-- <SerialFlash>\n|   |   |-- <SPI> v1.0\n|   |-- <SD> v1.0.8\n|   |   |-- <SPI> v1.0\n|   |-- <SPI> v1.0\n|   |-- <Wire> v1.0\n|-- <SPI> v1.0\n|-- <Adafruit_GFX>\n|-- <ResponsiveAnalogRead>\n|-- <SerialFlash>\n|   |-- <SPI> v1.0\n|-- <Adafruit SSD1306> v1.1.0\n|   |-- <SPI> v1.0\n|   |-- <Adafruit_GFX>\n|   |-- <Wire> v1.0\n|-- <AnalogMultiButton>\n|-- <Wire> v1.0\n|-- <SD> v1.0.8\n|   |-- <SPI> v1.0\nCompiling .pioenvs\\teensy31\\src\\bitshift\\preset_tremolo.o\nLinking .pioenvs\\teensy31\\firmware.elf\nChecking program size\ntext	   data	    bss	    dec	    hex	filename\n66644	      0	  53032	 119676	  1d37c	.pioenvs\\teensy31\\firmware.elf\nBuilding .pioenvs\\teensy31\\firmware.hex\nUploading .pioenvs\\teensy31\\firmware.hex\nTeensy Loader, Command Line, Version 2.1\nRead \".pioenvs\\teensy31\\firmware.hex\": 66644 bytes, 25.4% usage\nSoft reboot is not implemented for Win32\nWaiting for Teensy device...\n(hint: press the reset button)\nFound HalfKay Bootloader\nRead \".pioenvs\\teensy31\\firmware.hex\": 66644 bytes, 25.4% usage\nProgramming..................................................................\nBooting\n [SUCCESS] Took 5.66 seconds \n[Finished in 6.0s]",
 			"settings":
 			{
-				"buffer_size": 20610,
+				"buffer_size": 1413,
 				"line_ending": "Windows",
 				"name": "Build output",
 				"scratch": true
-			}
-		},
-		{
-			"file": "src/effect.cpp",
-			"settings":
-			{
-				"buffer_size": 1021,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/library.json",
-			"settings":
-			{
-				"buffer_size": 530,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/effect.h",
-			"settings":
-			{
-				"buffer_size": 972,
-				"line_ending": "Windows"
 			}
 		}
 	],
@@ -326,7 +302,7 @@
 			]
 		]
 	],
-	"build_varint": "",
+	"build_varint": "Upload",
 	"command_palette":
 	{
 		"height": 490.0,
@@ -384,14 +360,41 @@
 	"expanded_folders":
 	[
 		"/C/Users/Damienn/Documents/make/arduino/bitshift",
-		"/C/Users/Damienn/Documents/make/arduino/bitshift/lib",
-		"/C/Users/Damienn/Documents/make/arduino/bitshift/src"
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/.piolibdeps"
 	],
 	"file_history":
 	[
-		"/C/Users/Damienn/Documents/make/arduino/Blend2/.gitignore",
-		"/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/library.json",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift-v2/README.md",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/README.md",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/platformio.ini",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/preset_tremolo.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/display_SSD1306.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/audio.h",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/audio_default.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/props.h",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/uistate_param.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/input_default.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/effect_lfo.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/effect_lfo.h",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/effect_tremolo.h",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/preset_tremolo.h",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/preset.h",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/preset.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/bitshift/audio_default.h",
+		"/C/Users/Damienn/Documents/make/arduino/libraries/bitshift/effect_lfo.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/libraries/bitshift/display_SSD1306.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/main.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/lib/Bitshift/bitshift.h",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift-v2/src/display_SSD1306.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift-v2/src/effect_lfo.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/.editorconfig",
 		"/C/Users/Damienn/Documents/make/arduino/TeensyAudioWaveshaper/src/main.ino",
+		"/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/src/TeensyAudioPlotter.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/src/TeensyAudioPlotter.h",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift-v2/bitshift.ino",
+		"/C/Users/Damienn/Documents/make/arduino/bitshift/src/effect.cpp",
+		"/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/library.json",
+		"/C/Users/Damienn/Documents/make/arduino/Blend2/.gitignore",
 		"/C/Users/Damienn/Documents/make/web/react-entity-editor/src/EntityEditorHock.jsx",
 		"/C/Users/Damienn/Documents/make/web/react-entity-editor/src/config/ReactRouter4Config.jsx",
 		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/src/dogs/DogsList.jsx",
@@ -423,10 +426,8 @@
 		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/package.json",
 		"/C/Users/Damienn/Desktop/inspiration/hello.txt",
 		"/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/src/processing_plotter/processing_plotter.pde",
-		"/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/src/TeensyAudioPlotter.h",
 		"/C/Users/Damienn/Dropbox/Public/How to use the Public folder.txt",
 		"/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/README.md",
-		"/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/src/TeensyAudioPlotter.cpp",
 		"/C/Users/Damienn/Documents/make/arduino/audiofork/Audio/synth_waveform.h",
 		"/C/Users/Damienn/Documents/make/arduino/audiofork/Audio/effect_waveshaper.cpp",
 		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/src/bats/BatsEntityEditorConfig.js",
@@ -490,43 +491,18 @@
 		"/C/Users/Damienn/Documents/make/money/badger/src/api/ApiSync.js",
 		"/C/Users/Damienn/Documents/make/money/badger/src/components/Navigation.jsx",
 		"/C/Users/Damienn/Documents/make/money/transactions.csv",
-		"/C/Users/Damienn/Documents/make/web/dcme-api/src/CreateRequestActions.js",
-		"/C/Users/Damienn/Documents/make/web/dcme-api/src/ApiMethods.js",
-		"/C/Users/Damienn/Documents/make/money/badger/src/api/CreateApiMethods.js",
-		"/C/Users/Damienn/Documents/make/money/badger/src/api/FakeApiMethods.js",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/src/components/Source.jsx",
-		"/C/Users/Damienn/AppData/Local/Temp/776ffaf1-5c30-4bf8-a249-8dc2f18a3f6c/home/dxinteractive/damienclarke.me/api/.htaccess",
-		"/C/Users/Damienn/AppData/Local/Temp/776ffaf1-5c30-4bf8-a249-8dc2f18a3f6c/home/dxinteractive/damienclarke.me/badger/.htaccess",
-		"/C/Users/Damienn/Documents/make/money/badger/src/upload/UploadTransactionsEntityEditorConfig.js",
-		"/C/Users/Damienn/Documents/make/money/badger/src/upload/UploadTransactionsList.jsx",
-		"/C/Users/Damienn/Documents/make/money/badger/src/upload/UploadOverview.jsx",
-		"/C/Users/Damienn/Documents/make/money/badger/src/transactions/TransactionCsv.js",
-		"/C/Users/Damienn/Documents/make/money/badger/src/tags/TagsOverview.jsx",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/src/api/ApiReducer.js",
-		"/C/Users/Damienn/Documents/make/web/dcme-api/src/ApiReducer.js",
-		"/C/Users/Damienn/Documents/make/money/badger/src/pages/UploadPage.jsx",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/src/api/FakeApiMethods.js",
-		"/C/Users/Damienn/Documents/make/web/dcme-api/src/FakeApiMethods.js",
-		"/C/Users/Damienn/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/.gitignore",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/.gitignore",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/.editorconfig",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/index.html",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/docs/webpack.config.js",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/examples/index.html",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/examples/src/dogs/DogsEditForm.jsx",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/examples/src/dogs/DogsEdit.jsx",
-		"/C/Users/Damienn/Documents/make/web/react-entity-editor/examples/src/dogs/DogsOverview.jsx"
+		"/C/Users/Damienn/Documents/make/web/dcme-api/src/CreateRequestActions.js"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 43.0
 	},
 	"find_in_files":
 	{
 		"height": 117.0,
 		"where_history":
 		[
+			"",
 			"C:\\Users\\Damienn\\Documents\\make\\web\\react-entity-editor",
 			"C:\\Users\\Damienn\\Documents\\make\\web\\react-entity-editor\\src",
 			"",
@@ -539,6 +515,10 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"paramVisualizationData",
+			"waveformVisualization",
+			"waveformVis",
+			"waveformVisData",
 			"console",
 			"cons",
 			"handleGoEdit",
@@ -662,11 +642,7 @@
 			"BatsItemForm",
 			"getCurrentTask",
 			"status",
-			"nted &&",
-			"d &&",
-			"end",
-			"onOperationSuccess",
-			"promptTaskFallback"
+			"nted &&"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -694,7 +670,12 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"sheets":
+			[
+			]
+		},
+		{
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -702,15 +683,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20610,
+						"buffer_size": 1413,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								20610,
-								20610
+								1413,
+								1413
 							]
 						],
 						"settings":
@@ -719,106 +700,10 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 51.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/effect.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1021,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								604,
-								604
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/Damienn/Documents/make/arduino/TeensyAudioPlotter/library.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 530,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								530,
-								530
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/effect.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 972,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								337,
-								337
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -841,11 +726,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -857,7 +749,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 165.0
+		"height": 27.0
 	},
 	"output.find_results":
 	{

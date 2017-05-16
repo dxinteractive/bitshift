@@ -11,6 +11,9 @@
  * for the Arduino IDE to compile
  */
 
+// arduino
+#include <Arduino.h>
+
 // audio
 #include <Audio.h>
 #include <Wire.h>
