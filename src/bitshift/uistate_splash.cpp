@@ -17,7 +17,7 @@
 
 void BitshiftUIStateSplash::update(unsigned long ms)
 {
-  if(ms > 2000)
+  if(ms > 4000)
   {
     popState(false);
     pushState(nextState);

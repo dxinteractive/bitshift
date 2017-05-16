@@ -27,7 +27,6 @@
 
 // include bitshift libraries
 #include "bitshift/bitshift.h"
-//#include <bitshift-presets.h>
 
 // display
 const int PIN_SCREEN_SID = 4;
@@ -111,14 +110,17 @@ BitshiftInputDefault input(
 AudioInputI2S audioIn;
 
 // audio presets
-const int PRESETS_TOTAL = 3;
+const int PRESETS_TOTAL = 4;
 BitshiftPresetTremolo tremolo;
 BitshiftPresetBitcrusher bitcrusher;
 BitshiftPresetFilter filter;
+BitshiftPresetReverb reverb;
+
 BitshiftPreset* presets[PRESETS_TOTAL] = {
   &tremolo,
   &bitcrusher,
-  &filter
+  &filter,
+  &reverb
 };
 
 // audio output
@@ -154,6 +156,8 @@ void setup() {
   Serial.begin(9600);
   // while(!Serial) { delay(1000); }
 
+  // make this as big as possible without filling up all the RAM
+  AudioMemory(40);
   bitshift.setup();
 }
 

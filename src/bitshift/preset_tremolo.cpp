@@ -66,7 +66,7 @@ BitshiftPresetTremolo::BitshiftPresetTremolo():
 void BitshiftPresetTremolo::initialParams()
 {
   setParam(SPEED, 3.0);
-  setParam(DEPTH, 0.5);
+  setParam(DEPTH, 0.8);
   setParam(SHAPEANDMOD, 0.5);
   setParam(DIVISION, 0);
   setParam(VOLUME, 1.0);

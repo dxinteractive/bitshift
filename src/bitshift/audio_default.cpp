@@ -44,15 +44,13 @@ BitshiftAudioDefault::BitshiftAudioDefault(
 
 void BitshiftAudioDefault::setup()
 {
-  // todo: pass into constructor
-  AudioMemory(180);
   // todo: move this out and apply via a default config
   audioAdaptor.enable();
   audioAdaptor.inputSelect(AUDIO_INPUT_LINEIN);
   audioAdaptor.micGain(0);
   audioAdaptor.muteHeadphone();
   // disable adc hp as it causes noise to kick in when no input audio is detected
-  audioAdaptor.adcHighPassFilterDisable();
+  //audioAdaptor.adcHighPassFilterDisable();
   // good combination for minimum ADC noise when used with non-active guitar as input
   // large line in sensitivity, bring down dac and volume so overall gain is close to unity
   audioAdaptor.lineInLevel(15);

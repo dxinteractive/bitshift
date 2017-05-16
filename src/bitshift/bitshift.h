@@ -28,6 +28,7 @@
 #include "preset_tremolo.h"
 #include "preset_bitcrusher.h"
 #include "preset_filter.h"
+#include "preset_reverb.h"
 
 class Bitshift
 {
