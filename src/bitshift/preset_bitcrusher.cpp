@@ -12,6 +12,7 @@
 #include "preset_bitcrusher.h"
 #include <Arduino.h>
 #include "paramset.h"
+#include "utils.h"
 
 static const int RATE = 0;
 static const int DEPTH = 1;
@@ -52,7 +53,7 @@ void BitshiftPresetBitcrusher::paramValueString(char* str, int paramId) const
   switch(paramId)
   {
     case RATE:
-      sprintf(str, "%0.0fHz", params.rate);
+      floatToString(params.rate, 0, "%sHz", str);
       return;
 
     case DEPTH:
@@ -60,7 +61,7 @@ void BitshiftPresetBitcrusher::paramValueString(char* str, int paramId) const
       return;
 
     case VOLUME:
-      sprintf(str, "%0.0f%%", params.volume * 100.0);
+      floatToString(params.volume * 100.0, 0, "%s%%", str);
       return;
   }
 }

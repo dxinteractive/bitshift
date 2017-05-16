@@ -12,6 +12,7 @@
 #include "preset_tremolo.h"
 #include "paramset.h"
 #include "effect_lfo.h"
+#include "utils.h"
 #include "visualizationdata.h"
 
 static const int SPEED = 0;
@@ -86,14 +87,11 @@ void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
   switch(paramId)
   {
     case SPEED:
-      // TODO use this style everywhere
-      char str_temp[6];
-      dtostrf(params.speed, 2, 1, str_temp);
-      sprintf(str, "%sHz", str_temp);
+      floatToString(params.speed, 1, "%sHz", str);
       return;
 
     case DEPTH:
-      sprintf(str, "%0.0f%%", params.depth * 100.0);
+      floatToString(params.depth * 100.0, 0, "%s%%", str);
       return;
 
     case SHAPEANDMOD:
@@ -105,7 +103,7 @@ void BitshiftPresetTremolo::paramValueString(char* str, int paramId) const
       return;
 
     case VOLUME:
-      sprintf(str, "%0.0f%%", params.volume * 100.0);
+      floatToString(params.volume * 100.0, 0, "%s%%", str);
       return;
   }
 }

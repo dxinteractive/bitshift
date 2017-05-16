@@ -12,6 +12,7 @@
 #include "preset_filter.h"
 #include "paramset.h"
 #include "effect_filter.h"
+#include "utils.h"
 
 static const int FREQUENCY = 0;
 static const int RESONANCE = 1;
@@ -82,11 +83,11 @@ void BitshiftPresetFilter::paramValueString(char* str, int paramId) const
   switch(paramId)
   {
     case FREQUENCY:
-      sprintf(str, "%0.1fHz", params.frequency);
+      floatToString(params.frequency, 1, "%sHz", str);
       return;
 
     case RESONANCE:
-      sprintf(str, "%0.1f", params.resonance);
+      floatToString(params.resonance, 1, "%sHz", str);
       return;
 
     case TYPE:
@@ -94,7 +95,7 @@ void BitshiftPresetFilter::paramValueString(char* str, int paramId) const
       return;
 
     case VOLUME:
-      sprintf(str, "%0.0f%%", params.volume * 100.0);
+      floatToString(params.volume * 100.0, 0, "%s%%", str);
       return;
   }
 }
